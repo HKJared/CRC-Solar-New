@@ -1,1 +1,2 @@
-# CRC-Solar-New
+Run by terminal:
+    npm start

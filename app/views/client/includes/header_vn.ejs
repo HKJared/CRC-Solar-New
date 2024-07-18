@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/favicon.png" type="image/x-icon">
+    <title>CRC GROUP</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header class="center">
+        <div class="header-container container row flex-box">
+            <div class="logo center">
+                <a href="/"><img src="/image/logo.png" alt="CRC Solar Logo" style="height: 34px;"></a>
+            </div>
+            <div class="menu-container col">
+                <div class="header-info row">
+                    <div class="search-container row">
+                        <form action="">
+                            <input type="text" placeholder="Tìm kiếm sản phẩm">
+                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+                    <div class="language-container center">
+                        <div class="top-language">
+                            <span><img src="/image/language-vn.jpg" width="16">&nbsp;VN</span>
+                            <ul class="lang1">
+                                <li><a href="/cn/"><span><img src="/image/language-cn.jpg" width="16" height="12">&nbsp;CN</span></a></li>
+                                <li><a href="/en/"><span><img src="/image/language-en.jpg" width="16" height="12">&nbsp;EN</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="social-container row center">
+                        <a href="#" id="facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" id="youtube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="nav-container row">
+                    <ul class="nav row">
+                        <li class="nav-link">
+                            <div class="dropdown-nav-toggle row center">
+                                <span>Về CRC Solar</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-sub-menu center">
+                                <div class="container col">
+                                    <div class="abouts-container full-width">
+                                        <ul class="row full-width">
+                                            <li>
+                                                <a href="" class="full-width"><img src="/image/gioi-thieu.png" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Giới thiệu</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="" class="full-width"><img src="/image/doi-tac.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Đối tác</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="" class="full-width"><img src="/image/trach-nhiem-xa-hoi.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Trách nhiệm xã hội</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-link">
+                            <div class="dropdown-nav-toggle row center">
+                                <span>Sản phẩm</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-sub-menu center">
+                                <div class="container col">
+                                    <div class="categories-container">
+                                        <ul class="row">
+                                            <li class="active"><span>Tất cả</span></li>
+                                            <% for (let i = 0; i < headerData.product_categories.length; i ++) { %>
+                                                <li><span><%- headerData.product_categories[i].title %></span></li>    
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                    <div class="products-container full-width">
+                                        <ul class="row full-width">
+                                            <% for (let i = 0; i < headerData.products.length; i ++) { %>
+                                                <li class="col" data-productid="<%- headerData.products[i].product_id %>">
+                                                    <a href="#" class="full-width"><img src="<%- headerData.products[i].src %>" alt="" srcset="" class="full-width"></a>
+                                                    <span><%- headerData.products[i].product_name %></span>
+                                                </li>    
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-link">
+                            <div class="dropdown-nav-toggle row center">
+                                <span>Công nghệ</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-sub-menu center">
+                                <div class="container col">
+                                    <div class="technologies-container full-width">
+                                        <ul class="row full-width">
+                                            <% for (let i = 0; i < headerData.technologies.length; i ++) { %>
+                                                <li class="col" data-productid="<%- headerData.technologies[i].technology_id %>">
+                                                    <a href="#" class="full-width"><img src="<%- headerData.technologies[i].image %>" alt="" srcset="" class="full-width"></a>
+                                                    <div>
+                                                        <span><%- headerData.technologies[i].technology_name %></span>
+                                                    </div>
+                                                </li>    
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-link">
+                            <div class="dropdown-nav-toggle row center">
+                                <span>Dịch vụ</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-sub-menu col"></div>
+                        </li>
+                        <li class="nav-link">
+                            <div class="dropdown-nav-toggle row center">
+                                <span>Tin tức & sự kiện</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-sub-menu col"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="/js/header.js"></script>
