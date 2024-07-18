@@ -50,11 +50,55 @@ class HeaderModel {
                                                         technology_id DESC
                                                     `, [language]);
 
+        const [services] = await pool.execute(`
+                                                SELECT
+                                                    blogs.blog_id,
+                                                    blogs.title
+                                                FROM
+                                                    blogs
+                                                JOIN
+                                                    categories ON blogs.category_id = categories.category_id
+                                                WHERE
+                                                    categories.title = 'Dịch vụ'
+                                                    AND blogs.language = ?
+                                                ORDER BY
+                                                    blogs.created_at DESC
+                                            `, [language]);
+
         return {
             product_categories: product_categories,
             products: products,
-            technologies: technologies
+            technologies: technologies,
+            services: services
         }   
+    }
+}
+
+class MainModel {
+    static async getMainData(page, language) {
+        const [texts] = await pool.execute(`
+                                            SELECT
+                                                display_text_id, element_id, detail
+                                            FROM
+                                                display_texts
+                                            WHERE
+                                                page = ?
+                                                AND language = ?
+                                            `, [page, language]);
+
+        const [images] = await pool.execute(`
+                                            SELECT
+                                                display_image_id, element_id, src
+                                            FROM
+                                                display_images
+                                            WHERE
+                                                page = ?
+                                            `, [page]);
+
+        return {
+            texts: texts,
+            images: images
+        }
     }
 }
 
@@ -62,5 +106,5 @@ class FooterModel {
 }
 
 module.exports = {
-    HeaderModel, FooterModel
+    HeaderModel, MainModel, FooterModel
 };

@@ -65,37 +65,43 @@
         <div class="center" style="width: 100vw; background-color: #ffecec; padding: 50px 0;">
             <div class="container">
                 <div class="items-container row">
-                    <div class="item col center">
+                    <div class="item col center edit-element">
+                        <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-signs-post"></i></div>
                         <h4>Tầm nhìn</h4>
-                        <p>CRC SOLAR không ngừng nỗ lực phấn đấu để trở thành công ty hàng đầu trong lĩnh vực sản xuất, thi công các công trình sử dụng tấm pin năng lượng mặt trời công nghệ tiên tiến hiện đại nhất tại Việt Nam</p>
+                        <p id="block1-text1"></p>
                     </div>
-                    <div class="item col center">
+                    <div class="item col center edit-element">
+                        <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-shield-halved"></i></div>
                         <h4>Sứ mệnh</h4>
-                        <p>CRC SOLAR luôn cung cấp những sản phẩm tấm pin năng lượng mặt trời đạt tiêu chuẩn chất lượng cao nhất cho mọi công trình. Thực hiện sản xuất đúng theo tiến độ và chất lượng đã cam kết với khách hàng.</p>
+                        <p id="block1-text2"></p>
                     </div>
-                    <div class="item col center">
+                    <div class="item col center edit-element">
+                        <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-heart"></i></div>
                         <h4>Giá trị cốt lõi</h4>
-                        <p>Cải tiến liên tục: Văn hóa và động lực để phát triển. Hợp tác: Sẵn sàng hợp tác trên tinh thần đôi bên cùng có lợi. Tôn trọng: Luôn tôn trọng khách hàng, nhân viên và đối tác.</p>
+                        <p id="block1-text3"></p>
                     </div>
-                    <div class="item col center">
+                    <div class="item col center edit-element">
+                        <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-clipboard-question"></i></div>
                         <h4>Tại sao chọn CRC</h4>
-                        <p>CRC SOLAR có đội ngũ cán bộ kỹ thuật được đào tạo bài bản, có tính kỷ luật cao. Tất cả các sản phẩm của CRC SOLAR đều là những sản phẩm chất lượng có nguồn gốc xuất xứ rõ ràng.</p>
+                        <p id="block1-text4"></p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="block container products">
+        <div class="block container products col">
             <div class="header-block">
                 <h1>CÁC SẢN PHẨM CỦA CRC SOLAR</h1>
             </div>
             <div class="categories-container">
                 <ul class="row">
-                    <li>166 Series</li>
-                    <li>182 Series</li>
+                    <li class="active"><span>Tất cả</span></li>
+                    <% for (let i = 0; i < headerData.product_categories.length; i ++) { %>
+                        <li><span><%- headerData.product_categories[i].title %></span></li>    
+                    <% } %>
                 </ul>
             </div>
             <div class="products-container">
@@ -107,8 +113,8 @@
             </div>
         </div>
         <div class="block container col">
-            <div class="top-block">
-                <span>Tin tức & Báo chí</span>
+            <div class="header-block">
+                <h1>Tin tức & Báo chí</h1>
             </div>
             <div class="main-new row">
                 <div class="video-container">
@@ -211,6 +217,12 @@
             </div>
         </div>
     </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%= mainData.texts[i].element_id %>').text('<%= mainData.texts[i].detail %>');
+        </script>
+    <% } %>
+    
 </main>
 <script src="/js/home.js"></script>
 <% with ({ language: language }) { %>

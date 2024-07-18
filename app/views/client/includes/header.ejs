@@ -126,14 +126,60 @@
                                 <span>Dịch vụ</span>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div class="dropdown-sub-menu col"></div>
+                            <div class="dropdown-sub-menu center">
+                                <div class="container row flex-box">
+                                    <div class="services-container">
+                                        <ul class="col">
+                                            <% for (let i = 0; i < headerData.services.length; i ++) { %>
+                                                <li class="full-width">
+                                                    <a href="#" class="full-width"><span><%- headerData.services[i].title %></span></a>
+                                                </li>    
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                    <div class="services-image">
+                                        <img src="/image/block1.1.jpg" alt="" srcset="" class="full-width full-height">
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-link">
                             <div class="dropdown-nav-toggle row center">
                                 <span>Tin tức & sự kiện</span>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div class="dropdown-sub-menu col"></div>
+                            <div class="dropdown-sub-menu center">
+                                <div class="container col">
+                                    <div class="news-container">
+                                        <ul class="row full-width">
+                                            <li class="col">
+                                                <a href="#" class="full-width full-height"><img src="/image/tin-tuc.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Tin tức</span>
+                                                </div>
+                                            </li>
+                                            <li class="col">
+                                                <a href="#" class="full-width full-height"><img src="/image/su-kien.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Sự kiện</span>
+                                                </div>
+                                            </li>
+                                            <li class="col">
+                                                <a href="#" class="full-width full-height"><img src="/image/tuyen-dung.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Tuyển dụng</span>
+                                                </div>
+                                            </li>
+                                            <li class="col">
+                                                <a href="#" class="full-width full-height"><img src="/image/tin-khac.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <div>
+                                                    <span>Tin khác</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
