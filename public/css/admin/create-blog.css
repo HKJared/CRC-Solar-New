@@ -1,0 +1,182 @@
+:root {
+    --border: 1px solid #bebebe;
+}
+
+.create-blog input, .create-blog textarea, .create-blog select {
+    border: var(--border);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.create-blog textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.create-blog input:focus, .create-blog textarea:focus, .create-blog select:focus {
+    outline: 1px solid #F7F7F7;
+}
+
+.create-blog input::placeholder {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.create-blog label {
+    margin: 15px 0 5px 0;
+}
+
+.create-blog-container {
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F7F7;
+    padding: 15px 0 25px 0;
+    position: relative;
+}
+
+.more-info > div {
+    flex: 0 0 47%;
+}
+
+.more-info .image {
+    gap: 20px;
+}
+
+.more-info .image i {
+    color: #2f8da5;
+}
+
+.more-info .preview {
+    border-radius: 5px;
+    height: 260px;
+    overflow: hidden;
+    box-shadow: 0 0 5px #bebebe;
+}
+
+.back {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 18px;
+    background-color: transparent;
+    color: #979797;
+    border: 0;
+    cursor: pointer;
+}
+
+.create-blog-container h2 {
+    color: #3364EB;
+    width: 1000px;
+    padding: 10px 0;
+}
+
+.create-blog {
+    width: 1000px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px 10px 20px 10px;
+}
+
+.create-blog label span {
+    color: #ff0000;
+}
+
+.submit-blog {
+    display: block;
+    width: auto;
+    background-color: #3364EB;
+    color: #fff;
+    border: 0;
+    margin-top: 40px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-blog:hover {
+    background-color: #507aee;
+}
+
+.editor-container {
+    border: 1px solid #bebebe !important;
+    border-radius: 5px !important;
+    overflow: hidden;
+}
+
+.ck-sticky-panel__content {
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.ck-content {
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.ck-editor__editable[role="textbox"] {
+    min-height: 200px;
+}
+
+.ck-content .image {
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+#detail {
+    display: none;
+}
+
+#main_image {
+    display: none;
+}
+
+.toggle-is-outstanding {
+    margin-left: 20px;
+}
+
+.toggle-is-outstanding input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.toggle-is-outstanding label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 40px; /* Điều chỉnh chiều rộng */
+    height: 20px; /* Điều chỉnh chiều cao */
+    background: grey;
+    display: block;
+    border-radius: 10px; /* Điều chỉnh bán kính để giữ nguyên tỷ lệ */
+    position: relative;
+}
+
+.toggle-is-outstanding label:after {
+    content: '';
+    position: absolute;
+    top: 2px; /* Điều chỉnh vị trí trên */
+    left: 2px; /* Điều chỉnh vị trí trái */
+    width: 16px; /* Điều chỉnh chiều rộng của nút */
+    height: 16px; /* Điều chỉnh chiều cao của nút */
+    background: #fff;
+    border-radius: 8px; /* Điều chỉnh bán kính để giữ nguyên tỷ lệ */
+    transition: 0.3s;
+}
+
+.toggle-is-outstanding input:checked + label {
+    background: #bada55;
+}
+
+.toggle-is-outstanding input:checked + label:after {
+    left: calc(100% - 2px); /* Điều chỉnh vị trí khi được kiểm tra */
+    transform: translateX(-100%);
+}
+
+.toggle-is-outstanding label:active:after {
+    width: 22px; /* Điều chỉnh chiều rộng khi được kích hoạt */
+}

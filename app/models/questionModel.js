@@ -7,14 +7,20 @@ class QuestionModel {
 
         const queryString = `
             SELECT 
-                *
+                q.*,
+                a.fullname as admin_name,
+                ua.fullname as updated_by_name
             FROM 
-                questions
+                questions q
+            JOIN
+                admins a ON a.admin_id = q.created_by
+            LEFT JOIN
+                admins ua ON ua.admin_id = q.updated_by
             WHERE
-                LOWER(title) LIKE LOWER(?)
-                AND language = ? 
+                LOWER(q.title) LIKE LOWER(?)
+                AND q.language = ? 
             ORDER BY
-                question_id DESC
+                q.question_id DESC
         `;
 
         const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
@@ -24,11 +30,17 @@ class QuestionModel {
     static async getQuestionById(question_id) {
         const queryString = `
             SELECT 
-                *
+                q.*,
+                a.fullname as admin_name,
+                ua.fullname as updated_by_name
             FROM 
-                questions
+                questions q
+            JOIN
+                admins a ON a.admin_id = q.created_by
+            LEFT JOIN
+                admins ua ON ua.admin_id = q.updated_by
             WHERE 
-                question_id = ?
+                q.question_id = ?
         `;
 
         const [rows] = await pool.execute(queryString, [question_id]);

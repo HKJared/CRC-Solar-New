@@ -1,0 +1,169 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/recruitments.css">
+<main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
+    <div class="main center col">
+        <div class="row center block container col title-header-recruitment">
+            <h1 class="">Cơ hội nghề nghiệp</h1>
+            <label style="text-align: center;">CRC Solar là nơi để nhân viên khám phá giới hạn và bứt phá bản thân. Công ty tìm kiếm những nhân tài có tầm nhìn, biết hoạch định mục tiêu, làm việc đam mê và tạo ra sự khác biệt.</label>
+        </div>
+
+        <div class="row block container">
+            <div class="col recruitments-container left">
+                <% for (let i = 0; i < recruitments.length; i++) { %>
+                    <div class="recruitment col">    
+                        <h1 class="title-recruitment"><%- recruitments[i].position %></h1>
+                        <div>
+                            <div class="card-item">
+                                <div class="row">
+                                    <div class="col-4 row center card-item-content">
+                                        <div class="icon-card-item">
+                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="row col">
+                                            <p>Mức lương</p>
+                                            <h3><%- recruitments[i].salary_range %></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 row center card-item-content">
+                                        <div class="icon-card-item">
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="row col">
+                                            <p>Địa điểm</p>
+                                            <h3><%- recruitments[i].location %></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 row center card-item-content">
+                                        <div class="icon-card-item">
+                                            <i class="fa fa-hourglass" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="row col">
+                                            <p>Kinh nghiệm</p>
+                                            <h3><%- recruitments[i].experience_required %> năm</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 20px;">
+                                    <i class="fa-solid fa-briefcase" aria-hidden="true" style="margin-right: 12px;"></i>
+                                    <p>Phòng ban: <%- recruitments[i].department %></p>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <i class="fa-solid fa-user" aria-hidden="true" style="margin-right: 12px;"></i>
+                                    <p>Số lượng tuyển: <%- recruitments[i].quantity %></p>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <i class="fa fa-calendar" aria-hidden="true" style="margin-right: 12px;"></i>
+                                    <p>Hạn nộp hồ sơ: <%- recruitments[i].application_deadline %></p>
+                                </div>
+                                <div class="row" style="margin-top: 20px;">
+                                    <button class="btn-submit">Ứng tuyển ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-item detail" style="margin-top: 20px;">
+                            <%- recruitments[i].detail %>    
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <div class="right">
+                <div class="col general-info">
+                    <div class="card-item">
+                        <div class="card-item-body">
+                            <div class="logo">
+                                <div class="full-width">
+                                    <img src="/image/logo.png" alt="">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 12px;">
+                                <div class="col-4 row">
+                                    <i class="fa fa-users icon-card" aria-hidden="true"></i>
+                                <p>Quy mô</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>30-100 nhân viên</p>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 12px;">
+                                <div class="col-4 row">
+                                    <i class="fa fa-map-marker icon-card" aria-hidden="true"></i>
+                                    <p>Địa điểm</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>104/140 Khuất Duy Tiến, phường Nhân Chính, Quận Thanh Xuân, Hà Nội.</p>
+                                </div>
+                            </div>
+                            <div class="row center">
+                                <a class="see-all">
+                                    Xem chi tiết thông tin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-item" style="margin-top: 20px;">
+                        <div class="card-body">
+                            <div class="row col">
+                                <h1 class="title-header-item">Thông tin chung</h1>
+                            </div>
+                            <div class="row card-item-content">
+                                <div class="icon-card-item">
+                                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="row col">
+                                <p>Cấp bậc</p>
+                                <h3>Đại học chính quy</h3>
+                            </div>
+                        </div>
+                        <div class="row card-item-content">
+                        <div class="icon-card-item">
+                            <i class="fa fa-hourglass" aria-hidden="true"></i>
+                        </div>
+                        <div class="row col">
+                            <p>Kinh nghiệm</p>
+                            <h3>3 năm</h3>
+                        </div>
+                    </div>
+                    <div class="row card-item-content">
+                        <div class="icon-card-item">
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        </div>
+                        <div class="row col">
+                            <p>Hình thức làm việc</p>
+                            <h3>Nhân viên chính thức</h3>
+                        </div>
+                    </div>
+                    <div class="row card-item-content">
+                        <div class="icon-card-item">
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                        </div>
+                        <div class="row col">
+                            <p>Giới tính</p>
+                            <h3>Nam/Nữ</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
+</main>
+<script src="/js/recruitment.js"></script>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

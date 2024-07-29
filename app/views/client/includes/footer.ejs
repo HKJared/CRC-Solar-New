@@ -9,9 +9,10 @@
         <div class="more-info">
             <h3>Xem thêm</h3>
             <ul class="links-container col">
-                <li class="link"><a href="">Tuyển dụng</a></li>
-                <li class="link"><a href="contact">Hỏi đáp</a></li>
-                <li class="link"><a href="">Thư viện ảnh</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/photos">Thư viện ảnh</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/documents">Tài liệu</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/contact">Liên hệ</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/questions">Hỏi đáp</a></li>
             </ul>
         </div>
         <div class="hr"></div>

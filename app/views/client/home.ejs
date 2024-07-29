@@ -1,132 +1,170 @@
-<% with ({ language: language }) { %>
-    <%- include(`./includes/header_${language}`) %>
-<% } %>
+<%- include(`./includes/header`) %>
 <link rel="stylesheet" href="/css/client/home.css">
 <main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
     <div class="slider">
-        <div class="list row">
-            <img src="/image/slider/slide1.jpg" alt="" srcset="">
-            <img src="/image/slider/slide2.jpg" alt="" srcset="">
-            <img src="/image/slider/slide3.jpg" alt="" srcset="">
+        <div class="list row edit-element">
+            <button class="edit-button-image"><i class="fa-solid fa-camera"></i></button>
+            <img src="/image/slider/slide1.jpg" alt="" srcset="" id="block1-image1">
+            <img src="/image/slider/slide2.jpg" alt="" srcset="" id="block1-image2">
+            <img src="/image/slider/slide3.jpg" alt="" srcset="" id="block1-image3">
         </div>
     </div>
-    <script src="/js/slider.js"></script>
+    <!-- <script src="/js/slider.js"></script> -->
     <div class="main center col">
         <div class="block block1 container center col">
-            <div class="main-block row">
+            <div class="main-block row edit-element full-width flex-box">
+                <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                 <img src="/image/logo.png" alt="" srcset="">
-                <span>Công ty CP CRC SOLAR CELL là công ty chuyên sản xuất tấm pin năng lượng mặt trời có trụ sở tại Khu Công Nghiệp Lương Sơn xã Hòa Sơn huyện Lương Sơn tỉnh Hòa Bình, Việt Nam.</span>
+                <span id="block1-text1"></span>
             </div>
             <div class="info-capacity-container row">
-                <div class="child">
-                    <img src="/image/block1.1.jpg" alt="">
+                <div class="child edit-element">
+                    <button class="edit-button-image"><i class="fa-solid fa-camera"></i></button>
+                    <img src="" alt="" id="block1-image4">
                 </div>
-                <div class="child capacity">
+                <div class="child capacity edit-element">
+                    <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                     <ul class="col">
                         <li class="row">
-                            <div class="capacity-num center cnt-num">200+</div>
+                            <div class="capacity-num center cnt-num" id="block1-text2"></div>
                             <div class="capacity-info">
-                                <h3>Nhân sự có kinh nghiệm</h3>
-                                <span>Đội ngũ dày dặn kinh nghiệm, có kiến thức chuyên môn cao trong lĩnh vực năng lượng mặt trời.</span>
+                                <h3 data-translate="home_text1">Nhân sự có kinh nghiệm</h3>
+                                <span data-translate="home_text2">Đội ngũ dày dặn kinh nghiệm, có kiến thức chuyên môn cao trong lĩnh vực năng lượng mặt trời.</span>
                             </div>
                         </li>
                         <li class="row">
-                            <div class="capacity-num center cnt-num">5</div>
+                            <div class="capacity-num center cnt-num" id="block1-text3"></div>
                             <div class="capacity-info">
-                                <h3>Công ty thành viên</h3>
-                                <span>Mang đến sự đa dạng và phong phú trong cách tiếp cận và giải pháp.</span>
+                                <h3 data-translate="home_text3">Công ty thành viên</h3>
+                                <span data-translate="home_text4">Mang đến sự đa dạng và phong phú trong cách tiếp cận và giải pháp.</span>
                             </div>
                         </li>
                         <li class="row">
-                            <div class="capacity-num center cnt-num">10</div>
+                            <div class="capacity-num center cnt-num" id="block1-text4"></div>
                             <div class="capacity-info">
-                                <h3>Năm kinh nghiệm</h3>
-                                <span>Chúng tôi đã xây dựng nên sự uy tín và chuyên môn vững vàng trong ngành.</span>
+                                <h3 data-translate="home_text5">Năm kinh nghiệm</h3>
+                                <span data-translate="home_text6">Chúng tôi đã xây dựng nên sự uy tín và chuyên môn vững vàng trong ngành.</span>
                             </div>
                         </li>
                         <li class="row">
-                            <div class="capacity-num center cnt-num">40+</div>
+                            <div class="capacity-num center cnt-num" id="block1-text5"></div>
                             <div class="capacity-info">
-                                <h3>Đối tác đã hợp tác</h3>
-                                <span>Cam kết mang lại giá trị tối đa cho mỗi dự án.</span>
+                                <h3 data-translate="home_text7">Đối tác đã hợp tác</h3>
+                                <span data-translate="home_text8">Cam kết mang lại giá trị tối đa cho mỗi dự án.</span>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="child col">
-                    <span style="margin-top: 30px;">Là một doanh nghiệp của Việt Nam, CRC Solar luôn luôn tự hào là một doanh nghiệp hàng Việt Nam chất lượng cao đi tiên phong trong ngành sản xuất điện mặt trời này.</span>
-                    <br>
-                    <br>
-                    <span>Chúng tôi thường xuyên tổ chức các chương trình đào tạo nội bộ, lập kế hoạch nghề nghiệp và chăm sóc đời sống công nhân viên. Ngoài ra, CRC Solar còn hợp tác với các trường đại học, các tổ chức giáo dục và nghiên cứu khoa học để bồi dưỡng tài năng và tạo thêm công ăn việc làm tại địa phương. </span>
-                    <a href="about" class="center">Xem thêm</a>
+                <div class="child col edit-element">
+                    <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
+                    <span id="block1-text6" style="margin-top: 30px; white-space: pre-line;"></span>
+                    <a href="about" class="center" data-translate="home_text9">Xem thêm</a>
                 </div>
             </div>
         </div>
-        <div class="center" style="width: 100vw; background-color: #ffecec; padding: 50px 0;">
+        <div class="center" style="width: 100%; background-color: #ffecec; padding: 50px 0;">
             <div class="container">
                 <div class="items-container row">
                     <div class="item col center edit-element">
                         <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-signs-post"></i></div>
-                        <h4>Tầm nhìn</h4>
-                        <p id="block1-text1"></p>
+                        <h4 data-translate="home_text10">Tầm nhìn</h4>
+                        <p id="block2-text1"></p>
                     </div>
                     <div class="item col center edit-element">
                         <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h4>Sứ mệnh</h4>
-                        <p id="block1-text2"></p>
+                        <h4 data-translate="home_text11">Sứ mệnh</h4>
+                        <p id="block2-text2"></p>
                     </div>
                     <div class="item col center edit-element">
                         <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-heart"></i></div>
-                        <h4>Giá trị cốt lõi</h4>
-                        <p id="block1-text3"></p>
+                        <h4 data-translate="home_text12">Giá trị cốt lõi</h4>
+                        <p id="block2-text3"></p>
                     </div>
                     <div class="item col center edit-element">
                         <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="icon-itm"><i class="fa-solid fa-clipboard-question"></i></div>
-                        <h4>Tại sao chọn CRC</h4>
-                        <p id="block1-text4"></p>
+                        <h4 data-translate="home_text13">Tại sao chọn CRC</h4>
+                        <p id="block2-text4"></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="block container products col">
             <div class="header-block">
-                <h1>CÁC SẢN PHẨM CỦA CRC SOLAR</h1>
+                <h1 data-translate="home_text14">CÁC SẢN PHẨM CỦA CRC SOLAR</h1>
             </div>
             <div class="categories-container">
                 <ul class="row">
-                    <li class="active"><span>Tất cả</span></li>
+                    <li class="active"><span data-translate="home_text15">Tất cả</span></li>
                     <% for (let i = 0; i < headerData.product_categories.length; i ++) { %>
-                        <li><span><%- headerData.product_categories[i].title %></span></li>    
+                        <li data-product-category-id="<%- headerData.product_categories[i].product_category_id %>"><span><%- headerData.product_categories[i].title %></span></li>    
                     <% } %>
                 </ul>
             </div>
-            <div class="products-container">
-                <div class="product-item">
-                    <div class="product-img">
-                        <img src="" alt="">
-                    </div>
+            <div class="products-container full-width">
+                <ul class="row full-width">
+                    <% for (let i = 0; i < headerData.products.length; i ++) { %>
+                        <li class="col" data-productid="<%- headerData.products[i].product_id %>">
+                            <a href="<%- (language == 'vn' ? '' : ('/' + language)) + `/product/` + headerData.products[i].product_name %>" class="full-width"><img src="<%- headerData.products[i].src %>" alt="" srcset="" class="full-width"></a>
+                            <span><%- headerData.products[i].product_name %></span>
+                        </li>    
+                    <% } %>
+                </ul>
+            </div>
+            <div class="button-see-more full-width">
+                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/products" data-translate="home_text9" class="center">Xem thêm</a>
+            </div>
+        </div>
+        <div class="block container technologies col">
+            <div class="header-block">
+                <h1 data-translate="home_text16">CÔNG NGHỆ</h1>
+            </div>
+            <div class="technologies-container">
+                <ul class="row">
+                    <% if (headerData.technologies.length > 0) { %>
+                        <li class="active" data-technologyid="<%- headerData.technologies[0].technology_id %>"><span><%- headerData.technologies[0].technology_name %></span></li>
+                    <% } %>
+                    <% for (let i = 1; i < headerData.technologies.length; i ++) { %>
+                        <li data-technologyid="<%- headerData.technologies[i].technology_id %>"><span><%- headerData.technologies[i].technology_name %></span></li>    
+                    <% } %>
+                </ul>
+            </div>
+            <div class="detail-technologies-container full-width">
+                <div class="list">
+                    <% for (let i = 0; i < headerData.technologies.length; i ++) { %>
+                        <div class="row full-width" data-technologyid="<%- headerData.technologies[i].technology_id %>">
+                            <div class="image">
+                                <img src="<%- headerData.technologies[i].image %>" alt="" srcset="">
+                            </div>
+                            <div class="description">
+                                <span><%- headerData.technologies[i].description %></span>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
             </div>
         </div>
         <div class="block container col">
             <div class="header-block">
-                <h1>Tin tức & Báo chí</h1>
+                <h1 data-translate="home_text17">Tin tức & Báo chí</h1>
             </div>
             <div class="main-new row">
                 <div class="video-container">
-                    <video id="myVideo" width="100%" height="100%" controls autoplay>
-                        <source src="videos/CRC.mp4" type="video/mp4">
+                    <video id="myVideo" controls autoplay>
+                        <source src="https://crcsolar.com.vn/video/CRC.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="new">
-                    <h3>CÔNG TY CỔ PHẦN CRC SOLAR CELL</h3>
-                    <P>Tháng 7/2021, công ty CP CRC Solar Cell đã cho ra mắt dòng pin 166 Series mới với các module công suất cao và siêu hiệu quả. Dòng tấm pin mới này thiết kế 144 cell mang lại công suất tối đa 550W và đạt hiệu suất siêu cao là 21,39%
-                        <br> CRC Solar cung cấp bảo hành sản phẩm lên đến 15 năm tốt nhất trong ngành và bảo hành tuyến tính 25 năm. Suy giảm chỉ là 2% trong năm đầu tiên và suy giảm hàng năm tối đa là 0,5% từ năm thứ hai đến năm thứ 25. Với vật liệu làm tấm pin được nâng cấp và thiết kế quy trình tối ưu hóa, pin năng lượng CRC Solar cung cấp độ tin cậy và an toàn tải cơ học vượt trội. Hiệu suất tải cơ học tuyệt vời làm cho sản phẩm của chúng tôi có thể để lắp đặt được ở cả các khu vực có tải trọng tuyết / gió lớn.
-                    </P>
+                <div class="new edit-element">
+                    <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
+                    <h3 data-translate="home_text18">CÔNG TY CỔ PHẦN CRC SOLAR CELL</h3>
+                    <P id="block5-text1"></P>
                 </div>
             </div>
             <div class="newsletters-container row">
@@ -186,45 +224,24 @@
                         </div>
                     </div>
                 </a>
-                <!-- <a href="" class="newsletter col">
-                    <div class="img">
-                        <img src="/image/news5.jpg" alt="">
-                    </div>
-                    <div class="info-container colums">
-                        <div class="info flex-box row">
-                            <p><i class="fa-regular fa-user"></i> admin</p>
-                            <p><i class="fa-regular fa-clock"></i> 11/02/2022</p>
-                        </div>
-                        <div class="title">
-                            <h3>Triển lãm quốc tế về Năng lượng Điện và Chiếu sáng Việt Nam - EI Vietnam 2024</h3>
-                        </div>
-                    </div>
-                </a>
-                <a href="" class="newsletter col">
-                    <div class="img">
-                        <img src="/image/news6.jpg" alt="">
-                    </div>
-                    <div class="info-container colums">
-                        <div class="info flex-box row">
-                            <p><i class="fa-regular fa-user"></i> admin</p>
-                            <p><i class="fa-regular fa-clock"></i> 11/02/2022</p>
-                        </div>
-                        <div class="title">
-                            <h3>Kế hoạch Thực hiện quy hoạch Điện 8 được Thủ tướng phê duyệt</h3>
-                        </div>
-                    </div>
-                </a> -->
             </div>
         </div>
     </div>
     <% for (let i = 0; i < mainData.texts.length; i++) { %>
         <script>
-            $('#<%= mainData.texts[i].element_id %>').text('<%= mainData.texts[i].detail %>');
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'src', `<%- mainData.images[i].src %>`);
         </script>
     <% } %>
     
 </main>
 <script src="/js/home.js"></script>
-<% with ({ language: language }) { %>
-    <%- include(`./includes/footer_${language}`) %>
-<% } %>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

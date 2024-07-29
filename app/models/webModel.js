@@ -27,7 +27,7 @@ class HeaderModel {
                                                     FROM
                                                         product_images
                                                     GROUP BY
-                                                        product_id
+                                                        product_id DESC
                                                 ) pim ON p.product_id = pim.product_id
                                                 LEFT JOIN product_images pi ON pim.min_image_id = pi.product_image_id
                                                 WHERE
@@ -41,7 +41,7 @@ class HeaderModel {
 
         const [technologies] = await pool.execute(`
                                                     SELECT
-                                                        technology_id, technology_name, image
+                                                        technology_id, technology_name, description, image
                                                     FROM
                                                         technologies
                                                     WHERE
@@ -59,7 +59,7 @@ class HeaderModel {
                                                 JOIN
                                                     categories ON blogs.category_id = categories.category_id
                                                 WHERE
-                                                    categories.title = 'Dịch vụ'
+                                                    categories.name = 'service'
                                                     AND blogs.language = ?
                                                 ORDER BY
                                                     blogs.created_at DESC

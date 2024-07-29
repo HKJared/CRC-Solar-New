@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/admin/create-blog.css">
+<div class="create-blog-container col">
+    <h2>Tạo bài viết</h2>
+    <form class="create-blog col" id="create-blog-form">
+        <label for="title">Tiêu đề<span>*</span></label>
+        <input type="text" id="title">
+        <label for="detail">Nội dung</label>
+        <div class="editor-container">
+            <textarea name="" id="detail"></textarea>
+        </div>
+        <div class="more-info row flex-box">
+            <div class="left col">
+                <label for="category_id">Danh mục</label>
+                <select name="" id="category_id">
+                    <% for (let i = 0; i < categories.length; i++) { %>
+                        <option value="<%- categories[i].category_id %>"><%- categories[i].title %></option>
+                    <% } %>
+                </select>
+                <label for="tag">Tag</label>
+                <input type="text" id="tag">
+                <label for="seo_title">Tiêu đề SEO</label>
+                <input type="text" name="" id="seo_title">
+                <div class="row" style="align-items: center;">
+                    <label for="">Nổi bật</label>
+                    <div class="toggle-is-outstanding center">
+                        <input type="checkbox" id="is_outstanding" checked/>
+                        <label for="is_outstanding">Toggle</label>
+                    </div>
+                </div>
+            </div>
+            <div class="right col">
+                <div class="image row">
+                    <label for="">Ảnh chính</label>
+                    <label for="main_image"><i class="fa-solid fa-upload"></i></label>
+                    <input type="file" name="" id="main_image">
+                </div>
+                <div class="preview full-width">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="submit-blog">Tạo bài viết</button>
+    </form>
+</div>
+<script src="/js/admin/create-blog.js"></script>

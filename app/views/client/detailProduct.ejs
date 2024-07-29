@@ -1,0 +1,100 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/detailProduct.css">
+<main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
+    <div class="main center col">
+        <div class="full-width col center">
+            <div class="container product-header row">
+                <div class="box-image">
+                    <div class="slide">
+                        <% for (let i = 0; i < product.images.length; i++) { %>
+                            <div class="item" style="background-image: url('<%- product.images[i].src %>');">
+                                <div class="content">
+                                    <div class="name"></div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="button center">
+                        <button class="pre"><i class="fa-solid fa-arrow-left"></i></button>
+                        <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <div class="title-container">
+                        <h1><%- product.product_name %></h1>
+                    </div>
+                    <p><%- product.category_title %> | 100Ah | 51.2V</p>
+                    <div class="row info-product">
+                        <a href="#specification" data-translate="" class="link-element">Thông số sản phẩm</a>
+                        <a href="#detail" data-translate="" class="link-element">Chi tiết sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container row">
+                <div class="row center full-width" id="specification">
+                    <h1 class="title-demo">Thông số hóa</h1>
+                </div>
+            </div>
+            <div class="row container center" style="margin-top: 20px;">
+                <div class="col-3">
+                    <div class="col center">
+                        <p style="margin-bottom: 8px;">Tổng số Cell</p>
+                        <h2><%- product.quantity_cell %> Cell</h2>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col center">
+                        <p style="margin-bottom: 8px;">Dải công suất</p>
+                        <h2><%- product.power_output_range %></h2>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col center">
+                        <p style="margin-bottom: 8px;">Điện áp hệ thống lớn nhất</p>
+                        <h2><%- product.max_system_vol %>V</h2>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col center">
+                        <p style="margin-bottom: 8px;">Hiệu suất tấm pin lớn nhất</p>
+                        <h2><%- product.max_efficiency %>%</h2>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col center">
+                        <p style="margin-bottom: 8px;">Kích thước</p>
+                        <h2><%- product.dimension %></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container row" style="margin-top: 160px;">
+                <div class="row center full-width" id="detail">
+                    <h1 class="title-demo">Chi tiết sản phẩm</h1>
+                </div>
+            </div>
+            <div class="container row" style="margin-bottom: 160px;">
+                <%- product.detail %>
+            </div>
+        </div>
+    </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
+</main>
+<script src="/js/detailProduct.js"></script>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

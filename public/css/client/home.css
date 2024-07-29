@@ -1,8 +1,7 @@
 /* main */
 
 .slider {
-    width: 100vw;
-    overflow-x: hidden;
+    width: 100%;
 }
 
 .slider .list {
@@ -46,7 +45,8 @@
 }
 
 .block1 .main-block img {
-    width: calc(33.33% - 10px); 
+    width: calc(33.33% - 10px);
+    height: auto;
     margin-right: 10px;
 }
 
@@ -68,9 +68,9 @@
     padding: 0 10px;
 }
 
-.child img {
+.block1 .info-capacity-container .child img {
     width: 100%;
-    height: 100%;
+    height: 500px;
 }
 
 .child a {
@@ -199,11 +199,22 @@
 
 .main-new {
     margin-top: 20px;
+    display: flex;
+    align-items: stretch;
 }
 
 .video-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60%;
-    padding: 0;
+}
+
+#myVideo {
+    width: 100%;
+    height: 100%; /* Đặt chiều cao mong muốn */
+    background-color: black; /* Phần bị thiếu sẽ là màu đen */
+    object-fit: contain; /* Đảm bảo video không bị cắt, giữ nguyên tỷ lệ */
 }
 
 .new {
@@ -273,4 +284,74 @@
     margin-top: 10px;
     font-size: 14px;
     color: var(--Text);
+}
+
+main .technologies-container {
+    width: 100%;
+    border-bottom: var(--border);
+}
+
+main .technologies-container > ul > li {
+    font-size: 22px;
+    padding: 30px 60px 10px 60px;
+    cursor: pointer;
+    position: relative;
+}
+
+main .technologies-container > ul > li::before {
+    content: "";
+    height: 2.5px;
+    width: 0px;
+    background: var(--mainColor);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+main .technologies-container > ul > li:hover::before {
+    width: 100%;
+}
+
+main .technologies-container > ul > li.active {
+    font-weight: bold;
+}
+
+main .technologies-container > ul > li.active::before {
+    width: 100%;
+}
+
+.detail-technologies-container {
+    display: flex;
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.detail-technologies-container .list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    height: 350px;
+}
+
+.detail-technologies-container .list .row {
+    flex: 0 0 auto;
+    height: 300px;
+    padding: 5px 10px;
+}
+
+.detail-technologies-container .image {
+    width: 45%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.detail-technologies-container .description {
+    width: 50%;
+    padding: 10px 40px 10px 20px;
+}
+
+.detail-technologies-container .description span {
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-line;
 }

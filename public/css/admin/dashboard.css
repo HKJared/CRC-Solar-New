@@ -1,0 +1,111 @@
+.logs-header {
+    color: #3364EB;
+    padding: 40px 0 20px 15px;
+}
+
+.logs-container {
+    width: calc(100% - 300px);
+    height: 500px;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin: 0 15px;
+    border-radius: 15px;
+    border: var(--border);
+    border-spacing: 0;
+    box-shadow: 0 0 5px #fefefe;
+    background-color: #fff;
+}
+
+.logs-container-header {
+    padding: 8px 20px;
+    background-color: #f0f0f0;    
+    color: #8B8F93;
+    position: sticky;
+    top: 0;
+}
+
+.log-items li {
+    padding: 15px 20px 15px 20px;
+    border-bottom: var(--border);
+    cursor: pointer;
+}
+
+.log-items li:last-child {
+    border-bottom: 0;
+}
+
+.logs-container .logs-container-header span {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.logs-container .admin {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+.logs-container .action {
+    width: 18%;
+    justify-content: center;
+}
+
+.logs-container .status {
+    width: 18%;
+}
+
+.logs-container .date {
+    width: 31%;
+}
+
+.logs-container .image {
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #2f8da5;
+    color: #fff;
+}
+
+.admin-container {
+    margin-left: 15px;
+}
+
+.status span {
+    font-size: 14px;
+    padding: 2px 8px;
+    border-radius: 7px;
+}
+
+.success span {
+    background-color: #D2F7E3;
+    color: #3C8166;
+}
+
+.unsuccess span {
+    background-color: #f7d8d2;
+    color: #813c3c;
+}
+
+.action span, .date span, .admin-account {
+    font-size: 14px;
+    color: #929599;
+}
+
+.sub-row {
+    display: none;
+}
+
+.sub-row .detail {
+    font-size: 14px;
+    color: #929599;
+    padding: 15px 20px 0 20px;
+}
+
+.log-items .admin-name {
+    font-weight: 600;
+    color: #38373F;
+}
+

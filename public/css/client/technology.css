@@ -1,0 +1,24 @@
+.main {
+    padding: 20px 0;
+}
+
+.box-title {
+    padding: 40px 0 20px;
+}
+
+.box-title span {
+    display: flex;
+    text-align: end;
+    line-height: 1.5;
+    color: #2e2e2e;
+    width: 60%;
+}
+
+.product-info {
+    padding: 5px;
+}
+
+.product-info span {
+    font-size: 14px;
+    color: var(--extraText);
+}

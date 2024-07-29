@@ -1,8 +1,10 @@
 const pool = require('../../config/connectDB');
 const diacritics = require('diacritics');
 
+const requestPerPage = 20;
+
 class RequestModel {
-    static async getRequests(keyword, language) {
+    static async getRequests(keyword, page, language) {
         keyword = diacritics.remove(keyword);
 
         const queryString = `
@@ -13,13 +15,20 @@ class RequestModel {
             WHERE
                 (LOWER(fullname) LIKE LOWER(?)
                 OR LOWER(email) LIKE LOWER(?)
-                OR LOWER(phone) LIKE LOWER(?))
+                OR LOWER(phone_number) LIKE LOWER(?)
+                OR request_id = ?)
                 AND language = ?
             ORDER BY
-                status, request_id DESC
+                request_id DESC
+            LIMIT
+                ?
+            OFFSET
+                ?
         `;
 
-        const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, language]);
+        const offset = (page - 1) * requestPerPage;
+
+        const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, keyword, language, requestPerPage, offset]);
         return rows;
     }
 
@@ -40,12 +49,12 @@ class RequestModel {
     static async createRequest(data, language) {
         const queryString = `
             INSERT INTO requests (
-                fullname, email, phone, detail, language
+                fullname, email, phone_number, message, language
             ) VALUES (?, ?, ?, ?, ?)
         `;
 
         const [result] = await pool.execute(queryString, [
-            data.fullname, data.email, data.phone, data.detail, language
+            data.fullname, data.email, data.phone_number, data.message, language
         ]);
 
         return result.insertId;

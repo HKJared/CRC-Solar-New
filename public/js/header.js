@@ -55,3 +55,58 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 });
+
+$(document).ready(function() {
+    $(document).on('click', '.categories-container ul li', function(event) {
+        event.stopPropagation();
+        
+        if ($(this).hasClass('active')) return;
+
+        var container = $(this).closest('.container');
+        const product_category_id = $(this).data('product-category-id');
+        const language = $('header').data('language');
+
+        var query = `/api/${ language }/products?keyword=`;
+
+        if (product_category_id) {
+            query = `/api/${ language }/products?product_category_id=${ product_category_id }`
+        }
+
+        fetch(query, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            return response.json().then(data => {
+                if (!response.ok) {
+                    // showNotification(data.message);
+                    throw new Error('Network response was not ok');
+                }
+                return data;
+            });
+        })
+        .then(result => {
+            const products = result.data;
+            const productsLength = products.length > 5 ? 5 : products.length;
+
+            var productsHTML = ``
+            for (let i = 0; i < productsLength; i++) {
+                productsHTML += `
+                <li class="col" data-productid="${ products[i].product_id }">
+                    <a href="${ language == 'vn' ? '' : ('/' + language) }/product/${ products[i].product_name }" class="full-width"><img src="${ products[i].src }" alt="" srcset="" class="full-width"></a>
+                    <span>${ products[i].product_name }</span>
+                </li>
+                `
+            }
+
+            container.find('.products-container ul').empty().append(productsHTML);
+            container.find('.categories-container ul li').removeClass('active');
+            $(this).addClass('active');
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+        });
+    })
+})

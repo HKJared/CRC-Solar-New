@@ -1,0 +1,137 @@
+main {
+    background-color: #fff;
+    padding: 40px 0;
+}
+
+/* mail */
+
+.block1 .left {
+    width: 65%;
+}
+
+.block1 .left h1 {
+    color: #0E0D1B;
+    margin: 30px 0 12px 0;
+}
+
+.info-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.info-container > * {
+    flex: 1 1 calc(33% - 30px);
+    margin-right: 30px; 
+    position: relative;
+    overflow: hidden;
+}
+
+.info-container > *:last-child {
+    margin-right: 0;
+}
+
+.block1 label {
+    color: #0E0D1B;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 30px 0 20px 0;
+}
+
+.block1 input, .block1 textarea {
+    padding: 10px;
+    color: #525252;
+    font-size: 18px;
+    border: var(--border);
+    resize: vertical;
+}
+
+.block1 input:focus, .block1 textarea:focus {
+    outline: none;
+}
+
+.block1 button {
+    margin-top: 65px;
+    font-size: 22px;
+    padding: 10px 15px;
+    border: 0;
+    background-color: var(--mainColor);
+    color: #fff;
+    width: fit-content;
+}
+
+.block1 button:hover {
+    background-color: #cc3939;
+}
+
+.message {
+    margin-top: 30px;
+}
+
+.block1 .right {
+    width: 30%;
+    padding: 30px;
+    border: var(--border);
+    margin-left: 60px;
+}
+
+.block1 .right h1 {
+    font-size: 28px;
+    color: #0E0D1B;
+    font-weight: 500;
+}
+
+.block1 .right li {
+    padding: 10px 0;
+    color: #0E0D1B;
+    display: flex;
+}
+
+.block1 .right li i {
+    color: var(--mainColor);
+}
+
+.block1 .right li p {
+    margin-left: 8px;
+    width: calc(100% - 20px);
+}
+
+.block1 .right .hr {
+    margin: 10px 0;
+    border-top: var(--border);
+}
+
+.map-container {
+    width: 100vw;
+    background-color: var(--blueBlock2);
+    margin-top: 60px;
+}
+
+.block2 > * {
+    width: 50%;
+}
+
+.block2 .extra-info {
+    padding: 30px ;
+    align-items: end;
+}
+
+.block2 .extra-info .social {
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: #f3f3f3;
+    color: var(--mainColor);
+}
+
+.block2 .extra-info img {
+    height: 50px;
+    margin: 20px 0;
+}
+
+.block2 .extra-info h1 {
+    color: var(--mainColor);
+}

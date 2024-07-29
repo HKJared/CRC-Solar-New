@@ -1,0 +1,56 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/technology.css">
+<main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
+    <div class="main center col">
+        <div class="container center col">
+            <div class="tech-image full-width" style="height: 400px;">
+                <img src="<%- technology.image %>" alt="" srcset="">
+            </div>
+            <div class="box-title full-width flex-box">
+                <h1 style="color: var(--mainColor);"><%- technology.technology_name %></h1>
+                <span><%- technology.description %></span>
+            </div>
+        </div>
+        <div class="container tech-detail">
+            <%- technology.detail %>
+        </div>
+        <div class="container col">
+            <div class="box-title">
+                <h1 data-translate="">Các sản phẩm liên quan</h1>
+            </div>
+            <div class="products-container full-width">
+                <ul class="row full-width">
+                    <% for (let i = 0; i < (products.length > 5 ? 5 : products.length); i ++) { %>
+                        <li class="col" data-productid="<%- products[i].product_id %>">
+                            <a href="<%- (language == 'vn' ? '' : ('/' + language)) + `/product/` + products[i].product_name %>" class="full-width"><img src="<%- products[i].src %>" alt="" srcset="" class="full-width"></a>
+                            <div class="product-info flex-box row">
+                                <span><%- products[i].quantity_cell %> cell</span>
+                                <span><%- products[i].power_output_range %></span>
+                            </div>
+                            <span><%- products[i].product_name %></span>
+                        </li>    
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
+</main>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

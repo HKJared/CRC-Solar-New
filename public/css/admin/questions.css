@@ -1,0 +1,169 @@
+.questions-container {
+    display: flex;
+    padding: 15px;
+    position: relative;
+}
+
+.add-question-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+}
+
+#add-question-form {
+    padding: 15px;
+    background-color: #fff;
+    border: var(--border);
+    width: 700px;
+    z-index: 999;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #b6b6b6;
+}
+
+#add-question-form .x-btn {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 2px;
+    right: 2px;
+}
+
+#add-question-form input, #add-question-form textarea, #add-question-form select {
+    border: var(--border);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 10px;
+    resize: vertical;
+}
+
+#add-question-form input:focus, #add-question-form textarea:focus, #add-question-form select:focus {
+    outline: 1px solid #F7F7F7;
+}
+
+#add-question-form label {
+    padding: 16px 0 8px 5px;
+}
+
+#add-question-form .submit-question {
+    font-size: 16px;
+    padding: 5px;
+    margin-top: 20px;
+    background-color: #bada55;
+    border-radius: 5px;
+    color: var(--Text);
+}
+
+#add-question-form .submit-question:hover {
+    background-color: #c1df5f;
+}
+
+
+.questions-container h2 {
+    color: #3364EB;
+    width: 1000px;
+    padding: 10px 0;
+}
+
+.questions-container .add-question {
+    width: 30px;
+    height: 30px;
+    background-color: #bada55;
+    border-radius: 3px;
+}
+
+.questions-container > ul {
+    background-color: #fff;
+}
+
+.questions-container > ul > li {
+    padding: 10px 0;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.questions-container > ul > li:hover {
+    background-color: #fbfbfb;
+}
+
+.title {
+    padding: 5px 30px;
+}
+
+.sub-question {
+    display: none;
+    width: 1040px;
+    padding: 15px;
+}
+
+.sub-question li {
+    max-width: 1000px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.row-table .question {
+    position: relative;
+    cursor: pointer;
+}
+
+.row-table .question i {
+    position: absolute;
+    left: 10px;
+    top: 5px;    
+}
+
+.toggle-status {
+    margin-left: auto;
+    margin-right: 40px;
+}
+
+.toggle-status input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.toggle-status label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 40px; /* Điều chỉnh chiều rộng */
+    height: 20px; /* Điều chỉnh chiều cao */
+    background: grey;
+    display: block;
+    border-radius: 10px; /* Điều chỉnh bán kính để giữ nguyên tỷ lệ */
+    position: relative;
+}
+
+.toggle-status label:after {
+    content: '';
+    position: absolute;
+    top: 2px; /* Điều chỉnh vị trí trên */
+    left: 2px; /* Điều chỉnh vị trí trái */
+    width: 16px; /* Điều chỉnh chiều rộng của nút */
+    height: 16px; /* Điều chỉnh chiều cao của nút */
+    background: #fff;
+    border-radius: 8px; /* Điều chỉnh bán kính để giữ nguyên tỷ lệ */
+    transition: 0.3s;
+}
+
+.toggle-status input:checked + label {
+    background: #bada55;
+}
+
+.toggle-status input:checked + label:after {
+    left: calc(100% - 2px); /* Điều chỉnh vị trí khi được kiểm tra */
+    transform: translateX(-100%);
+}
+
+.toggle-status label:active:after {
+    width: 22px; /* Điều chỉnh chiều rộng khi được kích hoạt */
+}
+
+.extra-info {
+    padding-left: 60px;
+    font-size: 12px;
+    color: var(--extraText);
+}

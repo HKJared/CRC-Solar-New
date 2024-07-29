@@ -5,12 +5,13 @@ const AdminModel = require('../app/models/adminModel')
 const authenticate = async (req, res, next) => {
     try {
         // Lấy token từ header của request
-        const token = req.headers.authorization;
+        const token = req.headers.authentication;
         if (!token) {
             return res.status(401).json({ message: "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại." });
         }
         // Giải mã token
         const decoded = decodeToken(token);
+        
         if (!decoded) {
             return res.status(401).json({ message: "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại." });
         }

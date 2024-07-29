@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="/css/admin/products.css">
+<ul class="product-items">
+</ul>
+<div class="edit-product-container col" style="display: none;">
+    <form class="edit-product col">
+        <button class="x-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Chỉnh sửa sản phẩm</h2>
+        <label for="product_name">Tên sản phẩm<span>*</span></label>
+        <input type="text" id="product_name">
+        <div class="row">
+            <div class="left-row col">
+                <label for="product_code">Mã sản phẩm</label>
+                <input type="text" id="product_code">
+            </div>
+            <div class="right-row col">
+                <label for="product_category">Phân loại sản phẩm<span>*</span></label>
+                <select name="" id="product_category">
+                <% for (let i = 0; i < product_categories.length; i++) { %>
+                    <option value='<%= product_categories[i].product_category_id %>'><%= product_categories[i].title %></option>
+                <% } %>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left-row col">
+                <label for="quantity_cell">Tổng số Cell<span>*</span></label>
+                <input type="number" id="quantity_cell" min="1" max="">
+            </div>
+            <div class="right-row col">
+                <label for="power_output_range">Dải công suất<span>*</span></label>
+                <input type="text" name="" id="power_output_range">
+            </div>
+        </div>
+        <div class="row">
+            <div class="left-row col">
+                <label for="max_system_vol">Điện áp hệ thống lớn nhất<span>*</span></label>
+                <input type="number" id="max_system_vol" min="1">
+            </div>
+            <div class="right-row col">
+                <label for="max_efficiency">Hiệu suất tấm pin lớn nhất<span>*</span></label>
+                <input type="text" name="" id="max_efficiency">
+            </div>
+        </div>
+        <label for="dimension">Kích thước<span>*</span></label>
+        <input type="text" id="dimension">
+        <div class="row">
+            <div class="left-row col">
+                <label for="technologies">Công nghệ sử dụng<span>*</span></label>
+                <div class="col" id="technologies" style="margin-left: 20px;">
+                    <% for (let i = 0; i < technologies.length; i++) { %>
+                        <label><input type="checkbox" name="technologies" id="technology_<%= technologies[i].technology_id %>" value="<%= technologies[i].technology_id %>"> <%= technologies[i].technology_name %></label>
+                    <% } %>
+                </div>
+            </div>
+            <div class="right-row col">
+                <label for="images">Hình ảnh<span>*</span></label>
+                <input type="file" name="images" id="images">
+                <div class="images-preview row" id="image-preview"></div>
+            </div>
+        </div>
+        <label for="product_detail">Chi tiết sản phẩm</label>
+        <div class="editor-container">
+            <textarea name="" id="product_detail"></textarea>
+        </div>
+        <button type="submit" class="submit-product" data-productid="">Lưu sản phẩm</button>
+    </form>
+</div>
+<script src="/js/admin/products.js"></script>

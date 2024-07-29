@@ -1,0 +1,97 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/products.css">
+<main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
+    <div class="main center col">
+        <div class="block container products col">
+            <div class="header-block">
+                <h1 data-translate="home_text14">CÁC SẢN PHẨM CỦA CRC SOLAR</h1>
+            </div>
+            <div class="product-categories-container">
+                <ul class="row">
+                    <li class="active"><span data-translate="home_text15">Tất cả</span></li>
+                    <% for (let i = 0; i < headerData.product_categories.length; i ++) { %>
+                        <li data-product-category-id="<%- headerData.product_categories[i].product_category_id %>"><span><%- headerData.product_categories[i].title %></span></li>    
+                    <% } %>
+                </ul>
+            </div>
+            <div class="products-container full-width">
+                <ul class="row full-width">
+                    <% for (let i = 0; i < products.length; i ++) { %>
+                        <li class="col" data-productid="<%- products[i].product_id %>">
+                            <a href="<%- (language == 'vn' ? '' : ('/' + language)) + `/product/` + products[i].product_name %>" class="full-width"><img src="<%- products[i].src %>" alt="" srcset="" class="full-width"></a>
+                            <div class="product-info flex-box row">
+                                <span><%- products[i].quantity_cell %> cell</span>
+                                <span><%- products[i].power_output_range %></span>
+                            </div>
+                            <span><%- products[i].product_name %></span>
+                        </li>    
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+
+        <div class="block container col center">
+            <div class="header-block">
+                <h1 data-translate="products_text1">CHỨNG NHẬN CHẤT LƯỢNG</h1>
+            </div>
+            <div class="certifications">
+                <div class="slide">
+                    <div class="item" style="background-image: url('/image/chungnhan1.png');">
+                        <div class="content">
+                            <div class="name"></div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('/image/chungnhan2.png');">
+                        <div class="content">
+                            <div class="name"></div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('/image/chungnhan3.jpg');">
+                        <div class="content">
+                            <div class="name"></div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('/image/chungnhan1.png');">
+                        <div class="content">
+                            <div class="name"></div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('/image/chungnhan2.png');">
+                        <div class="content">
+                            <div class="name"></div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('/image/chungnhan3.jpg');">
+                        <div class="content">
+                            <div class="name"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button center">
+                    <button class="pre"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
+</main>
+<script src="/js/products.js"></script>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

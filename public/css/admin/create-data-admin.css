@@ -1,0 +1,105 @@
+:root {
+    --border: 1px solid #bebebe;
+}
+
+.create-data-admin input{
+    width: 680px;
+    border: var(--border);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.create-data-admin textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.create-data-admin input:focus {
+    outline: 1px solid #F7F7F7;
+}
+
+.create-data-admin input::placeholder {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.create-data-admin label {
+    margin: 15px 0 5px 0;
+}
+
+.create-data-admin .row {
+    justify-content: space-between
+}
+
+.create-data-admin .row > * {
+    flex: 0 0 47%;
+}
+
+.create-data-admin-container {
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F7F7;
+    padding: 15px 0 25px 0;
+    position: relative;
+}
+
+.back {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 18px;
+    background-color: transparent;
+    color: #979797;
+    border: 0;
+    cursor: pointer;
+}
+
+.create-data-admin-container h2 {
+    color: #3364EB;
+    width: 700px;
+    padding: 10px 0;
+}
+
+.create-data-admin {
+    width: 700px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px 10px 20px 10px;
+}
+
+.create-data-admin label span {
+    color: #ff0000;
+}
+
+.submit-account {
+    display: block;
+    width: auto;
+    background-color: #3364EB;
+    color: #fff;
+    border: 0;
+    margin-top: 40px;
+    padding: 10px 15px;
+    font-style: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-account:hover {
+    background-color: #507aee;
+}
+
+.password-container {
+    display: flex;
+    position: relative;
+}
+
+.toggle-eyes {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #bebebe;
+}

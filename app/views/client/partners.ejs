@@ -1,0 +1,29 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/partners.css">
+<main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
+    <div class="about top-main center col">
+        <h1>Đối tác</h1>
+    </div>
+    <div class="main center col">
+        
+    </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
+</main>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

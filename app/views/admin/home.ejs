@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRC Solar - Admin</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/history.js/1.8/native.history.min.js"></script>
+    <link rel="stylesheet" href="/css/admin/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <script src="/js/util.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+</head>
+<body>
+    <header data-language="<%- language %>">
+        <div id="notification" class="notification">
+            <span id="notificationText"></span>
+        </div>
+        <div class="confirm-container">
+            <div id="confirm" class="confirm">
+                <span id="confirmText"></span>
+                <div class="action-btn row">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="confirm-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+        <div class="primary-logo center">
+            <a href="/"><img src="/image/logo.png" alt=""></a>
+        </div>
+        <div class="search-container row flex-box">
+            <form action="" class="search">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" class="search-text" placeholder="Search">
+            </form>
+            <div class="right-container row">
+                <div class="language-container center">
+                    <% if (language == 'vn') { %>
+                        <div class="top-language">
+                            <span><img src="/image/language-vn.jpg" width="16px">&nbsp;VN</span>
+                            <ul class="lang1">
+                                <li><a href="/en/admin"><span><img src="/image/language-en.jpg" width="16px" height="12px">&nbsp;EN</span></a></li>
+                                <li><a href="/cn/admin"><span><img src="/image/language-cn.jpg" width="16px" height="12px">&nbsp;CN</span></a></li>
+                            </ul>
+                        </div>
+                    <% } else if (language == 'en') { %>
+                        <div class="top-language">
+                            <span><img src="/image/language-en.jpg" width="16px">&nbsp;EN</span>
+                            <ul class="lang1">
+                                <li><a href="/admin"><span><img src="/image/language-vn.jpg" width="16px" height="12px">&nbsp;VN</span></a></li>
+                                <li><a href="/cn/admin"><span><img src="/image/language-cn.jpg" width="16px" height="12px">&nbsp;CN</span></a></li>
+                            </ul>
+                        </div>
+                    <% } else { %>
+                        <div class="top-language">
+                            <span><img src="/image/language-cn.jpg" width="16px">&nbsp;CN</span>
+                            <ul class="lang1">
+                                <li><a href="/admin"><span><img src="/image/language-vn.jpg" width="16px" height="12px">&nbsp;VN</span></a></li>
+                                <li><a href="/en/admin"><span><img src="/image/language-en.jpg" width="16px" height="12px">&nbsp;EN</span></a></li>
+                            </ul>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="account-action center">
+                    <div class="image"><i class="fa-regular fa-circle-user"></i></div>
+                    <div class="action-container col">
+                        <ul>
+                            <li><i class="fa-regular fa-id-card"></i> <span>Thông tin cá nhân</span></li>
+                            <li id="logout"><i class="fa-solid fa-right-from-bracket"></i> <span>Log Out</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="body">
+        <nav>
+            <div class="nav-container">
+                <ul class="menu">
+                    <li id="dashboard"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin"><i class="fa-solid fa-table-cells-large"></i>  Tổng quan</a></li>
+                    <li>
+                        <label for=""><i class="fa-solid fa-user-tie"></i>  Quản trị viên dữ liệu <span><i class="fa-solid fa-caret-down"></i></span></label>
+                        <ul class="sub-menu">
+                            <li id="create_data_admin"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/create-data-admin">Tạo tài khoản quản trị viên</a></li>
+                            <li id="data_admins"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/data-admins">Danh sách quản trị viên</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label for=""><i class="fa-solid fa-store"></i>  Sản phẩm <span><i class="fa-solid fa-caret-down"></i></span></label>
+                        <ul class="sub-menu">
+                            <li id="add_product"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/add-product">Thêm sản phẩm</a></li>
+                            <li id="products"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/products">Danh sách sản phẩm</a></li>
+                            <li id="product_categories"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/product-categories">Danh mục sản phẩm</a></li>
+                            <li id="technologies"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/product-technologies">Danh mục công nghệ</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label for=""><i class="fa-solid fa-display"></i>  Hiển thị</a> <span><i class="fa-solid fa-caret-down"></i></span></label>
+                        <ul class="sub-menu">
+                            <li id="displayhome"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/home">Trang chủ</a></li>
+                            <li id="displayintroduction"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/introduction">Giới thiệu</a></li>
+                            <li id="displaypartners"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/partners">Đối tác</a></li>
+                            <li id="displaysocialResponsibility"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/socialResponsibility">Trách nhiệm xã hội</a></li>
+                            <li id="displayproducts"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/products">Danh sách sản phẩm</a></li>
+                            <li id="displaydetailProduct"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/detailProduct">Chi tiết sản phẩm</a></li>
+                            <li id="displaytechnology"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/technology">Công nghệ</a></li>
+                            <li id="displayblogs"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/blogs">Danh sách bài viết</a></li>
+                            <li id="displayrecruitments"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/recruitments">Tuyển dụng</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label for=""></i><i class="fa-regular fa-newspaper"></i>  Bài viết</a> <span><i class="fa-solid fa-caret-down"></i></span></label>
+                        <ul class="sub-menu">
+                            <li id="create_blog"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/create-blog">Tạo bài viết</a></li>
+                            <li id="blogs"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/blogs">Danh sách bài viết</a></li>
+                            <li id="blog_categories"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/blog-categories">Danh mục bài viết</a></li>
+                        </ul>
+                    </li>
+                    <li id="requests"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/requests"><i class="fa-solid fa-bell"></i>  Yêu cầu liên hệ</a></li>
+                    <li id="questions"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/questions"><i class="fa-regular fa-circle-question"></i>  Hỏi đáp</a></li>
+                    <li id="recruitments"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/recruitments"><i class="fa-solid fa-users-rectangle"></i>  Tuyển dụng</a></li>
+                    <li id="documents"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/documents"><i class="fa-regular fa-file"></i>  Tài liệu</a></li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <% with ({ render: render }) { %>
+                <%- include(`./partials/${render}`) %>
+            <% } %>
+        </main>
+    </div>
+    <button class="to-top-btn"><i class="fa-solid fa-chevron-up"></i></button>
+    <script>
+        const active = "<%= active %>"; 
+
+        $(document).ready(function() {
+            $("#" + active).addClass("active");
+        });
+    </script>
+    <script src="/js/admin/homepage.js"></script>
+</body>
+</html>

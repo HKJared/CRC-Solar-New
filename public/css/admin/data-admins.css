@@ -1,0 +1,152 @@
+.data-admins-header {
+    color: #3364EB;
+    padding: 40px 0 20px 15px;
+}
+
+.data-admins-container {
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: var(--border);
+    border-spacing: 0;
+    box-shadow: 0 0 5px #fefefe;
+}
+
+.data-admins-container thead tr {
+    margin: 8px 20px;
+}
+
+.data-admins-container tbody tr {
+    padding: 15px 20px 15px 20px;
+    border-bottom: var(--border);
+}
+
+.data-admins-container tbody tr:last-child {
+    border-bottom: 0;
+}
+
+.data-admins-container th {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.data-admins-container thead {
+    background-color: #f0f0f0;
+    border-bottom: var(--border);
+    color: #8B8F93;
+}
+
+.data-admins-container tbody {
+    background-color: #fff;
+    border-bottom: var(--border);
+}
+
+.data-admins-container .name {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+.data-admins-container .info {
+    width: 18%;
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+.data-admins-container .status {
+    width: 18%;
+}
+
+.data-admins-container .role {
+    width: 18%;
+}
+
+.data-admins-container .image {
+    font-size: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: 2f8da5;
+    background-color: #2f8da5;
+    color: #fff;
+}
+
+.admin-account-container {
+    margin-left: 15px;
+}
+
+.admin-name, .email {
+    font-weight: 600;
+    color: #38373F;
+}
+
+.admin-account, .phone-number {
+    font-size: 14px;
+    color: #929599;
+}
+
+.status span {
+    font-size: 14px;
+    padding: 2px 8px;
+    border-radius: 7px;
+}
+
+.is-active span {
+    background-color: #D2F7E3;
+    color: #3C8166;
+}
+
+.is-disable span {
+    background-color: #f7d8d2;
+    color: #813c3c;
+}
+
+.role span {
+    font-size: 14px;
+    color: #929599;
+}
+
+.toggle-status input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.toggle-status label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 60px; /* Điều chỉnh chiều rộng */
+    height: 30px; /* Điều chỉnh chiều cao */
+    background: grey;
+    display: block;
+    border-radius: 30px; /* Điều chỉnh bán kính để giữ nguyên tỷ lệ */
+    position: relative;
+}
+
+.toggle-status label:after {
+    content: '';
+    position: absolute;
+    top: 3px; /* Điều chỉnh vị trí trên */
+    left: 3px; /* Điều chỉnh vị trí trái */
+    width: 24px; /* Điều chỉnh chiều rộng của nút */
+    height: 24px; /* Điều chỉnh chiều cao của nút */
+    background: #fff;
+    border-radius: 24px; /* Điều chỉnh bán kính để giữ nguyên tỷ lệ */
+    transition: 0.3s;
+}
+
+.toggle-status input:checked + label {
+    background: #bada55;
+}
+
+.toggle-status input:checked + label:after {
+    left: calc(100% - 3px); /* Điều chỉnh vị trí khi được kiểm tra */
+    transform: translateX(-100%);
+}
+
+.toggle-status label:active:after {
+    width: 36px; /* Điều chỉnh chiều rộng khi được kích hoạt */
+}

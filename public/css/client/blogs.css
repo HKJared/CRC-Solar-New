@@ -1,0 +1,95 @@
+main .categories-container {
+    width: 100%;
+    border-bottom: var(--border);
+}
+
+main .categories-container a {
+    font-size: 18px;
+    padding: 15px 20px 10px 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+main .categories-container a::before {
+    content: "";
+    height: 2.5px;
+    width: 0px;
+    background: var(--mainColor);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+main .categories-container a:hover::before {
+    width: 100%;
+}
+
+main .categories-container a.active {
+    font-weight: bold;
+}
+
+main .categories-container a.active::before {
+    width: 100%;
+}
+
+.newsletters-container {
+    display: flex;
+    width: 100%;
+    margin-top: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: 5px;
+    background-color: #fff;
+    min-height: 100%;
+    padding: 20px 15px 60px 15px;
+}
+
+.newsletter {
+    width: calc(25% - 15px);
+    margin-bottom: 20px;
+    height: auto;
+    color: var(--Text);
+    border: var(--border);
+}
+
+.newsletter .img {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.newsletter .img img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.newsletter:hover img {
+    transform: scale(1.1);
+}
+
+.newsletter:hover {
+    border-color: #c9c9c9;
+}
+
+.newsletter .info-container {
+    padding: 8px;
+}
+
+.newsletter .info-container .info {
+    color: var(--extraText);
+    font-size: 11px;
+}
+
+.newsletter .info-container .title h3 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--Text);
+}

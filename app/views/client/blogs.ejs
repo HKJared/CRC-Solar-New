@@ -1,0 +1,80 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/blogs.css">
+<main class="center">
+    <script>
+        const page = '<%- page %>';
+        $('main').attr('data-page', page);
+    </script>
+    <div class="main center col">
+        <div class="block blogs-container container">
+            <div class="categories-container row">
+                <a href="/news" id="news">Tin tức</a>
+                <a href="/events" id="events">Sự kiện</a>
+                <a href="/technologies" id="technologies">Công nghệ</a>
+                <a href="/services" id="services">Dịch vụ</a>
+                <a href="/social-responsibility" id="social-responsibility">Trách nhiệm xã hội</a>
+                <a href="/other-news" id="other-news">Tin tức khác</a>
+            </div>
+            <div class="action-container row flex-box">
+                <div class="pagination-container"></div>
+                <div class="seach-container">
+                    <form class="row">
+                        <input type="text" placeholder="Tìm kiếm bài viết">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="newsletters-container row">
+                <%
+                function formatDate(datetimeString) {
+                    const date = new Date(datetimeString);
+                
+                    const day = date.getUTCDate(); // Get the day of the month (1-31)
+                    const month = date.getUTCMonth() + 1; // Months are zero-indexed, so add 1
+                    const year = date.getUTCFullYear(); // Get the four-digit year
+                
+                    // Pad single digit day and month with leading zero if needed
+                    const formattedDay = day < 10 ? `0${day}` : day;
+                    const formattedMonth = month < 10 ? `0${month}` : month;
+                
+                    return `${formattedDay}/${formattedMonth}/${year}`;
+                }
+                %>
+                <% for (let i = 0; i< blogs.length; i++) { %>
+                    <a href="<%- language == 'vn' ? `` : '/' + language %>/blog?title=<%- blogs[i].title %>&blog_id=<%- blogs[i].blog_id %>" class="newsletter col" title="<%- blogs[i].title %>">
+                        <div class="img">
+                            <img src="<%- blogs[i].main_image %>" alt="">
+                        </div>
+                        <div class="info-container col">
+                            <div class="info flex-box row">
+                                <p><i class="fa-regular fa-user"></i> <%- blogs[i].admin_name %></p>
+                                <p><i class="fa-regular fa-clock"></i> <%- formatDate(blogs[i].created_at) %></p>
+                            </div>
+                            <div class="title">
+                                <h3><%- blogs[i].title %></h3>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>            
+            </div>
+        </div>
+    </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
+</main>
+<%- include(`./includes/footer`) %>
+<script>
+    const name = '<%- name %>';
+    $(`#${ name }`).addClass('active');
+
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

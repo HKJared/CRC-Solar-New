@@ -1,37 +1,28 @@
 $(document).ready(function() {
-    // Function to create the count-up effect
-    function countUp(element, finalValue, hasPlus) {
-        let count = 0;
-        let increment = finalValue / 100; // Adjust the increment value for speed
-        let interval = setInterval(function() {
-            count += increment;
-            if (count >= finalValue) {
-                clearInterval(interval);
-                count = finalValue;
-            }
-            $(element).text(Math.floor(count) + (hasPlus ? '+' : ''));
-        }, 10); // Adjust the interval time for smoother effect
-    }
+    
+});
 
-    // Observe when the element comes into view
-    let observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                let $cntNum = $(entry.target);
-                let finalText = $cntNum.text();
-                let hasPlus = finalText.includes('+');
-                let finalValue = parseInt(finalText, 10);
-                countUp($cntNum, finalValue, hasPlus);
-                $cntNum.addClass('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-
-    // Attach the observer to each .cnt-num element
-    $('.cnt-num').each(function() {
-        observer.observe(this);
+$(document).ready(function() {
+    $('.technologies-container li').on('click', function() {
+        // Kiểm tra xem mục hiện tại đã có lớp active chưa
+        if ($(this).hasClass('active')) {
+            return; // Nếu đã active, không làm gì cả
+        }
+        
+        var technologyId = $(this).data('technologyid');
+        var $targetElement = $('.detail-technologies-container .row[data-technologyid="' + technologyId + '"]');
+        
+        // Xóa lớp active khỏi tất cả các mục khác
+        $('.technologies-container li').removeClass('active');
+        // Thêm lớp active cho mục được click
+        $(this).addClass('active');
+        
+        // Tính toán vị trí của phần tử mô tả so với khung cuộn ngang của list
+        var targetPosition = $targetElement.position().left;
+        
+        // Cuộn list đến vị trí của phần tử mô tả với hiệu ứng mượt
+        $('.detail-technologies-container .list').animate({
+            scrollLeft: targetPosition
+        }, 700); // Thời gian animation là 500ms
     });
 });
