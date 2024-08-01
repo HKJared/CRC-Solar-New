@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     $(document).on('click', '.next', function() {
         const items = $('.box-image .slide .item');

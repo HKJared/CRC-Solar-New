@@ -93,3 +93,44 @@
     background-color: var(--mainColor);
     color: #fff;
 }
+
+.editor-container {
+    border: 0 !important;
+    border-radius: 5px !important;
+    overflow: hidden;
+    margin-bottom: 60px;
+}
+
+.ck-sticky-panel__content {
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.ck-content {
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.ck-editor__editable[role="textbox"] {
+    min-height: 200px;
+}
+
+.ck-content .image {
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+#product_detail {
+    display: none;
+}
+
+.ck-editor__top {
+    display: none
+}
+
+.ck-content {
+    border: 0 !important;
+    padding: 0 !important;
+}

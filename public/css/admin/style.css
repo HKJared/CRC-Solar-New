@@ -231,6 +231,7 @@ nav {
     height: calc(100vh - 50px);
     background-color: #fff;
     box-shadow: 5px 0 5px -5px #d6d6d6;
+    overflow: auto;
 }
 
 nav a, nav label {

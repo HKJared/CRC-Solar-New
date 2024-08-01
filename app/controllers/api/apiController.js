@@ -327,7 +327,7 @@ const updateProduct = async (req, res) => {
             }
 
             await ProductModel.updateProduct(newDataProduct, admin_id);
-
+            
             await LogModel.updateStatusLog(log_id);
 
             return res.status(200).json({ message: 'Sản phẩm đã được cập nhật.' });

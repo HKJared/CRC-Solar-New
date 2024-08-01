@@ -1,6 +1,7 @@
 var keyword = '';
 var loading = false;
 const language = $('header').data('language');
+var editor;
 
 var filesArray = [];
 var existingImages = [];
@@ -238,7 +239,6 @@ $(document).ready(function() {
                 var technologiesToUpdate = [];
         
                 $('div#technologies input[type=checkbox]').each(function () {
-                    console.log(1)
                     var $checkbox = $(this);
                     var technologyId = $checkbox.val();
                     var isChecked = $checkbox.is(':checked');
