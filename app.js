@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const configViewEngine = require('./config/viewEngine');
 
@@ -10,7 +11,7 @@ const apiRouter = require('./routes/apiRouter');
 
 const app = express();
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
