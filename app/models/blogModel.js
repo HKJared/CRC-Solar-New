@@ -79,6 +79,8 @@ class BlogModel {
     
             // Thực thi câu lệnh SQL
             const [rows] = await pool.execute(queryString, [keyword, name, language]);
+            
+            console.log(rows)
             return rows;
         } catch (error) {
             console.error('Error executing getBlogsByCategoryName query:', error);
