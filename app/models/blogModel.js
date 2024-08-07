@@ -62,13 +62,12 @@ class BlogModel {
                 AND b.language = ?
             ORDER BY
                 b.blog_id DESC
+            LIMIT
+                ${ blogsPerPage }
+            OFFSET
+                ${ offset }
         `;
     
-    //     LIMIT
-    //     ?
-    // OFFSET
-    //     ?
-    //, blogsPerPage, offset
         try {
             // Xác nhận các tham số và kiểu dữ liệu
             console.log('keyword:', `%${keyword}%`);
