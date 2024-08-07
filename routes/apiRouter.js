@@ -56,7 +56,7 @@ apiRouter.put('/blog', (req, res, next) => {
 }, apiController.updateBlog);
 apiRouter.delete('/blog', (req, res, next) => {
     authorization(req, res, 'delete', next);
-}, apiController.updateBlog);
+}, apiController.deleteBlog);
 
 //request
 apiRouter.post('/request', apiController.creatRequest);

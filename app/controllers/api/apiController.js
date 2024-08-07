@@ -579,8 +579,8 @@ const deleteBlog = async (req, res) => {
         const admin_id = req.admin_id;
         const log_id = req.log_id;
 
-        const blog_id = req.body.blog_id;
-
+        const blog_id = req.query.blog_id;
+        
         const blog = await BlogModel.getBlogById(blog_id);
 
         if (!blog) {

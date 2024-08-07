@@ -113,7 +113,7 @@ class BlogModel {
             WHERE 
                 b.blog_id = ?
         `;
-
+        
         const [rows] = await pool.execute(queryString, [blog_id]);
         return rows[0];
     }

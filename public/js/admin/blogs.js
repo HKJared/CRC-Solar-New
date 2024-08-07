@@ -441,13 +441,12 @@ function deleteBlog(blog_id) {
     const language = $('header').data('language');
 
     renderLoading();
-    fetch(`/api/${language}/blog`, {
+    fetch(`/api/${language}/blog?blog_id=${blog_id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'appdivcation/json',
             'authentication': access_token
-        },
-        body: JSON.stringify({ blog_id: blog_id })
+        }
     })
     .then(response => {
         return response.json().then(data => {
@@ -467,7 +466,7 @@ function deleteBlog(blog_id) {
 
         $blogItem.remove();
 
-        if ($('form.edit-blog').data(blogid) == blog_id) {
+        if ($('form.edit-blog').data('blogid') == blog_id) {
             $('form.edit-blog').slideUp();
         }
     })
