@@ -78,7 +78,7 @@ class BlogModel {
             console.log('offset:', offset);
     
             // Thực thi câu lệnh SQL
-            const [rows] = await pool.execute(queryString, [keyword, name, language]);
+            const [rows] = await pool.execute(queryString, [`%${keyword}%`, name, language]);
             
             console.log(rows)
             return rows;
