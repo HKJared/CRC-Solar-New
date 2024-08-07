@@ -6,7 +6,8 @@ const requestPerPage = 20;
 class RequestModel {
     static async getRequests(keyword, page, language) {
         keyword = diacritics.remove(keyword);
-
+        const offset = (page - 1) * requestPerPage;
+        
         const queryString = `
             SELECT 
                 *
@@ -25,11 +26,14 @@ class RequestModel {
             OFFSET
                 ?
         `;
-
-        const offset = (page - 1) * requestPerPage;
-
-        const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, keyword, language, requestPerPage, offset]);
-        return rows;
+    
+        try {
+            const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, keyword, language, requestPerPage, offset]);
+            return rows;
+        } catch (error) {
+            console.error('Error executing getRequests query:', error);
+            throw error;
+        }
     }
 
     static async getRequestById(request_id) {

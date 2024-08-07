@@ -6,6 +6,8 @@ const blogsPerPage = 20;
 class BlogModel {
     static async getBlogsByTitle(keyword, page, language) {
         keyword = diacritics.remove(keyword);
+        const offset = (page - 1) * blogsPerPage;
+        
         const queryString = `
             SELECT 
                 b.*,
@@ -27,10 +29,14 @@ class BlogModel {
             OFFSET
                 ?
         `;
-        const offset = (page - 1) * blogsPerPage;
-        const [rows] = await pool.execute(queryString, [`%${keyword}%`, language, blogsPerPage, offset]);
-        
-        return rows;
+    
+        try {
+            const [rows] = await pool.execute(queryString, [`%${keyword}%`, language, blogsPerPage, offset]);
+            return rows;
+        } catch (error) {
+            console.error('Error executing getBlogsByTitle query:', error);
+            throw error;
+        }
     }
 
     static async getBlogsByCategoryName(keyword, name, page, language) {
