@@ -22,13 +22,13 @@ class RequestModel {
             ORDER BY
                 request_id DESC
             LIMIT
-                ?
+                ${ requestPerPage }
             OFFSET
-                ?
+                ${ offset }
         `;
     
         try {
-            const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, keyword, language, requestPerPage, offset]);
+            const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, keyword, language]);
             return rows;
         } catch (error) {
             console.error('Error executing getRequests query:', error);

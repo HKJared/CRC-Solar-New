@@ -68,23 +68,9 @@ class BlogModel {
                 ${ offset }
         `;
     
-        try {
-            // Xác nhận các tham số và kiểu dữ liệu
-            console.log('keyword:', `%${keyword}%`);
-            console.log('name:', name);
-            console.log('language:', language);
-            console.log('blogsPerPage:', blogsPerPage);
-            console.log('offset:', offset);
-    
-            // Thực thi câu lệnh SQL
-            const [rows] = await pool.execute(queryString, [`%${keyword}%`, name, language]);
+        const [rows] = await pool.execute(queryString, [`%${keyword}%`, name, language]);
             
-            console.log(rows)
-            return rows;
-        } catch (error) {
-            console.error('Error executing getBlogsByCategoryName query:', error);
-            throw error;
-        }
+        return rows;
     }    
 
     static async getBlogsByCategoryId(category_id) {
