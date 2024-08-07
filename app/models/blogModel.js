@@ -40,9 +40,11 @@ class BlogModel {
     }
 
     static async getBlogsByCategoryName(keyword, name, page, language) {
+        // Loại bỏ dấu câu và chuẩn bị các tham số
         keyword = diacritics.remove(keyword);
         const offset = (page - 1) * blogsPerPage;
     
+        // Câu lệnh SQL
         const queryString = `
             SELECT 
                 b.*,
@@ -67,6 +69,14 @@ class BlogModel {
         `;
     
         try {
+            // Xác nhận các tham số và kiểu dữ liệu
+            console.log('keyword:', `%${keyword}%`);
+            console.log('name:', name);
+            console.log('language:', language);
+            console.log('blogsPerPage:', blogsPerPage);
+            console.log('offset:', offset);
+    
+            // Thực thi câu lệnh SQL
             const [rows] = await pool.execute(queryString, [`%${keyword}%`, name, language, blogsPerPage, offset]);
             return rows;
         } catch (error) {
