@@ -163,7 +163,7 @@ $(document).ready(function() {
         
         showConfirm('Xác nhận xóa sản phẩm này', function(result) {
             if(result) {
-                deleteblog(blog_id);
+                deleteBlog(blog_id);
             }
         });
     });
