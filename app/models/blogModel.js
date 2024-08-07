@@ -62,12 +62,13 @@ class BlogModel {
                 AND b.language = ?
             ORDER BY
                 b.blog_id DESC
-            LIMIT
-                ?
-            OFFSET
-                ?
         `;
     
+    //     LIMIT
+    //     ?
+    // OFFSET
+    //     ?
+    //, blogsPerPage, offset
         try {
             // Xác nhận các tham số và kiểu dữ liệu
             console.log('keyword:', `%${keyword}%`);
@@ -77,11 +78,11 @@ class BlogModel {
             console.log('offset:', offset);
     
             // Thực thi câu lệnh SQL
-            const [rows] = await pool.execute(queryString, [keyword, name, language, blogsPerPage, offset]);
+            const [rows] = await pool.execute(queryString, [keyword, name, language]);
             return rows;
         } catch (error) {
             console.error('Error executing getBlogsByCategoryName query:', error);
-            return [];
+            throw error;
         }
     }    
 
