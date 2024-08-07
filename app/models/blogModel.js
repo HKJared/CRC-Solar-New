@@ -77,11 +77,11 @@ class BlogModel {
             console.log('offset:', offset);
     
             // Thực thi câu lệnh SQL
-            const [rows] = await pool.execute(queryString, [`%${keyword}%`, name, language, blogsPerPage, offset]);
+            const [rows] = await pool.execute(queryString, [keyword, name, language, blogsPerPage, offset]);
             return rows;
         } catch (error) {
             console.error('Error executing getBlogsByCategoryName query:', error);
-            throw error;
+            return [];
         }
     }    
 
