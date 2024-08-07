@@ -27,7 +27,7 @@ class HeaderModel {
                                                     FROM
                                                         product_images
                                                     GROUP BY
-                                                        product_id DESC
+                                                        product_id
                                                 ) pim ON p.product_id = pim.product_id
                                                 LEFT JOIN product_images pi ON pim.min_image_id = pi.product_image_id
                                                 WHERE
@@ -36,6 +36,7 @@ class HeaderModel {
                                                     p.product_id DESC
                                                 LIMIT
                                                     5
+
                                                 `, [language]);
                                                         
 
