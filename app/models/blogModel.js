@@ -25,13 +25,13 @@ class BlogModel {
             ORDER BY
                 b.blog_id DESC
             LIMIT
-                ?
+                ${ blogsPerPage }
             OFFSET
-                ?
+                ${ offset }
         `;
     
         try {
-            const [rows] = await pool.execute(queryString, [`%${keyword}%`, language, blogsPerPage, offset]);
+            const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
             return rows;
         } catch (error) {
             console.error('Error executing getBlogsByTitle query:', error);
