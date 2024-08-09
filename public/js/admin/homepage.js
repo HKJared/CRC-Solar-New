@@ -1,8 +1,7 @@
+const language = $('header').data('language');
+
 $(document).ready(function() {
-    const refresh_token = localStorage.getItem('refresh_token');
-    if(!refresh_token || refresh_token == '') {
-        window.location.href = '/admin/login'
-    }
+    refreshToken();
 
     setInterval(refreshToken, 60000);
 
@@ -117,7 +116,10 @@ function logout() {
     .then(response => response.json().then(data => {
         if (!response.ok) {
             removeLoading();
-            showNotification('Đã xảy ra lỗi, vui lòng thử lại');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('access_token');
+
+            window.location.href = '/admin/login';
             throw new Error('Network response was not ok');
         }
         return data;

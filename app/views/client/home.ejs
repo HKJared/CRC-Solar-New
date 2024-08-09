@@ -62,7 +62,7 @@
                 <div class="child col edit-element">
                     <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                     <span id="block1-text6" style="margin-top: 30px; white-space: pre-line;"></span>
-                    <a href="about" class="center" data-translate="home_text9">Xem thêm</a>
+                    <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/introduction" class="center" data-translate="home_text9">Xem thêm</a>
                 </div>
             </div>
         </div>
@@ -224,6 +224,9 @@
                         </div>
                     </div>
                 </a>
+            </div>
+            <div class="button-see-more full-width">
+                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/news" data-translate="home_text9" class="center">Xem thêm</a>
             </div>
         </div>
     </div>

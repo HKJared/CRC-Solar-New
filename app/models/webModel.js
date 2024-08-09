@@ -60,12 +60,13 @@ class HeaderModel {
                                                 JOIN
                                                     categories ON blogs.category_id = categories.category_id
                                                 WHERE
-                                                    categories.name = 'service'
+                                                    categories.name = 'services'
                                                     AND blogs.language = ?
                                                 ORDER BY
                                                     blogs.created_at DESC
                                             `, [language]);
 
+        
         return {
             product_categories: product_categories,
             products: products,
@@ -104,6 +105,26 @@ class MainModel {
 }
 
 class FooterModel {
+    static async getFooterData(language) {
+        const [policies] = await pool.execute(`
+            SELECT
+                blogs.blog_id,
+                blogs.title
+            FROM
+                blogs
+            JOIN
+                categories ON blogs.category_id = categories.category_id
+            WHERE
+                categories.name = 'policies'
+                AND blogs.language = ?
+            ORDER BY
+                blogs.created_at DESC
+        `, [language]);
+
+        return {
+            policies: policies
+        }
+    }
 }
 
 module.exports = {

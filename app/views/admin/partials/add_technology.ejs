@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/admin/add-technology.css">
+<div class="add-technology-container col">
+    <h2>Thêm công nghệ mới</h2>
+    <form class="add-technology col">
+        <label for="technology_name">Tên công nghệ<span>*</span></label>
+        <input type="text" id="technology_name">
+        <div class="row">
+            <div class="left-row col">
+                <label for="description">Mô tả<span>*</span></label>
+                <textarea name="" id="description"></textarea>
+            </div>
+            <div class="right-row col">
+                <label for="images">Hình ảnh<span>*</span></label>
+                <input type="file" name="images" id="images">
+                <div class="images-preview row" id="image-preview"></div>
+            </div>
+        </div>
+        <label for="technology_detail">Chi tiết công nghệ</label>
+        <div class="editor-container">
+            <textarea name="" id="detail"></textarea>
+        </div>
+        <button type="submit" class="submit-technology" data-technologyid="">Lưu công nghệ mới</button>
+    </form>
+</div>
+<script src="/js/admin/add-technology.js"></script>

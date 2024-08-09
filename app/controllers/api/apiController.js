@@ -14,7 +14,8 @@ const { log } = require('console');
 const { resourceLimits } = require('worker_threads');
 const { get } = require('http');
 const RequestModel = require('../../models/requestModel');
-const QuestionModel = require('../../models/questionModel');
+const FAQModel = require('../../models/FAQModel');
+const PictureModel = require('../../models/pictureModel');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -377,6 +378,154 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+const createTechnology = async (req, res) => {
+    upload(req, res, async function (err) {
+        if (err instanceof multer.MulterError) {
+            console.log(err);
+            return res.status(500).json({ message: 'Lỗi khi tải lên tệp ảnh' });
+        } else if (err) {
+            console.error("ERROR: ", err);
+            return res.status(500).json({ message: 'Đã xảy ra lỗi' });
+        }
+
+        try {
+            const language = req.language;
+            const admin_id = req.admin_id;
+            const files = req.files;
+            const technology = JSON.parse(req.body.technology);
+            const log_id = req.log_id;
+
+            await LogModel.updateDetailLog(`Tạo công nghệ mới: ${ technology.technology_name }`, log_id);
+
+            if (files.length != 0) {
+                const file = files[0];
+                const new_image_src = `/image/${file.originalname}`;
+                technology.image = new_image_src;
+            } else {
+                return res.status(400).json({ message: "Không có tệp ảnh nào được tải lên." })
+            }
+            
+            await ProductModel.createTechnology(technology, language, admin_id);
+
+            await LogModel.updateStatusLog(log_id);
+
+            return res.status(200).json({ message: 'Tạo công nghệ mới thành công.' });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Lỗi từ phía server.' });
+        }
+    });
+}
+
+const getTechnologies = async (req, res) => {
+    try {
+        const language = req.language;
+        const keyword = req.query.keyword;
+
+        const technologies = await ProductModel.getTechnologies(keyword, language);
+
+        return res.status(200).json({ data: technologies });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const getTechnologyById = async (req, res) => {
+    try {
+        const technology_id = req.query.technology_id;
+
+        const technology = await ProductModel.getTechnologyById(technology_id);
+
+        return res.status(200).json({ data: technology });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const updateTechnology = async (req, res) => {
+    upload(req, res, async function (err) {
+        if (err instanceof multer.MulterError) {
+            console.log(err);
+            return res.status(500).json({ message: 'Lỗi khi tải lên tệp ảnh' });
+        } else if (err) {
+            console.error("ERROR: ", err);
+            return res.status(500).json({ message: 'Đã xảy ra lỗi' });
+        }
+
+        try {
+            const language = req.language;
+            const admin_id = req.admin_id;
+            const files = req.files;
+            const newDataTechnology = JSON.parse(req.body.newDataTechnology);
+            const log_id = req.log_id;
+
+            const technology = await ProductModel.getTechnologyById(newDataTechnology.technology_id);
+
+            if (!technology) {
+                await LogModel.updateDetailLog(`Không tìm thấy công nghệ muốn chỉnh sửa`, log_id);
+                return res.status(400).json({ message: 'Không tìm thấy công nghệ muốn chỉnh sửa, vui lòng tải lại trang.' });
+            }
+
+            await LogModel.updateDetailLog(`Cập nhật nội dung công nghệ: ${ technology.technology_name } thành công nghệ: ${ newDataTechnology.technology_name }`, log_id);
+
+            if (files.length != 0) {
+                const file = files[0];
+                const new_image_src = `/image/${file.originalname}`;
+                newDataTechnology.image = new_image_src;
+            }
+            
+            await ProductModel.updateTechnology(newDataTechnology, admin_id);
+
+            await LogModel.updateStatusLog(log_id)
+
+            return res.status(200).json({ message: 'Cập nhật nội dung công nghệ thành công.' });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Lỗi từ phía server.' });
+        }
+    });
+}
+
+const deleteTechnology = async (req, res) => {
+    try {
+        const admin_id = req.admin_id;
+        const log_id = req.log_id;
+
+        const technology_id = req.body.technology_id;
+
+        const technology = await ProductModel.getTechnologyById(technology_id);
+
+        if (!technology) {
+            await LogModel.updateDetailLog('Không tìm thấy công nghệ cần xóa', log_id);
+
+            return res.status(400).json({ message: 'Không tìm thấy công nghệ cần xóa' })
+        }
+
+        await LogModel.updateDetailLog(`Xóa công nghệ: ${technology.technology_name}`, log_id);
+
+        const oldPath = path.join(__dirname, '../../../public', technology.image);
+
+        fs.unlink(oldPath, (err) => {
+            if (err) {
+                console.error('Lỗi khi xóa ảnh cũ:', err);
+            } else {
+                console.log('Đã xóa ảnh cũ:', oldPath);
+            }
+        });
+
+        await ProductModel.deleteTechnology(technology_id);
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Xóa công nghệ thành công.' })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
 const updateDisplayText = async (req, res) => {
     try {
         const language = req.language;
@@ -580,7 +729,7 @@ const deleteBlog = async (req, res) => {
         const log_id = req.log_id;
 
         const blog_id = req.query.blog_id;
-        
+
         const blog = await BlogModel.getBlogById(blog_id);
 
         if (!blog) {
@@ -588,6 +737,16 @@ const deleteBlog = async (req, res) => {
         }
 
         await LogModel.updateDetailLog(`Xóa bài viết: ${blog.title}`, log_id);
+
+        const oldPath = path.join(__dirname, '../../../public', blog.main_image);
+
+        fs.unlink(oldPath, (err) => {
+            if (err) {
+                console.error('Lỗi khi xóa ảnh cũ:', err);
+            } else {
+                console.log('Đã xóa ảnh cũ:', oldPath);
+            }
+        });
 
         await BlogModel.deleteBlog(blog_id);
 
@@ -649,40 +808,98 @@ const updateRequest = async (req, res) => {
     }
 }
 
-const createQuestion = async (req, res) => {
+const createFAQ = async (req, res) => {
     try {
         const admin_id = req.admin_id;
         const language = req.language;
         const log_id = req.log_id;
-        const question = req.body.question;
+        const FAQ = req.body.FAQ;
 
-        if (!question) {
+        if (!FAQ) {
             await LogModel.updateDetailLog('Không nhận được thông tin câu hỏi.', log_id);
             return res.status(400).json({ message: 'Đã xảy ra lỗi, vui lòng thử lại.' });
         }
 
-        await LogModel.updateDetailLog(`Tạo câu hỏi "${question.title}"`, log_id);
+        await LogModel.updateDetailLog(`Tạo câu hỏi "${FAQ.title}"`, log_id);
 
-        const idNewQuestion = await QuestionModel.createQuestion(question, language, admin_id);
-        const newQuestion = await QuestionModel.getQuestionById(idNewQuestion);
+        const idNewFAQ = await FAQModel.createFAQ(FAQ, language, admin_id);
+        const newFAQ = await FAQModel.getFAQById(idNewFAQ);
 
         await LogModel.updateStatusLog(log_id);
 
-        return res.status(200).json({ message: 'Tạo câu hỏi mới thành công.', question: newQuestion });
+        return res.status(200).json({ message: 'Tạo câu hỏi mới thành công.', FAQ: newFAQ });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Lỗi từ phía server.' });
     }
 }
 
-const getQuestions = async (req, res) => {
+const getFAQs = async (req, res) => {
     try {
         const keyword = req.query.keyword || '';
         const language = req.language;
 
-        const questions = await QuestionModel.getQuestions(keyword, language);
+        const FAQs = await FAQModel.getFAQs(keyword, language);
 
-        return res.status(200).json({ data: questions });
+        return res.status(200).json({ data: FAQs });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const updateFAQ = async (req, res) => {
+    try {
+        const admin_id = req.admin_id;
+        const language = req.language;
+        const log_id = req.log_id;
+        const newDataFAQ = req.body.newDataFAQ;
+
+        if (!newDataFAQ) {
+            await LogModel.updateDetailLog('Không nhận được thông tin câu hỏi.', log_id);
+            return res.status(400).json({ message: 'Đã xảy ra lỗi, vui lòng thử lại.' });
+        }
+
+        const FAQ = await FAQModel.getFAQById(newDataFAQ.FAQ_id);
+
+        if (!FAQ) {
+            await LogModel.updateDetailLog('Không tìm thấy câu hỏi câu hỏi.', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy câu hỏi muốn cập nhật, vui lòng tải lại trang.' });
+        }
+
+        await LogModel.updateDetailLog(`Cập nhật câu hỏi: ${FAQ.title} thành câu hỏi: ${newDataFAQ.title}`, log_id);
+
+        await FAQModel.updateFAQ(newDataFAQ, admin_id);
+        const newFAQ = await FAQModel.getFAQById(newDataFAQ.FAQ_id);
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Cập nhật câu hỏi thành công.', FAQ: newFAQ });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const deleteFAQ = async (req, res) => {
+    try {
+        const keyword = req.query.keyword || '';
+        const language = req.language;
+        const log_id = req.log_id;
+        const FAQ_id = req.body.FAQ_id;
+
+        const FAQ = await FAQModel.getFAQById(FAQ_id);
+
+        if (!FAQ) {
+            await LogModel.updateDetailLog('Không tìm thấy câu hỏi câu hỏi.', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy câu hỏi muốn xóa, vui lòng tải lại trang.' });
+        }
+
+        await LogModel.updateDetailLog(`Xóa câu hỏi: ${FAQ.title}`, log_id);
+        await FAQModel.deleteFAQ(FAQ_id);
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: "Xóa câu hỏi thành công." });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Lỗi từ phía server.' });
@@ -715,13 +932,110 @@ const getNewLogs = async (req, res) => {
     }
 }
 
+const createPicture = async (req, res) => {
+    upload(req, res, async function (err) {
+        if (err instanceof multer.MulterError) {
+            console.log(err);
+            return res.status(500).json({ message: 'Lỗi khi tải lên tệp ảnh' });
+        } else if (err) {
+            console.error("ERROR: ", err);
+            return res.status(500).json({ message: 'Đã xảy ra lỗi' });
+        }
+
+        try {
+            const language = req.language;
+            const admin_id = req.admin_id;
+            const files = req.files;
+            const picture = JSON.parse(req.body.data);
+            const log_id = req.log_id;
+
+            await LogModel.updateDetailLog(`Thêm ảnh mới`, log_id);
+
+            const file = files[0]
+
+            if (!files || files.length === 0) {
+                await LogModel.updateDetailLog(`Không có tệp hình ảnh được tải lên`, log_id);
+                return res.status(400).json({ message: 'Không có tệp hình ảnh được tải lên' });
+            }
+
+            const image_src = `/image/${file.originalname}`;
+            picture.src = image_src;
+            const newPictureId = await PictureModel.createPicture(picture, admin_id);
+
+            const newPicture = await PictureModel.getPictureById(newPictureId);
+
+            await LogModel.updateStatusLog(log_id)
+
+            return res.status(200).json({ message: 'Thêm ảnh mới thành công.', newPicture: newPicture });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Lỗi từ phía server.' });
+        }
+    });
+}
+
+const getPictures = async (req, res) => {
+    try {
+        const language = req.language;
+        const admin_id = req.admin_id;
+        const keyword = req.query.keyword;
+        const page = req.query.page;
+        
+        const pictures = await PictureModel.getPictures(keyword, page);
+
+        return res.status(200).json({ data: pictures });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const deletePicture = async (req, res) => {
+    try {
+        const language = req.language;
+        const admin_id = req.admin_id;
+        const picture_id = req.body.picture_id;
+        const log_id = req.log_id;
+        console.log(picture_id)
+        await LogModel.updateDetailLog(`Xóa ảnh`, log_id); 
+        
+        const picture = await PictureModel.getPictureById(picture_id);
+
+        if (!picture) {
+            await LogModel.updateDetailLog(`Không tìm thấy ảnh cần xóa`, log_id);
+            return res.status(400).json({ message: 'Không tìm thấy ảnh cần xóa' });
+        }
+
+        const oldPath = path.join(__dirname, '../../../public', picture.src);
+
+        fs.unlink(oldPath, (err) => {
+            if (err) {
+                console.error('Lỗi khi xóa ảnh cũ:', err);
+            } else {
+                console.log('Đã xóa ảnh cũ:', oldPath);
+            }
+        });
+
+        await PictureModel.deletePicture(picture_id);
+
+        await LogModel.updateStatusLog(log_id)
+
+        return res.status(200).json({ message: 'xóa ảnh thành công.'});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
 module.exports = {
     login, logout, refreshToken, createDataAdmin, getDataAdmins,
     toggleAdminStatus,
     getProducts, getProductById, createProduct, updateProduct, deleteProduct,
+    createTechnology, getTechnologies, getTechnologyById, updateTechnology, deleteTechnology,
     updateDisplayText, updateDisplayImage,
     createBlog, getBlogsByTitle, getBlog, updateBlog, deleteBlog,
     creatRequest, getRequests, updateRequest,
-    createQuestion, getQuestions,
-    getOldLogs, getNewLogs
+    createFAQ, getFAQs, updateFAQ, deleteFAQ,
+    getOldLogs, getNewLogs,
+    createPicture, getPictures, deletePicture
 }

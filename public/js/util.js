@@ -84,7 +84,7 @@ function setLanguage(language) {
             if ($(this).attr("placeholder") !== undefined) {
                 $(this).attr("placeholder", data[key]);
             } else {
-                $(this).text(data[key]);
+                $(this).html(data[key]);
             }
         });
     });

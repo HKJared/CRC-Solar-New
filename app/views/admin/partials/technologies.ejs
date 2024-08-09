@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/admin/technologies.css">
+<ul class="technology-items">
+</ul>
+<div class="edit-technology-container col" style="display: none;">
+    <form class="edit-technology col">
+        <button class="x-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Chỉnh sửa nội dung công nghệ</h2>
+        <label for="technology_name">Tên sản phẩm<span>*</span></label>
+        <input type="text" id="technology_name">
+        <div class="row">
+            <div class="left-row col">
+                <label for="description">Mô tả<span>*</span></label>
+                <textarea name="" id="description"></textarea>
+            </div>
+            <div class="right-row col">
+                <label for="images">Hình ảnh<span>*</span></label>
+                <input type="file" name="images" id="images">
+                <div class="images-preview row" id="image-preview"></div>
+            </div>
+        </div>
+        <label for="technology_detail">Chi tiết công nghệ</label>
+        <div class="editor-container">
+            <textarea name="" id="technology_detail"></textarea>
+        </div>
+        <div class="extra-info col">
+           
+        </div>
+        <button type="submit" class="submit-technology" data-technologyid="">Lưu thay đổi</button>
+    </form>
+</div>
+<script src="/js/admin/technologies.js"></script>

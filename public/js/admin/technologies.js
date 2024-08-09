@@ -8,7 +8,7 @@ var existingImages = [];
 var imagesToDelete = [];
 
 CKEDITOR.ClassicEditor
-.create(document.getElementById("product_detail"), {
+.create(document.getElementById("technology_detail"), {
     toolbar: {
         items: [
             'exportPDF','exportWord', '|',
@@ -141,7 +141,7 @@ CKEDITOR.ClassicEditor
 } );
 
 $(document).ready(function() {
-    document.title = "Admin - Danh sách sản phẩm";
+    document.title = "Admin - Danh mục công nghệ";
     search();
 });
 
@@ -149,19 +149,19 @@ $(document).ready(function() {
     $(document).on('click', '.edit-btn', function(event) {
         event.stopPropagation();
         
-        var product_id = $(this).data('productid');
+        var technology_id = $(this).data('technologyid');
 
-        showEditProduct(product_id);
+        showEditTechnology(technology_id);
     });
 
     $(document).on('click', '.delete-btn', function(event) {
         event.stopPropagation();
 
-        const product_id = $(this).data('productid');
+        const technology_id = $(this).data('technologyid');
         
-        showConfirm('Xác nhận xóa sản phẩm này', function(result) {
+        showConfirm('Xác nhận xóa công nghệ này', function(result) {
             if(result) {
-                deleteProduct(product_id);
+                deleteTechnology(technology_id);
             }
         });
     });
@@ -175,9 +175,28 @@ $(document).ready(function() {
     });
 
     $(document).on('change', '#images', function (e) {
-        const newFiles = Array.from(e.target.files);
-        filesArray = filesArray.concat(newFiles);
-        updateImagePreview();
+        const input = e.target;
+        const files = input.files;
+        const validImageTypes = ['image/jpeg', 'image/png'];
+    
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            
+            // Kiểm tra nếu file không phải là ảnh
+            if (!validImageTypes.includes(file.type)) {
+                // Xóa file khỏi input
+                input.value = '';
+                showNotification('Vui lòng chọn file có định xạng JPG hoặc PNG');
+                return;
+            }
+    
+            // Nếu đúng là ảnh, tạo src và thay đổi src của ảnh trong .image-preview-item img
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('.image-preview-item img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
     });
 
     $(document).on('click', '.remove-image', function (event) {
@@ -207,64 +226,48 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', 'form.edit-product .x-btn', function(event) {
+    $(document).on('click', 'form.edit-technology .x-btn', function(event) {
         event.stopPropagation();
 
-        $('.edit-product-container').slideUp();
+        $('.edit-technology-container').slideUp();
     });
 
-    $(document).on('submit', 'form.edit-product', function (event) {
+    $(document).on('submit', 'form.edit-technology', function (event) {
         event.preventDefault();
         
         var $form = $(this);
 
-        showConfirm('Xác nhận cập nhật sản phẩm.', function(result) {
+        showConfirm('Xác nhận cập nhật nội dung chỉnh sửa', function(result) {
             if(result) {
-                // Collecting form data for new_data_product
-                var newDataProduct = {
-                    product_id: $form.data('productid'),
-                    product_name: $('#product_name').val(),
-                    product_code: $('#product_code').val(),
-                    product_category_id: $('#product_category').val(),
-                    quantity_cell: $('#quantity_cell').val(),
-                    power_output_range: $('#power_output_range').val(),
-                    max_system_vol: $('#max_system_vol').val(),
-                    max_efficiency: $('#max_efficiency').val(),
-                    dimension: $('#dimension').val(),
+                // Collecting form data for new_data_technology
+                var newDataTechnology = {
+                    technology_id: $form.data('technologyid'),
+                    technology_name: $('#technology_name').val(),
+                    description: $('#description').val(),
+                    image: $('.image-preview-item img').attr('src'),
                     detail: editor.getData()
                 };
-        
-                // Technologies processing
-                var technologiesToDelete = [];
-                var technologiesToUpdate = [];
-        
-                $('div#technologies input[type=checkbox]').each(function () {
-                    var $checkbox = $(this);
-                    var technologyId = $checkbox.val();
-                    var isChecked = $checkbox.is(':checked');
-                    var isHaving = $checkbox.data('ishaving');
-        
-                    if (isHaving == "1" && !isChecked) {
-                        technologiesToDelete.push({ technology_id: technologyId });
-                    }
-                    if (isHaving == undefined && isChecked) {
-                        technologiesToUpdate.push({ technology_id: technologyId });
-                    }
-                });
-        
-                var firstImageSrc = $('#image-preview .image-preview-item img').first().attr('src');
-        
-                updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdate, firstImageSrc);
+    
+            var formData = new FormData();
+
+            var imageFile = $('#images')[0].files[0];
+            if (imageFile) {
+                formData.append('images', imageFile);
+            }
+
+            formData.append('newDataTechnology', JSON.stringify(newDataTechnology));
+
+            updateTechnology(formData, newDataTechnology);
             }
         })
     });
 });
 
-function showEditProduct(product_id) {
+function showEditTechnology(technology_id) {
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
-    fetch(`/api/${language}/product?product_id=${product_id}`, {
+    fetch(`/api/${language}/technology?technology_id=${technology_id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -283,62 +286,37 @@ function showEditProduct(product_id) {
         removeLoading();
 
         if (!result) {
-            showNotification('Product not found');
+            showNotification('technology not found');
             return;
         }
 
-        const product = result.data;
+        const technology = result.data;
 
         // Populate form fields
-        $('#product_name').val(product.product_name || '');
-        $('#product_code').val(product.product_code || '');
-        $('#product_category').val(product.product_category_id || '');
-        $('#quantity_cell').val(product.quantity_cell || '');
-        $('#power_output_range').val(product.power_output_range || '');
-        $('#max_system_vol').val(product.max_system_vol || '');
-        $('#max_efficiency').val(product.max_efficiency || '');
-        $('#dimension').val(product.dimension || '');
-        $('form.edit-product').attr('data-productid', product.product_id);
-        editor.setData(product.detail);
-        
-        // Ensure technologies is an array
-        const technologies = product.technologies || [];
-
-        // Update checkboxes based on the technologies array
-        technologies.forEach(tech => {
-            const checkbox = $(`#technology_${tech.id}`);
-            if (checkbox.length) {
-                checkbox.prop('checked', true);
-                checkbox.attr('data-ishaving', '1');
-            }
-        });
+        $('#technology_name').val(technology.technology_name || '');
+        $('#description').text(technology.description || '');
+        $('form.edit-technology').attr('data-technologyid', technology.technology_id);
+        editor.setData(technology.detail);
 
         const imagePreviewContainer = $('.images-preview');
         imagePreviewContainer.empty(); 
+        const imgElement = `
+            <div class="image-preview-item">
+                <img src="${technology.image}" alt="technology Image">
+            </div>
+        `;
+        imagePreviewContainer.append(imgElement);
 
-        existingImages = Array.isArray(product.images) ? product.images : [];
-        imagesToDelete.length = 0;
-
-        existingImages.forEach(image => {
-            const imgElement = `
-                <div class="image-preview-item">
-                    <img src="${image.src}" alt="Product Image">
-                    <button type="button" class="remove-image" data-imageid="${image.id}"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            `;
-            imagePreviewContainer.append(imgElement);
-        });
-
-        let extraInfoHTML = `<span>Tạo bởi <strong>${product.admin_name}</strong> lúc <strong>${formatDateTime(product.created_at)}</strong></span>`;
-        if (product.updated_by) {
-            extraInfoHTML += `<span>Chỉnh sửa bởi <strong>${product.updated_by_name}</strong> lúc <strong>${formatDateTime(product.updated_at)}</strong></span>`;
+        let extraInfoHTML = `<span>Tạo bởi <strong>${technology.admin_name}</strong> lúc <strong>${formatDateTime(technology.created_at)}</strong></span>`;
+        if (technology.updated_by) {
+            extraInfoHTML += `<span>Chỉnh sửa bởi <strong>${technology.updated_by_name}</strong> lúc <strong>${formatDateTime(technology.updated_at)}</strong></span>`;
         }
         $('.extra-info').html(extraInfoHTML);
 
-        $('.edit-product-container').slideDown();
+        $('.edit-technology-container').slideDown();
 
         $('main').animate({
-            scrollTop: $('.edit-product-container').offset().top
+            scrollTop: $('.edit-technology-container').offset().top
         }, 1000);
 
     })
@@ -353,7 +331,7 @@ function search() {
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
-    fetch(`/api/${ language }/products?keyword=${ keyword }`, {
+    fetch(`/api/${ language }/technologies?keyword=${ keyword }`, {
         method: 'GET',
         headers: {
             "authorization": access_token,
@@ -371,7 +349,7 @@ function search() {
         });
     })
     .then(result => {
-        showProducts(result.data);
+        showTechnologies(result.data);
         removeLoading();
     })
     .catch(error => {
@@ -380,41 +358,37 @@ function search() {
     });
 }
 
-function showProducts(data) {
-    $('.product-items').empty();
+function showTechnologies(data) {
+    $('.technology-items').empty();
     if (!data.length) {
         const noResultHTML = `<div class="no-result">
             <h2>Không sản phẩm nào phù hợp</h2>
             <span>Vui lòng thử tìm kiếm khác</span> 
         </div>`;
 
-        $('.product-items').append(noResultHTML);
+        $('.technology-items').append(noResultHTML);
 
         return
     }
  
     for (let i = 0; i < data.length; i++) {
-        let productHTML = `
-        <li class="col" data-productid="${data[i].product_id}">
-            <div class="product-item center col">
+        let technologyHTML = `
+        <li class="col" data-technologyid="${data[i].technology_id}">
+            <div class="technology-item center col">
                 <div class="image">
-                    <img src="${data[i].src}" alt="">
+                    <img src="${data[i].image}" alt="">
                 </div>
-                <div class="product-info full-width flex-box row">
-                    <span>${data[i].quantity_cell} cell</span>
-                    <span>${data[i].power_output_range}</span>
-                </div>
-                <div class="name full-width" title="${data[i].product_name}">
-                    <span>${data[i].product_name}</span>
+                <div class="name full-width" title="${data[i].technology_name}">
+                    <span>${data[i].technology_name}</span>
                 </div>
                 <div class="action">
-                    <button class="edit-btn row center" type="button" data-productid="${data[i].product_id}"><i class="fa-solid fa-pen"></i> Edit</button>
-                    <button class="delete-btn row center" type="button" data-productid="${data[i].product_id}"><i class="fa-solid fa-trash"></i> Delete</button>
+                    <button class="edit-btn row center" type="button" data-technologyid="${data[i].technology_id}"><i class="fa-solid fa-pen"></i> Edit</button>
+                    <button class="delete-btn row center" type="button" data-technologyid="${data[i].technology_id}"><i class="fa-solid fa-trash"></i> Delete</button>
                 </div>
             </div>
         </li>`;
 
-        $('.product-items').append(productHTML);
+        $('.technology-items').append(technologyHTML);
     }
 
     loading = false;
@@ -440,21 +414,13 @@ function updateImagePreview() {
     });
 }
 
-function updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdate, firstImageSrc) {
+function updateTechnology(formData, newDataTechnology) {
     const access_token = localStorage.getItem('access_token');
     const language = $('header').data('language');
     
-    var formData = new FormData();
-
-    formData.append('newDataProduct', JSON.stringify(newDataProduct));
-    formData.append('technologiesToDelete', JSON.stringify(technologiesToDelete));
-    formData.append('technologiesToUpdate', JSON.stringify(technologiesToUpdate));
-    formData.append('imagesToDelete', JSON.stringify(imagesToDelete));
-    filesArray.forEach(file => formData.append('images', file));
-    
     renderLoading();
     // Gửi dữ liệu sản phẩm tới máy chủ
-    fetch(`/api/${ language }/product`, {
+    fetch(`/api/${ language }/technology`, {
         method: 'PUT',
         headers: {
             "authentication": access_token
@@ -475,26 +441,24 @@ function updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdat
         removeLoading();
         showNotification(data.message);
 
-        var $productItem = $(`li[data-productid='${newDataProduct.product_id}']`);
+        var $technologyItem = $(`li[data-technologyid='${newDataTechnology.technology_id}']`);
 
         // Cập nhật hình ảnh
-        $productItem.find('.image img').attr('src', firstImageSrc);
+        $technologyItem.find('.image img').attr('src', newDataTechnology.image);
 
         // Cập nhật thông tin sản phẩm
-        $productItem.find('.product-info span').eq(0).text(`${newDataProduct.quantity_cell} cell`);
-        $productItem.find('.product-info span').eq(1).text(newDataProduct.power_output_range);
-        $productItem.find('.name span').text(newDataProduct.product_name);
-        $productItem.addClass('highlight-green');
+        $technologyItem.find('.name span').text(newDataTechnology.technology_name);
+        $technologyItem.addClass('highlight-green');
 
-        var newPosition = $productItem.offset().top - 100;
+        var newPosition = $technologyItem.offset().top - 100;
 
-        $('main').animate({ scrollTop: newPosition }, 1000, function() {
+        $('html, body').animate({ scrollTop: newPosition }, 1000, function() {
             setTimeout(function() {
-                $productItem.removeClass('highlight-green');
+                $technologyItem.removeClass('highlight-green');
             }, 2000); 
         });
 
-        $('.edit-product-container').slideUp();
+        $('.edit-technology-container').slideUp();
     })
     .catch(error => {
         removeLoading();
@@ -502,17 +466,17 @@ function updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdat
     });
 }
 
-function deleteProduct(product_id) {
+function deleteTechnology(technology_id) {
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
-    fetch(`/api/${language}/product`, {
+    fetch(`/api/${language}/technology`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'authentication': access_token
         },
-        body: JSON.stringify({ product_id: product_id })
+        body: JSON.stringify({ technology_id: technology_id })
     })
     .then(response => {
         return response.json().then(data => {
@@ -528,9 +492,9 @@ function deleteProduct(product_id) {
         removeLoading();
         showNotification(data.message);
 
-        var $productItem = $(`li[data-productid='${product_id}']`);
+        var $technologyItem = $(`li[data-technologyid='${technology_id}']`);
 
-        $productItem.remove();
+        $technologyItem.remove();
     })
     .catch(error => {
         removeLoading();

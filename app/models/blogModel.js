@@ -88,6 +88,8 @@ class BlogModel {
             WHERE 
                 b.category_id = ?
             ORDER BY
+                b.is_outstanding DESC,
+                b.status DESC,
                 b.blog_id DESC
         `;
     

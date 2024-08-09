@@ -13,6 +13,14 @@
     "header_nav_events": "活动",
     "header_nav_recruitment": "招聘",
     "header_nav_other_news": "其他新闻",
+    "footer_more_info": "查看更多信息",
+    "footer_contact_us": "联系我们",
+    "footer_subscribe": "订阅",
+    "footer_subscribe_description": "成为第一个获取我们最新信息的人",
+    "footer_link_photos": "图片库",
+    "footer_link_documents": "资料",
+    "footer_link_contact": "联系",
+    "footer_link_faqs": "常见问题",
     "home_text1": "经验丰富的人员",
     "home_text2": "一个具有广泛经验和高水平专业知识的团队。",
     "home_text3": "成员公司",
@@ -48,7 +56,7 @@
     "intro_text15": "合作伙伴",
     "intro_text16": "为什么选择CRC？",
     "intro_text17": "专家团队",
-    "intro_text18": "您准备好体验我们的产品了吗？立即联系我们",
+    "intro_text18": "您准备好体验我们的产品了吗？ <br>立即联系我们",
     "intro_text19": "我们的专家随时准备帮助您了解太阳能如何为您的家庭工作。安排一次免费的、无义务的咨询，以评估您的能源需求和潜在的节约。",
     "intro_text20": "立即预约"
 }

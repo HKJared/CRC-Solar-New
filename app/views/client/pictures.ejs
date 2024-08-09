@@ -1,0 +1,27 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/pictures.css">
+<main class="center">
+    <div class="main center col">
+        <div class="block block1 col container">
+            <div class="top-block">
+                <span>Ảnh sưu tầm</span>
+            </div>
+            <h1>Một số ảnh sưu tầm của CRC Solar</h1>
+            <div class="picture-items">
+                
+            </div>
+            <div class="show-more">
+                <button type="button" class="show-more-btn">
+                    <div class="background"></div>
+                    <span>Xem thêm</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/pictures.js"></script>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

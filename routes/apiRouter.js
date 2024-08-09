@@ -30,22 +30,20 @@ apiRouter.delete('/product', (req, res, next) => {
     authorization(req, res, 'delete', next);
 }, apiController.deleteProduct);
 
-// //models
-// apiRouter.post('/model', apiController.createModel);
-// apiRouter.put('/model', apiController.updateModel);
-// apiRouter.delete('/model', apiController.deleteModel);
+//technologies
+apiRouter.post('/technology', (req, res, next) => {
+    authorization(req, res, 'create', next);
+}, apiController.createTechnology);
+apiRouter.get('/technologies', apiController.getTechnologies);
+apiRouter.get('/technology', apiController.getTechnologyById);
+apiRouter.put('/technology', (req, res, next) => {
+    authorization(req, res, 'update', next);
+}, apiController.updateTechnology);
+apiRouter.delete('/technology', (req, res, next) => {
+    authorization(req, res, 'delete', next);
+}, apiController.deleteTechnology);
 
-// //categories
-// apiRouter.get('/categories', apiController.getCategories);
-
-// //orders
-// apiRouter.post('/order', apiController.createOrder);
-// apiRouter.get('/orders', apiController.getOrders);
-
-// //requests
-// apiRouter.post('/request', apiController.createRequest);
-
-// //page contents
+// blogs
 apiRouter.get('/blog', apiController.getBlog);
 apiRouter.get('/blogs', apiController.getBlogsByTitle);
 apiRouter.post('/blog', (req, res, next) => {
@@ -65,11 +63,17 @@ apiRouter.put('/request', (req, res, next) => {
     authorization(req, res, 'update', next);
 }, apiController.updateRequest);
 
-//question
-apiRouter.post('/question', (req, res, next) => {
+//FAQ
+apiRouter.post('/FAQ', (req, res, next) => {
     authorization(req, res, 'create', next);
-}, apiController.createQuestion);
-apiRouter.get('/questions', apiController.getQuestions);
+}, apiController.createFAQ);
+apiRouter.get('/FAQs', apiController.getFAQs);
+apiRouter.put('/FAQ', (req, res, next) => {
+    authorization(req, res, 'update', next);
+}, apiController.updateFAQ);
+apiRouter.delete('/FAQ', (req, res, next) => {
+    authorization(req, res, 'delete', next);
+}, apiController.deleteFAQ);
 
 // //banners
 // apiRouter.get('/banners', apiController.getBanners);
@@ -84,5 +88,13 @@ apiRouter.put('/display-images', (req, res, next) => {
 
 apiRouter.get('/old-logs', apiController.getOldLogs);
 apiRouter.get('/new-logs', apiController.getNewLogs);
+
+apiRouter.post('/picture', (req, res, next) => {
+    authorization(req, res, 'create', next);
+}, apiController.createPicture);
+apiRouter.get('/pictures', apiController.getPictures);
+apiRouter.delete('/picture', (req, res, next) => {
+    authorization(req, res, 'delete', next);
+}, apiController.deletePicture);
 
 module.exports = apiRouter;

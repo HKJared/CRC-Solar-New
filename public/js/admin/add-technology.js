@@ -135,101 +135,109 @@ CKEDITOR.ClassicEditor
 });
 
 $(document).ready(function() {
-    $(document).on('change', '#main_image', function() {
-        const file = this.files[0];
-        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        $('#file-error').text('');
-        
-        if (file) {
-            // Kiểm tra định dạng file
+    document.title = "Admin - Thêm công nghệ mới";
+});
+
+$(document).ready(function() {
+    $(document).on('submit', '.search', function(event) {
+        event.preventDefault();
+
+        //
+    });
+
+    $(document).on('change', '#images', function (e) {
+        const input = e.target;
+        const files = input.files;
+        const validImageTypes = ['image/jpeg', 'image/png'];
+    
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            
+            // Kiểm tra nếu file không phải là ảnh
             if (!validImageTypes.includes(file.type)) {
-                showNotification('Định dạng file không hợp lệ. Vui lòng chọn file ảnh (jpg, png, gif).');
-                $(this).val(''); // Reset input file
+                // Xóa file khỏi input
+                input.value = '';
+                showNotification('Vui lòng chọn file có định xạng JPG hoặc PNG');
                 return;
             }
-            
-            // Hiển thị ảnh xem trước
+    
+            // Nếu đúng là ảnh, tạo src và thay đổi src của ảnh trong .image-preview-item img
             const reader = new FileReader();
-            reader.onload = function(e) {
-                $('.preview').html(`<img src="${e.target.result}" alt="Ảnh xem trước" class="full-width full-height">`);
+            reader.onload = function (e) {
+                const imagePreviewContainer = $('.images-preview');
+                imagePreviewContainer.empty(); 
+                const imgElement = `
+                    <div class="image-preview-item">
+                        <img src="${e.target.result}" alt="technology Image">
+                    </div>
+                `;
+                imagePreviewContainer.append(imgElement);
             };
             reader.readAsDataURL(file);
         }
     });
 
-    $('#create-blog-form').on('submit', function(event) {
-        event.preventDefault(); // Ngăn chặn submit form mặc định
-
-        // Kiểm tra các đầu vào
-        const title = $('#title').val().trim();
-        const detail = editor.getData();
-        const category_id = $('#category_id').val();
-        const tag = $('#tag').val().trim();
-        const seo_title = $('#seo_title').val().trim();
-        const is_outstanding = $('#is_outstanding').is(':checked');
-        const main_image = $('#main_image')[0].files[0];
-
-        // Kiểm tra tiêu đề
-        if (title === "") {
-            showNotification("Tiêu đề không được để trống");
-            $('#title').addClass('warning-border');
-            $('main').animate({
-                scrollTop: $('#title').offset().top - 20
-            }, 500);
-            return;
-        }
-
-        if (!main_image) {
-            showNotification('Hãy thêm ảnh chính cho bài viết.');
-            return
-        }
-
-        const data = {
-            title: title,
-            detail: detail,
-            category_id: category_id,
-            tag: tag,
-            seo_title: seo_title,
-            is_outstanding: is_outstanding,
-            category_id: category_id
-        }
+    $(document).on('submit', 'form.add-technology', function (event) {
+        event.preventDefault();
         
-        // Tạo form data để gửi file
-        let formData = new FormData();
-        formData.append('data', JSON.stringify(data));
-        formData.append('images', main_image);
+        var $form = $(this);
 
-        createBlog(formData)
+        showConfirm('Xác nhận lưu công nghệ mới.', function(result) {
+            if(result) {
+                // Collecting form data for new_data_technology
+                var technology = {
+                    technology_name: $('#technology_name').val(),
+                    description: $('#description').val(),
+                    image: $('.image-preview-item img').attr('src'),
+                    detail: editor.getData()
+                };
+    
+            var formData = new FormData();
+
+            var imageFile = $('#images')[0].files[0];
+            if (imageFile) {
+                formData.append('images', imageFile);
+            }
+
+            formData.append('technology', JSON.stringify(technology));
+
+            createTechnology(formData);
+            }
+        })
     });
 });
 
-function createBlog(formData){
-    const language = $('header').data('language');
+function createTechnology(formData) {
     const access_token = localStorage.getItem('access_token');
-
+    const language = $('header').data('language');
+    
     renderLoading();
-    fetch(`/api/${ language }/blog`, {
+    // Gửi dữ liệu sản phẩm tới máy chủ
+    fetch(`/api/${ language }/technology`, {
         method: 'POST',
         headers: {
-            'authentication': access_token
+            "authentication": access_token
         },
         body: formData
     })
-    .then(response => response.json().then(data => {
-        if (!response.ok) {
-            removeLoading();
-            showNotification(data.message);
-            throw new Error('Network response was not ok');
-        }
-        return data;
-    }))
-    .then(result => {
-        showNotification(result.message);
+    .then(response => {
+        return response.json().then(data => {
+            if (!response.ok) {
+                removeLoading();
+                showNotification(data.message);
+                throw new Error('Network response was not ok');
+            }
+            return data;
+        });
+    })
+    .then(data => {
         removeLoading();
-        setTimeout(function() {
-            window.location.href = `${ language == 'vn' ? '' : '/' + language }/admin/blogs`;
-        }, 2000)
-    }) 
+        showNotification(data.message);
+
+        setTimeout(() => {
+            window.location.href = `/admin/product-technologies`;
+        }, 2000);
+    })
     .catch(error => {
         removeLoading();
         console.error('There was a problem with the fetch operation:', error);

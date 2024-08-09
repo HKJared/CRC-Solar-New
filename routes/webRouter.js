@@ -9,7 +9,6 @@ const { webcrypto } = require('crypto');
 
 webRouter.get('/', clientController.getHomepage);
 webRouter.get('/introduction', clientController.getIntrodutionPage);
-webRouter.get('/partners', clientController.getPartnersPage);
 webRouter.get('/products', clientController.getProductsPage);
 webRouter.get('/product/:product_name', clientController.getDetailProductPage);
 webRouter.get('/technology/:technology_name', clientController.getTechnologyPage);
@@ -20,13 +19,14 @@ webRouter.get('/events', blogCategoryMiddleware('events'), clientController.getB
 webRouter.get('/other-news', blogCategoryMiddleware('other-news'), clientController.getBlogsPage);
 webRouter.get('/technologies', blogCategoryMiddleware('technologies'), clientController.getBlogsPage);
 webRouter.get('/services', blogCategoryMiddleware('services'), clientController.getBlogsPage);
+webRouter.get('/partners', blogCategoryMiddleware('partners'), clientController.getBlogsPage);
 webRouter.get('/social-responsibility', blogCategoryMiddleware('social-responsibility'), clientController.getBlogsPage);
 
 webRouter.get('/blog', clientController.getBlogPage);
 
 webRouter.get('/contact', clientController.getContactPage);
 
-webRouter.get('/photos');
+webRouter.get('/pictures', clientController.getPicturesPage);
 
 
 webRouter.get('/admin/login', adminController.getLoginPage);
@@ -40,6 +40,7 @@ webRouter.get('/admin/products', adminController.getAdminProductsPage);
 webRouter.get('/admin/add-product', adminController.getAdminAddProductPage);
 webRouter.get('/admin/product-categories', adminController.getAdminProductCategoriesPage);
 webRouter.get('/admin/product-technologies', adminController.getAdminTechnologiesPage);
+webRouter.get('/admin/add-technology', adminController.getAdminAddTechnologyPage);
 
 webRouter.get('/admin/display/:page_name', adminController.getAdminDisplayPage);
 
@@ -49,7 +50,8 @@ webRouter.get('/admin/blog-categories', adminController.getAdminBlogCategoriesPa
 
 webRouter.get('/admin/requests', adminController.getAdminRequestsPage);
 
-webRouter.get('/admin/questions', adminController.getAdminQuestionsPage);
+webRouter.get('/admin/FAQs', adminController.getAdminFAQsPage);
 
+webRouter.get('/admin/pictures', adminController.getAdminPicturesPage);
 
 module.exports = webRouter;

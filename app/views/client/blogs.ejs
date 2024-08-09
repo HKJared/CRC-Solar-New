@@ -8,12 +8,13 @@
     <div class="main center col">
         <div class="block blogs-container container">
             <div class="categories-container row">
-                <a href="/news" id="news">Tin tức</a>
-                <a href="/events" id="events">Sự kiện</a>
-                <a href="/technologies" id="technologies">Công nghệ</a>
-                <a href="/services" id="services">Dịch vụ</a>
-                <a href="/social-responsibility" id="social-responsibility">Trách nhiệm xã hội</a>
-                <a href="/other-news" id="other-news">Tin tức khác</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/news" id="news">Tin tức</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/events" id="events">Sự kiện</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/technologies" id="technologies">Công nghệ</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/services" id="services">Dịch vụ</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/partners" id="partners">Đối tác</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/social-responsibility" id="social-responsibility">Trách nhiệm xã hội</a>
+                <a href="<%- language == 'vn' ? `` : '/' + language %>/other-news" id="other-news">Tin tức khác</a>
             </div>
             <div class="action-container row flex-box">
                 <div class="pagination-container"></div>

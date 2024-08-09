@@ -422,7 +422,7 @@ function updateBlog(formData, newDataBlog) {
 
         var newPosition = $blogItem.offset().top - 100;
 
-        $('html, body').animate({ scrollTop: newPosition }, 1000, function() {
+        $('main').animate({ scrollTop: newPosition }, 1000, function() {
             setTimeout(function() {
                 $blogItem.removeClass('highlight-green');
             }, 2000); 

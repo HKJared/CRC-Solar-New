@@ -5,7 +5,7 @@ body {
 }
 
 .top-main {
-    height: 40vh;
+    height: 432px;
     color: #fff;
 }
 
@@ -293,8 +293,37 @@ body {
     margin-right: 30px; 
     position: relative;
     overflow: hidden;
+    padding: 24px;
 }
 
 .feedback:last-child {
     margin-right: 0;
+}
+
+.feedback .bio {
+    align-items: center;
+}
+
+.feedback .bio .image {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.feedback .bio .info {
+    margin-left: 16px;
+}
+
+.feedback .bio .info .name {
+    color: var(--mainColor);
+}
+
+.feedback .bio .info .location, .feedback .bio .info .project {
+    font-size: 11px;
+    color: var(--extraText);
+}
+
+.feedback-detail {
+    margin-top: 16px;
+    color: #333333;
 }

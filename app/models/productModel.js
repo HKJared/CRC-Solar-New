@@ -69,7 +69,9 @@ class ProductModel {
                 pi.product_image_id as image_id,
                 pc.title AS category_title,
                 t.technology_id,
-                t.technology_name
+                t.technology_name,
+                a.fullname as admin_name,
+                ua.fullname as updated_by_name 
             FROM 
                 products p
             LEFT JOIN 
@@ -80,6 +82,10 @@ class ProductModel {
                 product_technology pt ON p.product_id = pt.product_id
             LEFT JOIN
                 technologies t ON pt.technology_id = t.technology_id
+            JOIN 
+                admins a ON p.created_by = a.admin_id
+            LEFT JOIN 
+                admins ua ON p.updated_by = ua.admin_id
             WHERE 
                 p.product_id = ?
         `;
@@ -205,6 +211,45 @@ class ProductModel {
         return rows;
     }
 
+    static async getTechnologies(keyword, language) {
+        keyword = diacritics.remove(keyword);
+        
+        const queryString = `
+            SELECT 
+                technology_id, technology_name, image, description
+            FROM 
+                technologies
+            WHERE
+                LOWER(technology_name) LIKE LOWER(?)
+                AND language = ?
+            ORDER BY
+                technology_id DESC
+        `;
+
+        const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
+        return rows;
+    }
+
+    static async getTechnologyById(technology_id) {
+        const queryString = `
+            SELECT 
+                t.*,
+                a.fullname as admin_name,
+                ua.fullname as updated_by_name 
+            FROM 
+                technologies t
+            JOIN 
+                admins a ON t.created_by = a.admin_id
+            LEFT JOIN 
+                admins ua ON t.updated_by = ua.admin_id
+            WHERE
+                t.technology_id = ?
+        `;
+
+        const [row] = await pool.execute(queryString, [technology_id]);
+        return row[0];
+    }
+
     static async createProduct(data, language, admin_id) {
         const queryString = `
             INSERT INTO products (
@@ -216,6 +261,22 @@ class ProductModel {
         const [result] = await pool.execute(queryString, [
             data.product_name, data.product_code, data.product_category_id, data.quantity_cell, data.power_output_range,
             language, data.max_system_vol, data.max_efficiency, data.dimension, data.product_detail, admin_id
+        ]);
+
+        return result.insertId;
+    }
+
+    static async createTechnology(data, language, admin_id) {
+        const queryString = `
+            INSERT INTO technologies (
+                technology_name, image, description, detail, language,
+                created_by, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())
+        `;
+        console.log(data)
+        const [result] = await pool.execute(queryString, [
+            data.technology_name, data.image, data.description, data.detail, language,
+            admin_id
         ]);
 
         return result.insertId;
@@ -268,6 +329,25 @@ class ProductModel {
         return;
     }
 
+    static async updateTechnology(data, admin_id) {
+        const queryString = `
+            UPDATE
+                technologies 
+            SET
+                technology_name = ?, image = ?, description = ?, detail = ?,
+                updated_by = ?, updated_at = CURRENT_TIMESTAMP()
+            WHERE
+                technology_id = ?
+        `;
+        
+        await pool.execute(queryString, [
+            data.technology_name, data.image, data.description, data.detail,
+            admin_id, data.technology_id
+        ]);
+
+        return;
+    }
+
     static async deleteProduct(product_id) {
         const queryString = `
             DELETE FROM products 
@@ -275,6 +355,16 @@ class ProductModel {
         `;
 
         await pool.execute(queryString, [product_id]);
+        return;
+    }
+
+    static async deleteTechnology(technology_id) {
+        const queryString = `
+            DELETE FROM technologies 
+            WHERE technology_id = ?
+        `;
+
+        await pool.execute(queryString, [technology_id]);
         return;
     }
 

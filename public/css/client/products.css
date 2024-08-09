@@ -34,7 +34,7 @@
 }
 
 main .products-container {
-    min-height: 60vh;
+    min-height: 648px;
 }
 
 main .products-container ul {

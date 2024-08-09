@@ -13,6 +13,14 @@
     "header_nav_events": "Events",
     "header_nav_recruitment": "Recruitment",
     "header_nav_other_news": "Other News",
+    "footer_more_info": "More Information",
+    "footer_contact_us": "Contact Us",
+    "footer_subscribe": "Subscribe",
+    "footer_subscribe_description": "Be the first to receive the latest news from us",
+    "footer_link_photos": "Photo Gallery",
+    "footer_link_documents": "Documents",
+    "footer_link_contact": "Contact",
+    "footer_link_faqs": "FAQs",
     "home_text1": "Experienced Personnel",
     "home_text2": "A team with extensive experience and high expertise in solar energy.",
     "home_text3": "Member Companies",
@@ -47,7 +55,7 @@
     "intro_text15": "Partner Companies",
     "intro_text16": "Why Choose CRC?",
     "intro_text17": "Expert Team",
-    "intro_text18": "Are you ready to experience our products? Contact us today",
+    "intro_text18": "Are you ready to experience our products? <br> Contact us today",
     "intro_text19": "Our experts are ready to help you understand how solar energy can work for your home. Schedule a free, no-obligation consultation to assess your energy needs and potential savings.",
     "intro_text20": "Book Now"
 }

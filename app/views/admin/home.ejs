@@ -65,7 +65,7 @@
                     <div class="image"><i class="fa-regular fa-circle-user"></i></div>
                     <div class="action-container col">
                         <ul>
-                            <li><i class="fa-regular fa-id-card"></i> <span>Thông tin cá nhân</span></li>
+                            <li id="change-password"><i class="fa-solid fa-arrows-rotate"></i> <span>Đổi mật khẩu</span></li>
                             <li id="logout"><i class="fa-solid fa-right-from-bracket"></i> <span>Log Out</span></li>
                         </ul>
                     </div>
@@ -90,7 +90,7 @@
                         <ul class="sub-menu">
                             <li id="add_product"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/add-product">Thêm sản phẩm</a></li>
                             <li id="products"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/products">Danh sách sản phẩm</a></li>
-                            <li id="product_categories"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/product-categories">Danh mục sản phẩm</a></li>
+                            <li id="add_technology"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/add-technology">Thêm công nghệ mới</a></li>
                             <li id="technologies"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/product-technologies">Danh mục công nghệ</a></li>
                         </ul>
                     </li>
@@ -100,9 +100,9 @@
                             <li id="displayhome"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/home">Trang chủ</a></li>
                             <li id="displayintroduction"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/introduction">Giới thiệu</a></li>
                             <li id="displaypartners"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/partners">Đối tác</a></li>
-                            <li id="displaysocialResponsibility"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/socialResponsibility">Trách nhiệm xã hội</a></li>
+                            <li id="displaysocialResponsibility"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/social-responsibility">Trách nhiệm xã hội</a></li>
                             <li id="displayproducts"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/products">Danh sách sản phẩm</a></li>
-                            <li id="displaydetailProduct"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/detailProduct">Chi tiết sản phẩm</a></li>
+                            <li id="displaydetailProduct"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/detail-product">Chi tiết sản phẩm</a></li>
                             <li id="displaytechnology"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/technology">Công nghệ</a></li>
                             <li id="displayblogs"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/blogs">Danh sách bài viết</a></li>
                             <li id="displayrecruitments"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/recruitments">Tuyển dụng</a></li>
@@ -117,7 +117,7 @@
                         </ul>
                     </li>
                     <li id="requests"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/requests"><i class="fa-solid fa-bell"></i>  Yêu cầu liên hệ</a></li>
-                    <li id="questions"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/questions"><i class="fa-regular fa-circle-question"></i>  Hỏi đáp</a></li>
+                    <li id="FAQs"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/FAQs"><i class="fa-regular fa-circle-question"></i>  Hỏi đáp</a></li>
                     <li>
                         <label for=""><i class="fa-solid fa-users-rectangle"></i>  Tuyển dụng<span><i class="fa-solid fa-caret-down"></i></span></label>
                         <ul class="sub-menu">
@@ -129,7 +129,7 @@
                     <li>
                         <label for=""><i class="fa-regular fa-file"></i>  Thư viện<span><i class="fa-solid fa-caret-down"></i></span></label>
                         <ul class="sub-menu">
-                            <li id="photos"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/photos">Thư viện ảnh</a></li>
+                            <li id="pictures"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/pictures">Thư viện ảnh</a></li>
                             <li id="documents"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/documents">Tài liệu</a></li>
                         </ul>
                     </li>

@@ -1,8 +1,8 @@
 const pool = require('../../config/connectDB');
 const diacritics = require('diacritics');
 
-class QuestionModel {
-    static async getQuestions(keyword, language) {
+class FAQModel {
+    static async getFAQs(keyword, language) {
         keyword = diacritics.remove(keyword);
 
         const queryString = `
@@ -11,7 +11,7 @@ class QuestionModel {
                 a.fullname as admin_name,
                 ua.fullname as updated_by_name
             FROM 
-                questions q
+                FAQs q
             JOIN
                 admins a ON a.admin_id = q.created_by
             LEFT JOIN
@@ -20,36 +20,36 @@ class QuestionModel {
                 LOWER(q.title) LIKE LOWER(?)
                 AND q.language = ? 
             ORDER BY
-                q.question_id DESC
+                q.FAQ_id DESC
         `;
 
         const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
         return rows;
     }
 
-    static async getQuestionById(question_id) {
+    static async getFAQById(FAQ_id) {
         const queryString = `
             SELECT 
                 q.*,
                 a.fullname as admin_name,
                 ua.fullname as updated_by_name
             FROM 
-                questions q
+                FAQs q
             JOIN
                 admins a ON a.admin_id = q.created_by
             LEFT JOIN
                 admins ua ON ua.admin_id = q.updated_by
             WHERE 
-                q.question_id = ?
+                q.FAQ_id = ?
         `;
 
-        const [rows] = await pool.execute(queryString, [question_id]);
+        const [rows] = await pool.execute(queryString, [FAQ_id]);
         return rows[0];
     }
 
-    static async createQuestion(data, language, admin_id) {
+    static async createFAQ(data, language, admin_id) {
         const queryString = `
-            INSERT INTO questions (title, detail, language, created_by, created_at)
+            INSERT INTO FAQs (title, detail, language, created_by, created_at)
             VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP())
         `;
 
@@ -60,29 +60,29 @@ class QuestionModel {
         return result.insertId;
     }
 
-    static async updateQuestion(data, admin_id) {
+    static async updateFAQ(data, admin_id) {
         const queryString = `
-            UPDATE questions 
+            UPDATE FAQs 
             SET title = ?, detail = ?, updated_by = ?, updated_at = CURRENT_TIMESTAMP()
-            WHERE question_id = ?
+            WHERE FAQ_id = ?
         `;
 
         await pool.execute(queryString, [
-            data.title, data.detail, admin_id, data.question_id
+            data.title, data.detail, admin_id, data.FAQ_id
         ]);
 
         return;
     }
 
-    static async deleteQuestion(question_id) {
+    static async deleteFAQ(FAQ_id) {
         const queryString = `
-            DELETE FROM questions 
-            WHERE question_id = ?
+            DELETE FROM FAQs 
+            WHERE FAQ_id = ?
         `;
 
-        pool.execute(queryString, [question_id]);
+        pool.execute(queryString, [FAQ_id]);
         return;
     }
 }
 
-module.exports = QuestionModel;
+module.exports = FAQModel;

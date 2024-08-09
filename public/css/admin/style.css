@@ -133,6 +133,10 @@ header {
     animation: zoomOut 0.5s forwards;
 }
 
+.confirm span {
+    margin: 20px 0 40px 0;
+}
+
 @keyframes zoomOut {
     from {
         transform: scale(0);
@@ -152,13 +156,13 @@ header {
 }
 
 .confirm .action-btn .confirm-btn {
-    background-color: #2f8da5;
+    background-color: var(--mainColor);
     color: #fff;
     border: 0;
 }
 
 .confirm .action-btn .confirm-btn:hover {
-    background-color: #49a8c0;
+    background-color: var(--extraColor);
 }
 
 .confirm .action-btn .cancel-btn:hover {
@@ -286,7 +290,7 @@ li label span {
 
 .active > a, .active > label {
     font-weight: bold;
-    color: #2f8da5;
+    color: var(--mainColor);
 }
 
 .full-width {
@@ -518,7 +522,7 @@ main {
 
 .account-action .image i {
     font-size: 24px;
-    color: #2f8da5;
+    color: var(--mainColor);
 }
 
 .account-action .action-container {
@@ -541,7 +545,7 @@ main {
 }
 
 .account-action .action-container li:hover {
-    color: #2f8da5;
+    color: var(--mainColor);
 }
 
 .account-action .action-container li span {

@@ -7,17 +7,17 @@
         </div>
         <div class="hr"></div>
         <div class="more-info">
-            <h3>Xem thêm</h3>
+            <h3 data-translate="footer_more_info">Xem thêm</h3>
             <ul class="links-container col">
-                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/photos">Thư viện ảnh</a></li>
-                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/documents">Tài liệu</a></li>
-                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/contact">Liên hệ</a></li>
-                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/questions">Hỏi đáp</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/pictures" data-translate="footer_link_photos">Thư viện ảnh</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/documents" data-translate="footer_link_documents">Tài liệu</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/contact" data-translate="footer_link_contact">Liên hệ</a></li>
+                <li class="link"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/FAQs" data-translate="footer_link_faqs">Hỏi đáp</a></li>
             </ul>
         </div>
         <div class="hr"></div>
         <div class="more-info">
-            <h3>Liên hệ với chúng tôi</h3>
+            <h3 data-translate="footer_contact_us">Liên hệ với chúng tôi</h3>
             <ul class="contacts-container col">
                 <li class="contact row">
                     <i class="fa-solid fa-envelope"></i>
@@ -35,8 +35,8 @@
         </div>
         <div class="hr"></div>
         <div class="more-info">
-            <h3>Nhận thông báo</h3>
-            <span>Hãy là người đầu tiên nhận thông tin mới nhất từ chúng tôi</span>
+            <h3 data-translate="footer_subscribe">Nhận thông báo</h3>
+            <span data-translate="footer_subscribe_description">Hãy là người đầu tiên nhận thông tin mới nhất từ chúng tôi</span>
             <form id="add-email" action="#" class="row">
                 <input type="text" placeholder="Example@gmail.com">
                 <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
@@ -47,8 +47,9 @@
         <span>Copyright <i class="fa-regular fa-copyright"></i> CRC Solar 2024.</span>
         <span>Design by NHK</span>
         <div class="policy">
-            <a href="/warranty-policy">Chính sách bảo hành</a>
-            <a href="/privacy-policy">Chính sách bảo mật</a>
+            <% for (let i = 0; i < footerData.policies.length; i ++) { %>
+                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/blog?title=<%- footerData.policies[i].title %>&blog_id=<%- footerData.policies[i].blog_id %>" class="full-width"><span><%- footerData.policies[i].title %></span></a>   
+            <% } %>
         </div>
     </div>
 </footer>

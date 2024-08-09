@@ -98,9 +98,18 @@ const getAdminTechnologiesPage = async (req, res) => {
     try {
         const language = req.language;
 
-        const technologies = await TechnologyModel.getTechnologies(language);
+        return res.status(200).render('admin/home', { language: language, render: 'technologies', active: "technologies" });
+    } catch (error) {
+        console.error('ERROR: ', error);
+        return res.status(500).render('serverError', { err: 'Server have an error' });
+    }
+}
 
-        return res.status(200).render('admin/home', { language: language, technologies: technologies, render: 'technologies', active: "technologies" });
+const getAdminAddTechnologyPage = async (req, res) => {
+    try {
+        const language = req.language;
+
+        return res.status(200).render('admin/home', { language: language, render: 'add_technology', active: "add_technology" });
     } catch (error) {
         console.error('ERROR: ', error);
         return res.status(500).render('serverError', { err: 'Server have an error' });
@@ -160,6 +169,7 @@ const getAdminDisplayPage = async (req, res) => {
         const language = req.language;
         const page_name = req.params.page_name;
         const headerData = await HeaderModel.getHeaderData(language);
+        const footerData = await FooterModel.getFooterData(language)
         const mainData = await MainModel.getMainData(`${ page_name }`, language);
         
         // Tải giao diện client
@@ -168,39 +178,43 @@ const getAdminDisplayPage = async (req, res) => {
 
         switch (page_name) {
             case 'home':
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name }, { async: true });
                 break;
             case 'introduction':
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name }, { async: true });
                 break;
             case 'partners':
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name }, { async: true });
+                categories = await CategoryModel.getCategoriesByTitle('', language);
+                blogs = await BlogModel.getBlogsByCategoryName('', 'partners', 1, language);
+                clientViewContent = await ejs.renderFile(path.join(__dirname, '../../views/client', `blogs.ejs`), { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, blogs: blogs, categories: categories, name: 'partners' }, { async: true });
                 break;
-            case 'socialResponsibility':
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name }, { async: true });
+            case 'social-responsibility':
+                categories = await CategoryModel.getCategoriesByTitle('', language);
+                blogs = await BlogModel.getBlogsByCategoryName('', 'social-responsibility', 1, language);
+                clientViewContent = await ejs.renderFile(path.join(__dirname, '../../views/client', `blogs.ejs`), { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, blogs: blogs, categories: categories, name: 'social-responsibility' }, { async: true });
                 break;
             case 'products':
                 products = await ProductModel.getProducts('', language);
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name, products: products }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, products: products }, { async: true });
                 break;
-            case 'detailProduct':
+            case 'detail-product':
                 products = await ProductModel.getProducts('', language);
                 product = await ProductModel.getProductById(products[0].product_id);
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name, product: product }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, product: product }, { async: true });
                 break;
             case 'technology':
                 technology = await TechnologyModel.getTechnologyById(1);
                 products = await ProductModel.getProductByTechnologyId(1);
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name, technology: technology, products: products }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, technology: technology, products: products }, { async: true });
                 break;
             case 'blogs':
                 categories = await CategoryModel.getCategoriesByTitle('', language);
                 blogs = await BlogModel.getBlogsByCategoryName('', categories[0].name, 1, language);
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name, blogs: blogs, categories: categories, name: categories[0].name }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, blogs: blogs, categories: categories, name: categories[0].name }, { async: true });
                 break;
             case 'recruitments':
                 const recruitments = await RecruitmentModel.getRecruitments('', language);
-                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, mainData: mainData, page: page_name, recruitments: recruitments }, { async: true });
+                clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, recruitments: recruitments }, { async: true });
                 break;
             default:
                 return res.status(200).render('admin/display', { language: language, active: "display", headerData: headerData, mainData: mainData, page: page_name, mainContent: '' });
@@ -214,11 +228,22 @@ const getAdminDisplayPage = async (req, res) => {
     }
 }
 
-const getAdminQuestionsPage = async (req, res) => {
+const getAdminFAQsPage = async (req, res) => {
     try {
         const language = req.language;
         
-        return res.status(200).render('admin/home', { language, render: 'questions', active: "questions" })
+        return res.status(200).render('admin/home', { language, render: 'FAQs', active: "FAQs" })
+    } catch (error) {
+        console.error('ERROR: ', error);
+        return res.status(500).render('serverError', { err: 'Server have an error' })
+    }
+}
+
+const getAdminPicturesPage = async (req, res) => {
+    try {
+        const language = req.language;
+        
+        return res.status(200).render('admin/home', { language, render: 'pictures', active: "pictures" })
     } catch (error) {
         console.error('ERROR: ', error);
         return res.status(500).render('serverError', { err: 'Server have an error' })
@@ -229,9 +254,10 @@ module.exports = {
     getLoginPage,
     getHomepage,
     getAdminCreateDataAdminPage, getAdminDataAdminsPage,
-    getAdminAddProductPage, getAdminProductsPage, getAdminProductCategoriesPage, getAdminTechnologiesPage,
+    getAdminAddProductPage, getAdminProductsPage, getAdminProductCategoriesPage, getAdminTechnologiesPage, getAdminAddTechnologyPage,
     getAdminDisplayPage,
     getAdminCreateBlogPage, getAdminBlogsPage, getAdminBlogCategoriesPage,
     getAdminRequestsPage,
-    getAdminQuestionsPage
+    getAdminFAQsPage,
+    getAdminPicturesPage
 }

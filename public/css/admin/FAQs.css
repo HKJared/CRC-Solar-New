@@ -1,19 +1,19 @@
-.questions-container {
+.FAQs-container {
     display: flex;
     padding: 15px;
-    position: relative;
 }
 
-.add-question-container {
+.add-FAQ-container {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: calc(100vh - 80px);
+    z-index: 999;
 }
 
-#add-question-form {
+#edit-FAQ-form, #add-FAQ-form {
     padding: 15px;
     background-color: #fff;
     border: var(--border);
@@ -24,7 +24,7 @@
     box-shadow: 0 0 3px #b6b6b6;
 }
 
-#add-question-form .x-btn {
+#edit-FAQ-form .x-btn, #add-FAQ-form .x-btn {
     position: absolute;
     height: 16px;
     width: 16px;
@@ -32,7 +32,7 @@
     right: 2px;
 }
 
-#add-question-form input, #add-question-form textarea, #add-question-form select {
+#edit-FAQ-form input, #add-FAQ-form input, #edit-FAQ-form textarea, #add-FAQ-form textarea, #edit-FAQ-form select, #add-FAQ-form select {
     border: var(--border);
     border-radius: 5px;
     font-size: 16px;
@@ -40,15 +40,15 @@
     resize: vertical;
 }
 
-#add-question-form input:focus, #add-question-form textarea:focus, #add-question-form select:focus {
+#edit-FAQ-form input:focus, #add-FAQ-form input:focus, #edit-FAQ-form textarea:focus, #add-FAQ-form textarea:focus, #edit-FAQ-form select:focus, #add-FAQ-form select:focus {
     outline: 1px solid #F7F7F7;
 }
 
-#add-question-form label {
+#edit-FAQ-form label, #add-FAQ-form label {
     padding: 16px 0 8px 5px;
 }
 
-#add-question-form .submit-question {
+#edit-FAQ-form .cancel, #edit-FAQ-form .submit-FAQ, #add-FAQ-form .submit-FAQ {
     font-size: 16px;
     padding: 5px;
     margin-top: 20px;
@@ -57,34 +57,42 @@
     color: var(--Text);
 }
 
-#add-question-form .submit-question:hover {
+#edit-FAQ-form .cancel {
+    background-color: transparent;
+}
+
+#edit-FAQ-form .submit-FAQ:hover, #add-FAQ-form .submit-FAQ:hover {
     background-color: #c1df5f;
 }
 
+#edit-FAQ-form .cancel:hover {
+    background-color: #f8f8f8;
+}
 
-.questions-container h2 {
+
+.FAQs-container h2 {
     color: #3364EB;
     width: 1000px;
     padding: 10px 0;
 }
 
-.questions-container .add-question {
+.FAQs-container .add-FAQ {
     width: 30px;
     height: 30px;
     background-color: #bada55;
     border-radius: 3px;
 }
 
-.questions-container > ul {
+.FAQs-container > ul {
     background-color: #fff;
 }
 
-.questions-container > ul > li {
+.FAQs-container > ul > li {
     padding: 10px 0;
     border-bottom: 1px solid #dfdfdf;
 }
 
-.questions-container > ul > li:hover {
+.FAQs-container > ul > li:hover {
     background-color: #fbfbfb;
 }
 
@@ -92,24 +100,24 @@
     padding: 5px 30px;
 }
 
-.sub-question {
+.sub-FAQ {
     display: none;
     width: 1040px;
     padding: 15px;
 }
 
-.sub-question li {
+.sub-FAQ li {
     max-width: 1000px;
     flex-wrap: wrap;
     overflow: hidden;
 }
 
-.row-table .question {
+.row-table .FAQ {
     position: relative;
     cursor: pointer;
 }
 
-.row-table .question i {
+.row-table .FAQ i {
     position: absolute;
     left: 10px;
     top: 5px;    

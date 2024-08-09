@@ -84,7 +84,7 @@
                                                 </div>
                                             </li>
                                             <li>
-                                                <a href="" class="full-width"><img src="/image/trach-nhiem-xa-hoi.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/social-responsibility" class="full-width"><img src="/image/trach-nhiem-xa-hoi.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_about_social_responsibility">Trách nhiệm xã hội</span>
                                                 </div>
@@ -160,7 +160,7 @@
                                         <ul class="col">
                                             <% for (let i = 0; i < headerData.services.length; i ++) { %>
                                                 <li class="full-width">
-                                                    <a href="#" class="full-width"><span><%- headerData.services[i].title %></span></a>
+                                                    <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/blog?title=<%- headerData.services[i].title %>&blog_id=<%- headerData.services[i].blog_id %>" class="full-width"><span><%- headerData.services[i].title %></span></a>
                                                 </li>    
                                             <% } %>
                                         </ul>
