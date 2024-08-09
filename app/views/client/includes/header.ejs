@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/image/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/image/base/favicon.png" type="image/base/x-icon">
     <title>CRC GROUP</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512px-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,7 +18,7 @@
         </div>
         <div class="header-container container row flex-box">
             <div class="logo center">
-                <a href="/<%- language == 'vn' ? `` : language %>"><img src="/image/logo.png" alt="CRC Solar Logo" style="height: 34px;"></a>
+                <a href="/<%- language == 'vn' ? `` : language %>"><img src="/image/base/logo.png" alt="CRC Solar Logo" style="height: 34px;"></a>
             </div>
             <div class="menu-container col">
                 <div class="header-info row">
@@ -31,26 +31,26 @@
                     <div class="language-container center">
                         <% if (language == 'vn') { %>
                             <div class="top-language">
-                                <span><img src="/image/language-vn.jpg" width="16px">&nbsp;VN</span>
+                                <span><img src="/image/base/language-vn.jpg" width="16px">&nbsp;VN</span>
                                 <ul class="lang1">
-                                    <li><a href="/en/"><span><img src="/image/language-en.jpg" width="16px" height="12px">&nbsp;EN</span></a></li>
-                                    <li><a href="/cn/"><span><img src="/image/language-cn.jpg" width="16px" height="12px">&nbsp;CN</span></a></li>
+                                    <li><a href="/en/"><span><img src="/image/base/language-en.jpg" width="16px" height="12px">&nbsp;EN</span></a></li>
+                                    <li><a href="/cn/"><span><img src="/image/base/language-cn.jpg" width="16px" height="12px">&nbsp;CN</span></a></li>
                                 </ul>
                             </div>
                         <% } else if (language == 'en') { %>
                             <div class="top-language">
-                                <span><img src="/image/language-en.jpg" width="16px">&nbsp;EN</span>
+                                <span><img src="/image/base/language-en.jpg" width="16px">&nbsp;EN</span>
                                 <ul class="lang1">
-                                    <li><a href="/"><span><img src="/image/language-vn.jpg" width="16px" height="12px">&nbsp;VN</span></a></li>
-                                    <li><a href="/cn/"><span><img src="/image/language-cn.jpg" width="16px" height="12px">&nbsp;CN</span></a></li>
+                                    <li><a href="/"><span><img src="/image/base/language-vn.jpg" width="16px" height="12px">&nbsp;VN</span></a></li>
+                                    <li><a href="/cn/"><span><img src="/image/base/language-cn.jpg" width="16px" height="12px">&nbsp;CN</span></a></li>
                                 </ul>
                             </div>
                         <% } else { %>
                             <div class="top-language">
-                                <span><img src="/image/language-cn.jpg" width="16px">&nbsp;CN</span>
+                                <span><img src="/image/base/language-cn.jpg" width="16px">&nbsp;CN</span>
                                 <ul class="lang1">
-                                    <li><a href="/"><span><img src="/image/language-vn.jpg" width="16px" height="12px">&nbsp;VN</span></a></li>
-                                    <li><a href="/en/"><span><img src="/image/language-en.jpg" width="16px" height="12px">&nbsp;EN</span></a></li>
+                                    <li><a href="/"><span><img src="/image/base/language-vn.jpg" width="16px" height="12px">&nbsp;VN</span></a></li>
+                                    <li><a href="/en/"><span><img src="/image/base/language-en.jpg" width="16px" height="12px">&nbsp;EN</span></a></li>
                                 </ul>
                             </div>
                         <% } %>
@@ -72,19 +72,19 @@
                                     <div class="abouts-container full-width">
                                         <ul class="row full-width">
                                             <li>
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/introduction" class="full-width"><img src="/image/gioi-thieu.png" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/introduction" class="full-width"><img src="/image/base/gioi-thieu.png" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_about_intro">Giới thiệu</span>
                                                 </div>
                                             </li>
                                             <li>
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/partners" class="full-width"><img src="/image/doi-tac.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/partners" class="full-width"><img src="/image/base/doi-tac.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_about_partners">Đối tác</span>
                                                 </div>
                                             </li>
                                             <li>
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/social-responsibility" class="full-width"><img src="/image/trach-nhiem-xa-hoi.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/social-responsibility" class="full-width"><img src="/image/base/trach-nhiem-xa-hoi.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_about_social_responsibility">Trách nhiệm xã hội</span>
                                                 </div>
@@ -166,7 +166,7 @@
                                         </ul>
                                     </div>
                                     <div class="services-image">
-                                        <img src="/image/block1.1.jpg" alt="" srcset="" class="full-width full-height">
+                                        <img src="/image/base/dich-vu.jpg" alt="" srcset="" class="full-width full-height">
                                     </div>
                                 </div>
                             </div>
@@ -181,25 +181,25 @@
                                     <div class="news-container">
                                         <ul class="row full-width">
                                             <li class="col">
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/news" class="full-width full-height"><img src="/image/tin-tuc.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/news" class="full-width full-height"><img src="/image/base/tin-tuc.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_news">Tin tức</span>
                                                 </div>
                                             </li>
                                             <li class="col">
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/events" class="full-width full-height"><img src="/image/su-kien.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/events" class="full-width full-height"><img src="/image/base/su-kien.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_events">Sự kiện</span>
                                                 </div>
                                             </li>
                                             <li class="col">
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/recruitments" class="full-width full-height"><img src="/image/tuyen-dung.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/recruitments" class="full-width full-height"><img src="/image/base/tuyen-dung.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_recruitment">Tuyển dụng</span>
                                                 </div>
                                             </li>
                                             <li class="col">
-                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/other-news" class="full-width full-height"><img src="/image/tin-khac.jpg" alt="" srcset="" class="full-width full-height"></a>
+                                                <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/other-news" class="full-width full-height"><img src="/image/base/tin-khac.jpg" alt="" srcset="" class="full-width full-height"></a>
                                                 <div>
                                                     <span data-translate="header_nav_other_news">Tin khác</span>
                                                 </div>
