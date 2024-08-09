@@ -1,6 +1,5 @@
 var keyword = '';
 var loading = false;
-const language = $('header').data('language');
 
 $(document).ready(function() {
     document.title = "CRC Solar - Admin - Hỏi đáp";

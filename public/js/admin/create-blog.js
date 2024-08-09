@@ -204,7 +204,6 @@ $(document).ready(function() {
 });
 
 function createBlog(formData){
-    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

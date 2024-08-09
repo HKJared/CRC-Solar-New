@@ -224,7 +224,6 @@ $(document).ready(function() {
         filesArray.forEach(file => formData.append('images', file));
 
         const access_token = localStorage.getItem('access_token');
-        const language = $('header').data('language');
 
         renderLoading();
         // Gửi dữ liệu sản phẩm tới máy chủ

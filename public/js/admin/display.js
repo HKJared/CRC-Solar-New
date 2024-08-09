@@ -191,7 +191,6 @@ $(document).ready(function() {
 });
 
 function updateDisplayText (data) {
-    const language = $('header').data('language');
     const page = $('.body main').data('page');
     const access_token = localStorage.getItem('access_token');
 
@@ -237,7 +236,6 @@ function updateDisplayText (data) {
 }
 
 function updateDisplayImage(data) {
-    const language = $('header').data('language');
     const page = $('.body main').data('page');
     const access_token = localStorage.getItem('access_token');
 

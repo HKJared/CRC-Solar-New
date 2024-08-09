@@ -19,7 +19,6 @@ $(document).ready(function() {
 
 function getOldLogs() {
     const access_token = localStorage.getItem('access_token');
-    const language = $('header').data('language');
 
     fetch(`/api/${language}/old-logs?time=${encodeURIComponent(time_new_log)}`, {
         method: 'GET',

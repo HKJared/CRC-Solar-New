@@ -2,7 +2,6 @@ var editor;
 var keyword = '';
 var loading = false;
 var page = 1;
-const language = $('header').data('language');
 
 var filesArray = [];
 var existingImages = [];
@@ -387,7 +386,6 @@ function showBlogs(data) {
 
 function updateBlog(formData, newDataBlog) {
     const access_token = localStorage.getItem('access_token');
-    const language = $('header').data('language');
     
     renderLoading();
     // Gửi dữ divệu sản phẩm tới máy chủ
@@ -438,7 +436,6 @@ function updateBlog(formData, newDataBlog) {
 
 function deleteBlog(blog_id) {
     const access_token = localStorage.getItem('access_token');
-    const language = $('header').data('language');
 
     renderLoading();
     fetch(`/api/${language}/blog?blog_id=${blog_id}`, {

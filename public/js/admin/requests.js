@@ -1,7 +1,6 @@
 var keyword = '';
 var page = 1;
 var loading = false;
-const language = $('header').data('language');
 
 $(document).ready(function() {
     document.title = "CRC Solar - Admin - Danh sách yêu cầu liên hệ";

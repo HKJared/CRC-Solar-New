@@ -1,6 +1,5 @@
 var keyword = '';
 var loading = false;
-const language = $('header').data('language');
 var editor;
 
 var filesArray = [];
@@ -349,7 +348,6 @@ function showEditProduct(product_id) {
 }
 
 function search() {
-    
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
@@ -442,7 +440,6 @@ function updateImagePreview() {
 
 function updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdate, firstImageSrc) {
     const access_token = localStorage.getItem('access_token');
-    const language = $('header').data('language');
     
     var formData = new FormData();
 

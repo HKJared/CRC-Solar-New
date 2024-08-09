@@ -22,9 +22,6 @@ $(document).ready(function() {
         let account = $('#account').val();
         let password = $('#password').val();
         let isValid = true;
-
-        
-        console.log(account, password)
     
         if (!account || account == "") {
             showNotification('Vui lòng nhập tài khoản.');

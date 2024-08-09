@@ -1,6 +1,5 @@
 var keyword = '';
 var loading = false;
-const language = $('header').data('language');
 var editor;
 
 var filesArray = [];
@@ -416,7 +415,6 @@ function updateImagePreview() {
 
 function updateTechnology(formData, newDataTechnology) {
     const access_token = localStorage.getItem('access_token');
-    const language = $('header').data('language');
     
     renderLoading();
     // Gửi dữ liệu sản phẩm tới máy chủ

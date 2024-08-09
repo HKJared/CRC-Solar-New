@@ -67,8 +67,6 @@ $(document).ready(function() {
 });
 
 function search() {
-    const language = $('header').data('language');
-    
     loading = true;
     renderLoading();
     fetch(`/api/${ language }/data-admins?keyword=${ keyword }`, {

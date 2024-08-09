@@ -209,7 +209,6 @@ $(document).ready(function() {
 
 function createTechnology(formData) {
     const access_token = localStorage.getItem('access_token');
-    const language = $('header').data('language');
     
     renderLoading();
     // Gửi dữ liệu sản phẩm tới máy chủ
