@@ -46,7 +46,7 @@ $(document).ready(function() {
             phone_number: phoneNumber,
             message: message
         };
-
+        const language = $('header').data('language');
         fetch(`/api/${language}/request`, {
             method: 'POST',
             headers: {

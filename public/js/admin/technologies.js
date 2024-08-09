@@ -263,6 +263,7 @@ $(document).ready(function() {
 });
 
 function showEditTechnology(technology_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
@@ -326,7 +327,7 @@ function showEditTechnology(technology_id) {
 }
 
 function search() {
-    
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
@@ -414,6 +415,7 @@ function updateImagePreview() {
 }
 
 function updateTechnology(formData, newDataTechnology) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     
     renderLoading();
@@ -465,6 +467,7 @@ function updateTechnology(formData, newDataTechnology) {
 }
 
 function deleteTechnology(technology_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

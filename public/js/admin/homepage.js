@@ -1,5 +1,3 @@
-var language = $('header').data('language');
-
 $(document).ready(function() {
     refreshToken();
 

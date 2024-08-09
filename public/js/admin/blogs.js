@@ -248,6 +248,7 @@ $(document).ready(function() {
 });
 
 function showEditBlog(blog_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
@@ -308,6 +309,7 @@ function showEditBlog(blog_id) {
 }
 
 function search() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
@@ -385,6 +387,7 @@ function showBlogs(data) {
 }
 
 function updateBlog(formData, newDataBlog) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     
     renderLoading();
@@ -435,6 +438,7 @@ function updateBlog(formData, newDataBlog) {
 }
 
 function deleteBlog(blog_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

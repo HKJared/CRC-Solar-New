@@ -260,6 +260,7 @@ $(document).ready(function() {
 });
 
 function showEditProduct(product_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
@@ -348,6 +349,7 @@ function showEditProduct(product_id) {
 }
 
 function search() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
@@ -439,6 +441,7 @@ function updateImagePreview() {
 }
 
 function updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdate, firstImageSrc) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     
     var formData = new FormData();
@@ -500,6 +503,7 @@ function updateProduct(newDataProduct, technologiesToDelete, technologiesToUpdat
 }
 
 function deleteProduct(product_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

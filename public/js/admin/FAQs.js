@@ -128,6 +128,7 @@ $(document).ready(function() {
 });
 
 function search() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
@@ -210,6 +211,7 @@ function showFAQs(data) {
 }
 
 function createFAQ(FAQ) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
@@ -273,6 +275,7 @@ function createFAQ(FAQ) {
 }
 
 function updateFAQ(newDataFAQ) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
@@ -322,6 +325,7 @@ function updateFAQ(newDataFAQ) {
 }
 
 function deleteFAQ(FAQ_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

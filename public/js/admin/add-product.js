@@ -216,13 +216,12 @@ $(document).ready(function() {
             technologies
         };
 
-        console.log(product);
-
         const formData = new FormData();
 
         formData.append('product', JSON.stringify(product));
         filesArray.forEach(file => formData.append('images', file));
 
+        const language = $('header').data('language');
         const access_token = localStorage.getItem('access_token');
 
         renderLoading();

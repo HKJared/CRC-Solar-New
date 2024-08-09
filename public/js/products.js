@@ -6,7 +6,7 @@ $(document).ready(function() {
 
         var container = $(this).closest('.container');
         const product_category_id = $(this).data('product-category-id');
-        const language = $('header').data('language');
+        var language = $('header').data('language');
 
         var query = `/api/${ language }/products?keyword=`;
 

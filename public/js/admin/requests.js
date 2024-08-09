@@ -42,6 +42,7 @@ $(document).ready(function() {
 });
 
 function search() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
@@ -126,6 +127,7 @@ function showRequests(data) {
 }
 
 function updateRequest(request_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

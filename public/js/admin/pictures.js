@@ -112,6 +112,7 @@ $(document).ready(function() {
 });
 
 function search() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
     loading = true;
     fetch(`/api/${language}/pictures?keyword=${ keyword }&page=${page}`, {
@@ -155,6 +156,7 @@ function showPictures(pictures) {
 }
 
 function createPicture(formData){
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
@@ -196,6 +198,7 @@ function createPicture(formData){
 }
 
 function deletePicture(picture_id) {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();

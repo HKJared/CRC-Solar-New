@@ -18,6 +18,7 @@ $(document).ready(function() {
 });
 
 function getOldLogs() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     fetch(`/api/${language}/old-logs?time=${encodeURIComponent(time_new_log)}`, {
@@ -47,6 +48,7 @@ function getOldLogs() {
 }
 
 function getNewLogs() {
+    const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     fetch(`/api/${language}/new-logs?time=${encodeURIComponent(time_new_log)}`, {

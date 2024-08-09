@@ -18,6 +18,7 @@ $(document).ready(function() {
 });
 
 function search() {
+    const language = $('header').data('language');
     renderLoading();
     fetch(`/api/${language}/pictures?keyword=${ keyword }&page=${ page }`, {
         method: 'GET',
