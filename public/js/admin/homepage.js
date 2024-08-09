@@ -32,16 +32,16 @@ $(document).ready(function() {
         $('html, main').animate({scrollTop: 0}, 500);
     });
 
-    var language = $('.top-language');
-    var lang1 = language.find('.lang1');
+    var $language = $('.top-language');
+    var lang1 = $language.find('.lang1');
 
     // Hiệu ứng khi rê chuột vào ngôn ngữ
-    language.on('mouseenter', function() {
+    $language.on('mouseenter', function() {
         lang1.stop().slideDown();
     });
 
     // Hiệu ứng khi rê chuột ra khỏi ngôn ngữ
-    language.on('mouseleave', function() {
+    $language.on('mouseleave', function() {
         lang1.stop().slideUp();
     });
 
