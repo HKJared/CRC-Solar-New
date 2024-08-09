@@ -1,4 +1,4 @@
-const language = $('header').data('language');
+var language = $('header').data('language');
 
 $(document).ready(function() {
     refreshToken();
