@@ -80,7 +80,7 @@ class RecruitmentModel {
         await pool.execute(queryString, [
             data.position, data.department, data.location, data.quantity, data.salary_range, 
             data.experience_required, data.application_deadline, data.detail,
-            admin_id, recruitment_id
+            admin_id, data.recruitment_id
         ]);
 
         return;

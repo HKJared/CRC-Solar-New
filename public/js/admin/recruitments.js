@@ -150,10 +150,17 @@ $(document).ready(function() {
         search();
     });
 
+    $(document).on('click', 'form.edit-recruitment .x-btn', function(event) {
+        event.stopPropagation();
+
+        $('.edit-recruitment-container').slideUp();
+    });
+
     $('.edit-recruitment').on('submit', function(event) {
         event.preventDefault(); // Ngăn chặn hành động submit mặc định
 
         const recruitment = {
+            recruitment_id: $(this).data('recruitmentid'),
             position: $('#position').val(),
             department: $('#department').val(),
             location: $('#location').val(),
@@ -180,7 +187,11 @@ $(document).ready(function() {
             return; // Ngăn không cho form submit nếu có lỗi
         }
 
-        editRecruitment(recruitment);
+        showConfirm('Xác nhận lưu', function(result) {
+            if (result) {
+                editRecruitment(recruitment);
+            }
+        });
     });
 
     $(document).on('click', '.edit-btn', function(event) {
@@ -189,6 +200,18 @@ $(document).ready(function() {
         var recruitment_id = $(this).data('recruitmentid');
 
         showEditRecruitment(recruitment_id);
+    });
+
+    $(document).on('click', '.delete-btn', function(event) {
+        event.stopPropagation();
+
+        const recruitment_id = $(this).data('recruitmentid');
+        
+        showConfirm('Xác nhận xóa bài tuyển dụng này', function(result) {
+            if(result) {
+                deleteRecruitment(recruitment_id);
+            }
+        });
     });
 });
 
@@ -249,19 +272,19 @@ function showEditRecruitment(recruitment_id) {
     });
 }
 
-function editRecruitment(recruitment) {
+function editRecruitment(newDataRecruitment) {
     const language = $('header').data('language');
     const access_token = localStorage.getItem('access_token');
 
     renderLoading();
     // Gửi dữ liệu sản phẩm tới máy chủ
     fetch(`/api/${ language }/recruitment`, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             "authentication": access_token,
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ recruitment: recruitment })
+        body: JSON.stringify({ newDataRecruitment: newDataRecruitment })
     })
     .then(response => {
         return response.json().then(data => {
@@ -276,9 +299,22 @@ function editRecruitment(recruitment) {
     .then(data => {
         removeLoading();
         showNotification(data.message);
-        setTimeout(() => {
-            window.location.href = `/admin/recruitments`;
-        }, 2000);
+
+        var $recruitmentItem = $(`li[data-recruitmentid='${newDataRecruitment.recruitment_id}']`);
+
+        $recruitmentItem.find('.position').html(newDataRecruitment.position);
+        $recruitmentItem.find('.department').html(`<strong>Phòng ban:</strong> ${newDataRecruitment.department}`);
+        $recruitmentItem.find('.application-deadline').html(`<strong>Hạn ứng tuyển:</strong> ${newDataRecruitment.application_deadline}`);
+
+        var newPosition = $recruitmentItem.offset().top - 100;
+
+        $('main').animate({ scrollTop: newPosition }, 1000, function() {
+            setTimeout(function() {
+                $recruitmentItem.removeClass('highlight-green');
+            }, 2000); 
+        });
+
+        $('.edit-recruitment-container').slideUp();
     })
     .catch(error => {
         removeLoading();
@@ -365,6 +401,10 @@ function deleteRecruitment(recruitment_id) {
     .then(result => {
         showNotification(result.message);
         removeLoading();
+
+        if ($('form.edit-recruitment').data('recruitmentid') == recruitment_id) {
+            $('.edit-recruitment-container').slideUp();
+        }
 
         var $recruitmentItem = $(`li[data-recruitmentid='${recruitment_id}']`);
         $recruitmentItem.slideUp();

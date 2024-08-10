@@ -173,7 +173,11 @@ $(document).ready(function() {
             return; // Ngăn không cho form submit nếu có lỗi
         }
 
-        createRecruitment(recruitment);
+        showConfirm('Xác nhận tạo bài tuyển dụng mới', function(result) {
+            if (result) {
+                createRecruitment(recruitment);
+            }
+        });
     });
 });
 

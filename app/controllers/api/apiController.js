@@ -1153,18 +1153,18 @@ const createRecruitment = async (req, res) => {
         const log_id = req.log_id;
 
         if (!recruitment) {
-            await LogModel.updateDetailLog('Không nhận được dữ liệu đơn tuyển dụng', log_id);
+            await LogModel.updateDetailLog('Không nhận được dữ liệu bài tuyển dụng', log_id);
             return res.status(400).json({ message: 'Không nhận được dữ liệu, vui lòng thử lại.' });
         }
 
         
-        await LogModel.updateDetailLog(`Tạo đơn tuyển dụng: ${ recruitment.position }`, log_id);
+        await LogModel.updateDetailLog(`Tạo bài tuyển dụng: ${ recruitment.position }`, log_id);
 
         const newRecruitmentId = await RecruitmentModel.createRecruitment(recruitment, language, admin_id);
 
         await LogModel.updateStatusLog(log_id);
 
-        return res.status(200).json({ message: 'Tạo đơn tuyển dụng thành công.' })
+        return res.status(200).json({ message: 'Tạo bài tuyển dụng thành công.' })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Lỗi từ phía server.' });
@@ -1195,10 +1195,73 @@ const getRecruitment = async (req, res) => {
         const recruitment = await RecruitmentModel.getRecruitmentById(recruitment_id);
 
         if (!recruitment) {
-            return res.status(400).json({ message: 'Không tìm thấy đơn tuyển dụng cần chỉnh sửa, vui lòng tải lại trang.' });
+            return res.status(400).json({ message: 'Không tìm thấy bài tuyển dụng cần chỉnh sửa, vui lòng tải lại trang.' });
         }
 
         return res.status(200).json({ data: recruitment });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const updateRecruitment = async (req, res) => {
+    try {
+        const language = req.language;
+        const newDataRecruitment = req.body.newDataRecruitment;
+        const admin_id = req.admin_id;
+        const log_id = req.log_id;
+
+        if (!newDataRecruitment) {
+            await LogModel.updateDetailLog('Không nhận được dữ liệu chỉnh sửa bài tuyển dụng', log_id);
+            return res.status(400).json({ message: 'Không nhận được dữ liệu chỉnh sửa, vui lòng thử lại.' });
+        }
+
+        const recruitment = await RecruitmentModel.getRecruitmentById(newDataRecruitment.recruitment_id);
+        
+        if (!recruitment) {
+            await LogModel.updateDetailLog('Không tìm thấy bài tuyển dụng cần chỉnh sửa.', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy bài tuyển dụng cần chỉnh sửa, vui lòng tải lại trang.' });
+        }
+
+        await LogModel.updateDetailLog(`Chỉnh sửa bài tuyển dụng: ${ recruitment.position } thành ${ newDataRecruitment.position }`, log_id);
+
+        await RecruitmentModel.updateRecruitment(newDataRecruitment, admin_id);
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Chỉnh sửa bài tuyển dụng thành công.' })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const deleteRecruitment = async (req, res) => {
+    try {
+        const recruitment_id = req.body.recruitment_id;
+        const admin_id = req.admin_id;
+        const log_id = req.log_id;
+
+        if (!recruitment_id) {
+            await LogModel.updateDetailLog('Không tìm thấy bài tuyển dụng cần xóa', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy bài tuyển dụng cần xóa, vui lòng tải lại trang.' });
+        }
+
+        const recruitment = await RecruitmentModel.getRecruitmentById(recruitment_id);
+
+        if (!recruitment) {
+            await LogModel.updateDetailLog('Không tìm thấy bài tuyển dụng cần xóa', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy bài tuyển dụng cần xóa, vui lòng tải lại trang.' });
+        }
+
+        await LogModel.updateDetailLog(`Xóa bài tuyển dụng: ${ recruitment.position }`, log_id);
+
+        await RecruitmentModel.deleteRecruitment(recruitment_id);
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Xóa bài tuyển dụng thành công.' })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Lỗi từ phía server.' });
@@ -1217,5 +1280,5 @@ module.exports = {
     getOldLogs, getNewLogs,
     createPicture, getPictures, deletePicture,
     createDocument, getDocuments, deleteDocument,
-    createRecruitment, getRecruitments, getRecruitment
+    createRecruitment, getRecruitments, getRecruitment, updateRecruitment, deleteRecruitment
 }

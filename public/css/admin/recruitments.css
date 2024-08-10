@@ -17,7 +17,7 @@
     z-index: 9990;
 }
 
-#edit-recruitment-form, #add-recruitment-form {
+.edit-recruitment, .add-recruitment {
     padding: 15px;
     background-color: #fff;
     border: var(--border);
@@ -28,15 +28,15 @@
     box-shadow: 0 0 3px #b6b6b6;
 }
 
-#edit-recruitment-form .x-btn, #add-recruitment-form .x-btn {
+.edit-recruitment .x-btn, .add-recruitment .x-btn {
     position: absolute;
     height: 16px;
     width: 16px;
-    top: 2px;
-    right: 2px;
+    top: 6px;
+    right: 6px;
 }
 
-#edit-recruitment-form input, #add-recruitment-form input, #edit-recruitment-form textarea, #add-recruitment-form textarea, #edit-recruitment-form select, #add-recruitment-form select {
+.edit-recruitment input, .add-recruitment input, .edit-recruitment textarea, .add-recruitment textarea, .edit-recruitment select, .add-recruitment select {
     border: var(--border);
     border-radius: 5px;
     font-size: 16px;
@@ -44,15 +44,15 @@
     resize: vertical;
 }
 
-#edit-recruitment-form input:focus, #add-recruitment-form input:focus, #edit-recruitment-form textarea:focus, #add-recruitment-form textarea:focus, #edit-recruitment-form select:focus, #add-recruitment-form select:focus {
+.edit-recruitment input:focus, .add-recruitment input:focus, .edit-recruitment textarea:focus, .add-recruitment textarea:focus, .edit-recruitment select:focus, .add-recruitment select:focus {
     outline: 1px solid #F7F7F7;
 }
 
-#edit-recruitment-form label, #add-recruitment-form label {
+.edit-recruitment label, .add-recruitment label {
     padding: 16px 0 8px 5px;
 }
 
-#edit-recruitment-form .cancel, #edit-recruitment-form .submit-recruitment, #add-recruitment-form .submit-recruitment {
+.edit-recruitment .cancel, .edit-recruitment .submit-recruitment, .add-recruitment .submit-recruitment {
     font-size: 16px;
     padding: 5px;
     margin-top: 20px;
@@ -61,15 +61,15 @@
     color: var(--Text);
 }
 
-#edit-recruitment-form .cancel {
+.edit-recruitment .cancel {
     background-color: transparent;
 }
 
-#edit-recruitment-form .submit-recruitment:hover, #add-recruitment-form .submit-recruitment:hover {
+.edit-recruitment .submit-recruitment:hover, .add-recruitment .submit-recruitment:hover {
     background-color: #c1df5f;
 }
 
-#edit-recruitment-form .cancel:hover {
+.edit-recruitment .cancel:hover {
     background-color: #f8f8f8;
 }
 

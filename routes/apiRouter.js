@@ -93,6 +93,12 @@ apiRouter.post('/recruitment', (req, res, next) => {
 }, apiController.createRecruitment);
 apiRouter.get('/recruitments', apiController.getRecruitments);
 apiRouter.get('/recruitment', apiController.getRecruitment);
+apiRouter.put('/recruitment', (req, res, next) => {
+    authorization(req, res, 'update', next);
+}, apiController.updateRecruitment);
+apiRouter.delete('/recruitment', (req, res, next) => {
+    authorization(req, res, 'delete', next);
+}, apiController.deleteRecruitment);
 
 //pictures
 apiRouter.post('/picture', (req, res, next) => {
