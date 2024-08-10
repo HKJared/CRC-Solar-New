@@ -1,9 +1,12 @@
 const pool = require('../../config/connectDB');
 const diacritics = require('diacritics');
 
+recruitmentsPerPage = 20;
+
 class RecruitmentModel {
-    static async getRecruitments(keyword, language) {
+    static async getRecruitments(keyword, page, language) {
         keyword = diacritics.remove(keyword);
+        const offset = recruitmentsPerPage * (page - 1);
 
         const queryString = `
             SELECT 
@@ -11,24 +14,36 @@ class RecruitmentModel {
             FROM 
                 recruitments
             WHERE
-                LOWER(position) LIKE LOWER(?)
+                (LOWER(position) LIKE LOWER(?)
+                OR LOWER(department) LIKE LOWER(?))
                 AND language = ?
             ORDER BY
                 recruitment_id DESC
+            LIMIT
+                ${ recruitmentsPerPage }
+            OFFSET
+                ${ offset }
+            
         `;
 
-        const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
+        const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, language]);
         return rows;
     }
 
     static async getRecruitmentById(recruitment_id) {
         const queryString = `
             SELECT 
-                *
+                r.*,
+                a.fullname as admin_name,
+                ua.fullname as updated_by_name 
             FROM 
-                recruitments
+                recruitments r
+            JOIN
+                admins a ON r.created_by = a.admin_id
+            LEFT JOIN 
+                admins ua ON r.updated_by = ua.admin_id
             WHERE 
-                recruitment_id = ?
+                r.recruitment_id = ?
         `;
 
         const [rows] = await pool.execute(queryString, [recruitment_id]);
@@ -43,7 +58,7 @@ class RecruitmentModel {
                 created_by, created_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())
         `;
-
+        
         const [result] = await pool.execute(queryString, [
             data.position, data.department, data.location, data.quantity, data.salary_range, 
             data.experience_required, data.application_deadline, data.detail, language, 

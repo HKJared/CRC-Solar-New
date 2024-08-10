@@ -75,10 +75,7 @@ apiRouter.delete('/FAQ', (req, res, next) => {
     authorization(req, res, 'delete', next);
 }, apiController.deleteFAQ);
 
-// //banners
-// apiRouter.get('/banners', apiController.getBanners);
-// apiRouter.put('/banner', apiController.updateBanner);
-
+//displays
 apiRouter.put('/display-texts', (req, res, next) => {
     authorization(req, res, 'update', next);
 }, apiController.updateDisplayText);
@@ -86,9 +83,18 @@ apiRouter.put('/display-images', (req, res, next) => {
     authorization(req, res, 'update', next);
 }, apiController.updateDisplayImage);
 
+//logs
 apiRouter.get('/old-logs', apiController.getOldLogs);
 apiRouter.get('/new-logs', apiController.getNewLogs);
 
+//recruitments
+apiRouter.post('/recruitment', (req, res, next) => {
+    authorization(req, res, 'create', next);
+}, apiController.createRecruitment);
+apiRouter.get('/recruitments', apiController.getRecruitments);
+apiRouter.get('/recruitment', apiController.getRecruitment);
+
+//pictures
 apiRouter.post('/picture', (req, res, next) => {
     authorization(req, res, 'create', next);
 }, apiController.createPicture);
@@ -96,5 +102,14 @@ apiRouter.get('/pictures', apiController.getPictures);
 apiRouter.delete('/picture', (req, res, next) => {
     authorization(req, res, 'delete', next);
 }, apiController.deletePicture);
+
+//documents
+apiRouter.post('/document', (req, res, next) => {
+    authorization(req, res, 'create', next);
+}, apiController.createDocument);
+apiRouter.get('/documents', apiController.getDocuments);
+apiRouter.delete('/document', (req, res, next) => {
+    authorization(req, res, 'delete', next);
+}, apiController.deleteDocument);
 
 module.exports = apiRouter;

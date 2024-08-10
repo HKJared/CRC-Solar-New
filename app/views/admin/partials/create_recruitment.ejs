@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/admin/create-recruitment.css">
+<div class="create-recruitment-container col">
+    <h2>Tạo bài tuyển dụng</h2>
+    <form class="create-recruitment col">
+        <label for="position">Vị trí tuyển dụng<span>*</span></label>
+        <input type="text" id="position">
+        <div class="row">
+            <div class="left-row col">
+                <label for="department">Phòng ban</label>
+                <input type="text" id="department">
+            </div>
+            <div class="right-row col">
+                <label for="location">Địa điểm làm việc<span>*</span></label>
+                <input type="text" id="location">
+            </div>
+        </div>
+        <div class="row">
+            <div class="left-row col">
+                <label for="quantity">Số lượng tuyển<span>*</span></label>
+                <input type="number" id="quantity" min="1" max="">
+            </div>
+            <div class="right-row col">
+                <label for="salary_range">Khoảng lương<span>*</span></label>
+                <input type="text" name="" id="salary_range">
+            </div>
+        </div>
+        <div class="row">
+            <div class="left-row col">
+                <label for="experience_required">Yêu cầu kinh nghiệm (năm)<span>*</span></label>
+                <input type="number" id="experience_required" min="0">
+            </div>
+            <div class="right-row col">
+                <label for="application_deadline">Hạn nộp hồ sơ<span>*</span></label>
+                <input type="date" name="" id="application_deadline">
+            </div>
+        </div>
+        <label for="detail">Chi tiết</label>
+        <div class="editor-container">
+            <textarea name="" id="detail"></textarea>
+        </div>
+        <button type="submit" class="submit-recruitment">Lưu bài tuyển dụng</button>
+    </form>
+</div>
+<script src="/js/admin/create-recruitment.js"></script>

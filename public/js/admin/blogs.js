@@ -364,7 +364,7 @@ function showBlogs(data) {
             <div class="img">
                 <img src="${data[i].main_image}" alt="">
             </div>
-            <div class="info-container col">
+            <div class="info-container center col">
                 <div class="info flex-box row">
                     <p><i class="fa-regular fa-user"></i> ${data[i].admin_name}</p>
                     <p><i class="fa-regular fa-clock"></i> ${formatDate(data[i].created_at)}</p>

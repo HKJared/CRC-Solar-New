@@ -16,6 +16,8 @@ const { get } = require('http');
 const RequestModel = require('../../models/requestModel');
 const FAQModel = require('../../models/FAQModel');
 const PictureModel = require('../../models/pictureModel');
+const DocumentModel = require('../../models/documentModel');
+const RecruitmentModel = require('../../models/recruitmentModel');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -266,7 +268,7 @@ const createProduct = async (req, res) => {
 
             const product_id = await ProductModel.createProduct(product, language, 1);
 
-            const image_src = files.map(file => `/image/${file.originalname}`);
+            const image_src = files.map(file => `/image/${file.filename}`);
 
             for (let i = 0; i < image_src.length; i++) {
                 await ProductModel.createProductImage(image_src[i], product_id)
@@ -339,7 +341,7 @@ const updateProduct = async (req, res) => {
             }
 
             // Thêm các ảnh mới
-            const image_src = files.map(file => `/image/${file.originalname}`);
+            const image_src = files.map(file => `/image/${file.filename}`);
             for (let i = 0; i < image_src.length; i++) {
                 await ProductModel.createProductImage(image_src[i], product_id)
             }
@@ -416,7 +418,7 @@ const createTechnology = async (req, res) => {
 
             if (files.length != 0) {
                 const file = files[0];
-                const new_image_src = `/image/${file.originalname}`;
+                const new_image_src = `/image/${file.filename}`;
                 technology.image = new_image_src;
             } else {
                 return res.status(400).json({ message: "Không có tệp ảnh nào được tải lên." })
@@ -489,7 +491,7 @@ const updateTechnology = async (req, res) => {
 
             if (files.length != 0) {
                 const file = files[0];
-                const new_image_src = `/image/${file.originalname}`;
+                const new_image_src = `/image/${file.filename}`;
                 newDataTechnology.image = new_image_src;
             }
             
@@ -598,7 +600,7 @@ const updateDisplayImage = async (req, res) => {
                 const file = files[i];
 
                 if (file) {
-                    const image_src = `/image/${file.originalname}`;
+                    const image_src = `/image/${file.filename}`;
                     const oldImagePath = await DisplayModel.getOldImageByElementId(element_id, page);
                     
                     if (oldImagePath) {
@@ -655,7 +657,7 @@ const createBlog = async (req, res) => {
                 return res.status(400).json({ message: 'Không có tệp hình ảnh được tải lên' });
             }
 
-            const image_src = `/image/${file.originalname}`;
+            const image_src = `/image/${file.filename}`;
             await BlogModel.createBlog(blog, image_src, language, admin_id);
 
             await LogModel.updateStatusLog(log_id)
@@ -724,7 +726,7 @@ const updateBlog = async (req, res) => {
 
             if (files.length != 0) {
                 const file = files[0];
-                const new_image_src = `/image/${file.originalname}`;
+                const new_image_src = `/image/${file.filename}`;
                 newDataBlog.main_image = new_image_src;
             }
             
@@ -975,7 +977,7 @@ const createPicture = async (req, res) => {
                 return res.status(400).json({ message: 'Không có tệp hình ảnh được tải lên' });
             }
 
-            const image_src = `/image/${file.originalname}`;
+            const image_src = `/image/${file.filename}`;
             picture.src = image_src;
             const newPictureId = await PictureModel.createPicture(picture, admin_id);
 
@@ -1044,6 +1046,165 @@ const deletePicture = async (req, res) => {
     }
 }
 
+const createDocument = async (req, res) => {
+    documentUpload(req, res, async function (err) {
+        if (err instanceof multer.MulterError) {
+            console.log(err);
+            return res.status(500).json({ message: 'Lỗi khi tải lên tệp tài liệu' });
+        } else if (err) {
+            console.error("ERROR: ", err);
+            return res.status(500).json({ message: 'Đã xảy ra lỗi' });
+        }
+
+        try {
+            const language = req.language;
+            const admin_id = req.admin_id;
+            const files = req.files;
+            var document = JSON.parse(req.body.data);
+            const log_id = req.log_id;
+
+            await LogModel.updateDetailLog(`Thêm tài liệu mới`, log_id);
+
+            const file = files[0]
+
+            if (!files || files.length === 0) {
+                await LogModel.updateDetailLog(`Không có tệp tài liệu được tải lên`, log_id);
+                return res.status(400).json({ message: 'Không có tệp tài liệu được tải lên' });
+            }
+
+            const document_src = `/document/${file.filename}`;
+            document.src = document_src;
+
+            const newDocumentId = await DocumentModel.createDocument(document, language, admin_id);
+
+            const newDocument = await DocumentModel.getDocumentById(newDocumentId);
+
+            await LogModel.updateStatusLog(log_id)
+
+            return res.status(200).json({ message: 'Thêm tài liệu mới thành công.', newDocument: newDocument });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Lỗi từ phía server.' });
+        }
+    });
+}
+
+const getDocuments = async (req, res) => {
+    try {
+        const language = req.language;
+        const keyword = req.query.keyword || '';
+        const page = req.query.page || 1;
+
+        const documents = await DocumentModel.getDocuments(keyword, page, language);
+
+        return res.status(200).json({ data: documents });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const deleteDocument = async (req, res) => {
+    try {
+        const document_id = req.body.document_id;
+        const admin_id = req.admin_id;
+        const log_id = req.log_id;
+
+        if (!document_id) {
+            await LogModel.updateDetailLog('Không tìm thấy tài liệu cần xóa', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy tài liệu cần xóa, vui lòng tải lại trang.' });
+        }
+
+        const document = await DocumentModel.getDocumentById(document_id);
+
+        if (!document) {
+            await LogModel.updateDetailLog('Không tìm thấy tài liệu cần xóa.', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy tài liệu cần xóa, vui lòng tải lại trang.' });
+        }
+
+        await LogModel.updateDetailLog(`Xóa tài liệu: ${ document.document_name }`, log_id);
+
+        await DocumentModel.deleteDocument(document_id);
+
+        const oldPath = path.join(__dirname, '../../../public', document.src);
+
+        fs.unlink(oldPath, (err) => {
+            if (err) {
+                console.error('Lỗi khi xóa tài liệu cũ:', err);
+            } else {
+                console.log('Đã xóa tài liệu cũ:', oldPath);
+            }
+        });
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Xóa tài liệu thành công.' })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const createRecruitment = async (req, res) => {
+    try {
+        const language = req.language;
+        const recruitment = req.body.recruitment;
+        const admin_id = req.admin_id;
+        const log_id = req.log_id;
+
+        if (!recruitment) {
+            await LogModel.updateDetailLog('Không nhận được dữ liệu đơn tuyển dụng', log_id);
+            return res.status(400).json({ message: 'Không nhận được dữ liệu, vui lòng thử lại.' });
+        }
+
+        
+        await LogModel.updateDetailLog(`Tạo đơn tuyển dụng: ${ recruitment.position }`, log_id);
+
+        const newRecruitmentId = await RecruitmentModel.createRecruitment(recruitment, language, admin_id);
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Tạo đơn tuyển dụng thành công.' })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const getRecruitments = async (req, res) => {
+    try {
+        const language = req.language;
+        const keyword = req.query.keyword;
+        const page = req.query.page;
+        
+        const recruitments = await RecruitmentModel.getRecruitments(keyword, page, language);
+
+        return res.status(200).json({ data: recruitments });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const getRecruitment = async (req, res) => {
+    try {
+        const language = req.language;
+
+        const recruitment_id = req.query.recruitment_id;
+        
+        const recruitment = await RecruitmentModel.getRecruitmentById(recruitment_id);
+
+        if (!recruitment) {
+            return res.status(400).json({ message: 'Không tìm thấy đơn tuyển dụng cần chỉnh sửa, vui lòng tải lại trang.' });
+        }
+
+        return res.status(200).json({ data: recruitment });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
 module.exports = {
     login, logout, refreshToken, createDataAdmin, getDataAdmins,
     toggleAdminStatus,
@@ -1054,5 +1215,7 @@ module.exports = {
     creatRequest, getRequests, updateRequest,
     createFAQ, getFAQs, updateFAQ, deleteFAQ,
     getOldLogs, getNewLogs,
-    createPicture, getPictures, deletePicture
+    createPicture, getPictures, deletePicture,
+    createDocument, getDocuments, deleteDocument,
+    createRecruitment, getRecruitments, getRecruitment
 }

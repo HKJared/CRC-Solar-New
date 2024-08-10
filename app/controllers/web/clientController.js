@@ -158,7 +158,7 @@ const getRecruitmentsPage = async (req, res) => {
         const footerData = await FooterModel.getFooterData(language);
         const mainData = await MainModel.getMainData('recruitments', language);
 
-        const recruitments = await RecruitmentModel.getRecruitments('', language);
+        const recruitments = await RecruitmentModel.getRecruitments('', 1, language);
         
         return res.status(200).render('client/recruitments', { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: 'recruitments', recruitments: recruitments, err: null });
     } catch (error) {

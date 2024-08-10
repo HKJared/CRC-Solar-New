@@ -371,13 +371,12 @@ main {
 
 .action {
     display: flex;
-    width: 150px;
-    justify-content: space-between;
+    gap: 10px;
     padding: 0px 10px;
 }
 
-.action button {
-    flex: 0 0 48%;
+.action button, .action a {
+    width: 65px;
     padding: 5px 0;
     background-color: transparent;
     border: 1px solid #acacb4;
@@ -385,8 +384,16 @@ main {
     font-size: 12px;
 }
 
-.action button i {
+.action button i, .action a i {
     margin-right: 5px;
+}
+
+.action .view-btn {
+    color: #679ce0;
+}
+
+.action .view-btn:hover {
+    background-color: #e5f3fd;
 }
 
 .action .edit-btn {

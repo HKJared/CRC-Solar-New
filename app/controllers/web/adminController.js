@@ -239,6 +239,28 @@ const getAdminFAQsPage = async (req, res) => {
     }
 }
 
+const getAdminCreateRecruitmentPage = async (req, res) => {
+    try {
+        const language = req.language;
+        
+        return res.status(200).render('admin/home', { language, render: 'create_recruitment', active: "create_recruitment" })
+    } catch (error) {
+        console.error('ERROR: ', error);
+        return res.status(500).render('serverError', { err: 'Server have an error' })
+    }
+}
+
+const getAdminRecruitmentsPage = async (req, res) => {
+    try {
+        const language = req.language;
+        
+        return res.status(200).render('admin/home', { language, render: 'recruitments', active: "recruitments" })
+    } catch (error) {
+        console.error('ERROR: ', error);
+        return res.status(500).render('serverError', { err: 'Server have an error' })
+    }
+}
+
 const getAdminPicturesPage = async (req, res) => {
     try {
         const language = req.language;
@@ -250,6 +272,18 @@ const getAdminPicturesPage = async (req, res) => {
     }
 }
 
+const getAdminDocumentsPage = async (req, res) => {
+    try {
+        const language = req.language;
+        
+        return res.status(200).render('admin/home', { language, render: 'documents', active: "documents" })
+    } catch (error) {
+        console.error('ERROR: ', error);
+        return res.status(500).render('serverError', { err: 'Server have an error' })
+    }
+}
+
+
 module.exports = {
     getLoginPage,
     getHomepage,
@@ -259,5 +293,6 @@ module.exports = {
     getAdminCreateBlogPage, getAdminBlogsPage, getAdminBlogCategoriesPage,
     getAdminRequestsPage,
     getAdminFAQsPage,
-    getAdminPicturesPage
+    getAdminCreateRecruitmentPage, getAdminRecruitmentsPage,
+    getAdminPicturesPage, getAdminDocumentsPage
 }

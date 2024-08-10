@@ -331,7 +331,7 @@ function showEditProduct(product_id) {
 
         let extraInfoHTML = `<span>Tạo bởi <strong>${product.admin_name}</strong> lúc <strong>${formatDateTime(product.created_at)}</strong></span>`;
         if (product.updated_by) {
-            extraInfoHTML += `<span>Chỉnh sửa bởi <strong>${product.updated_by_name}</strong> lúc <strong>${formatDateTime(product.updated_at)}</strong></span>`;
+            extraInfoHTML += `<span>Chỉnh sửa gần nhất bởi <strong>${product.updated_by_name}</strong> lúc <strong>${formatDateTime(product.updated_at)}</strong></span>`;
         }
         $('.extra-info').html(extraInfoHTML);
 
