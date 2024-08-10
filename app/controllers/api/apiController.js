@@ -22,11 +22,28 @@ const storage = multer.diskStorage({
         cb(null, 'public/image/') // Thư mục lưu trữ file
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        const timestamp = Date.now();
+        const originalName = file.originalname;
+        const uniqueName = `${timestamp}-${originalName}`;
+        cb(null, uniqueName); // Tên file bao gồm thời gian
     }
 });
 
 const upload = multer({ storage: storage }).array('images', 10);
+
+const documentStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/document/'); // Thư mục lưu trữ tài liệu
+    },
+    filename: function (req, file, cb) {
+        const timestamp = Date.now();
+        const originalName = file.originalname;
+        const uniqueName = `${timestamp}-${originalName}`;
+        cb(null, uniqueName); // Tên file bao gồm thời gian
+    }
+});
+
+const documentUpload = multer({ storage: documentStorage }).array('documents', 10);
 
 const login = async (req, res) => {
     try {
