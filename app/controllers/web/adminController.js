@@ -261,6 +261,17 @@ const getAdminRecruitmentsPage = async (req, res) => {
     }
 }
 
+const getAdminRecruitmentApplicationsPage = async (req, res) => {
+    try {
+        const language = req.language;
+        
+        return res.status(200).render('admin/home', { language, render: 'recruitments', active: "recruitments" })
+    } catch (error) {
+        console.error('ERROR: ', error);
+        return res.status(500).render('serverError', { err: 'Server have an error' })
+    }
+}
+
 const getAdminPicturesPage = async (req, res) => {
     try {
         const language = req.language;

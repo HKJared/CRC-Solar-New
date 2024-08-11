@@ -55,6 +55,7 @@ webRouter.get('/admin/FAQs', adminController.getAdminFAQsPage);
 webRouter.get('/admin/create-recruitment', adminController.getAdminCreateRecruitmentPage);
 webRouter.get('/admin/recruitments', adminController.getAdminRecruitmentsPage);
 
+
 webRouter.get('/admin/pictures', adminController.getAdminPicturesPage);
 webRouter.get('/admin/documents', adminController.getAdminDocumentsPage);
 

@@ -52,7 +52,7 @@ $(document).ready(function () {
             return; // Ngăn không cho form submit nếu có lỗi
         }
 
-        console.log(recruitment_application);
+        createRecruitmentApplication(recruitment_application);
     })
 });
 

@@ -18,6 +18,7 @@ const FAQModel = require('../../models/FAQModel');
 const PictureModel = require('../../models/pictureModel');
 const DocumentModel = require('../../models/documentModel');
 const RecruitmentModel = require('../../models/recruitmentModel');
+const RecruitmentApplicationModel = require('../../models/recruitmentApplicationModel');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -1268,6 +1269,78 @@ const deleteRecruitment = async (req, res) => {
     }
 }
 
+const createRecruitmentApplication = async (req, res) => {
+    try {
+        const language = req.language;
+        const recruitment_application = req.body.recruitment_application;
+
+        if (!recruitment_application.recruitment_id) {
+            return res.status(400).json({ message: 'Không nhận được dữ liệu bài tuyển dụng, vui lòng tải lại trang.' });
+        }
+
+        const recruitment = await RecruitmentModel.getRecruitmentById(recruitment_application.recruitment_id);
+
+        if (!recruitment) {
+            return res.status(400).json({ message: 'Không nhận được dữ liệu bài tuyển dụng, vui lòng tải lại trang.' });
+        }
+
+        await RecruitmentApplicationModel.createRecruitmentApplication(recruitment_application, language);
+
+        return res.status(200).json({ message: 'Chúng tôi đã nhận được đơn ứng tuyển của bạn, vui lõng theo dõi email và số điện thoại được đề cập.' })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const getRecruitmentApplications = async (req, res) => {
+    try {
+        const language = req.language;
+        const keyword = req.query.keyword || '';
+        const page = req.query.page || 1;
+
+        const recruitment_applications = await RecruitmentApplicationModel.getRecruitmentApplications(keyword, page, language);
+
+        return res.status(200).json({ data: recruitment_applications });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+const updateRecruitmentApplication = async (req, res) => {
+    try {
+        const language = req.language;
+        const newDataRecruitmentApplication = req.body.newDataRecruitmentApplication;
+        const admin_id = req.admin_id;
+        const log_id = req.log_id;
+
+        if (!newDataRecruitmentApplication) {
+            await LogModel.updateDetailLog('Không nhận được dữ liệu cập nhật đơn ứng tuyển', log_id);
+            return res.status(400).json({ message: 'Không nhận được dữ liệu cập nhật, vui lòng thử lại.' });
+        }
+
+        const recruitment_application = await RecruitmentApplicationModel.getRecruitmentApplicationById(newDataRecruitmentApplication.recruitment_application_id);
+        
+        if (!recruitment_application) {
+            await LogModel.updateDetailLog('Không tìm thấy đơn ứng tuyển cần cập nhật.', log_id);
+            return res.status(400).json({ message: 'Không tìm thấy đơn ứng tuyển cần cập nhật, vui lòng tải lại trang.' });
+        }
+
+        await LogModel.updateDetailLog(`Cập nhật đơn ứng tuyển của ứng viên ${ recruitment_application.fullname } cho vị trí ${ recruitment_application.position }`, log_id);
+
+        await RecruitmentApplicationModel.updateRecruitmentApplication(newDataRecruitmentApplication, admin_id);
+
+        await LogModel.updateStatusLog(log_id);
+
+        return res.status(200).json({ message: 'Cập nhật đơn ứng tuyển thành công.' })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Lỗi từ phía server.' });
+    }
+}
+
+
 module.exports = {
     login, logout, refreshToken, createDataAdmin, getDataAdmins,
     toggleAdminStatus,
@@ -1280,5 +1353,6 @@ module.exports = {
     getOldLogs, getNewLogs,
     createPicture, getPictures, deletePicture,
     createDocument, getDocuments, deleteDocument,
-    createRecruitment, getRecruitments, getRecruitment, updateRecruitment, deleteRecruitment
+    createRecruitment, getRecruitments, getRecruitment, updateRecruitment, deleteRecruitment,
+    createRecruitmentApplication, getRecruitmentApplications, updateRecruitmentApplication
 }
