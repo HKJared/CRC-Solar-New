@@ -20,6 +20,7 @@
 
 .block .left {
   width: 70%;
+  gap: 40px;
 }
 
 .block .right {
@@ -129,12 +130,103 @@ main .container:last-child {
   font-size: 18px;
 }
 
-.btn-submit {
+.btn-apply, .show-detail {
   width: 40%;
   background-color: var(--mainColor);
-  padding: 20px;
+  padding: 16px;
   font-size: 20px;
   color: white;
   border: none;
   border-radius: 6px;
+}
+
+.btn-apply:hover, .show-detail:hover {
+  background-color: var(--extraColor);
+}
+
+.detail {
+  position: relative;
+}
+
+.btn-hide {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  margin-bottom: 32px;
+  border: 0;
+  background-color: transparent;
+  color: #333;
+  font-size: 16px;
+}
+
+.apply-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#apply-form {
+  position: relative;
+  padding: 32px;
+  width: 500px;
+  background-color: #fff;
+  box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.3);
+  animation: zoomOut 0.5s forwards;
+}
+
+@keyframes zoomOut {
+  from {
+      transform: scale(0);
+  }
+  to {
+      transform: scale(1);
+  }
+}
+
+#apply-form .x-btn {
+  border: 0;
+  background-color: transparent;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  top: 2px;
+  right: 2px;
+}
+
+#apply-form h2 {
+  font-size: 18px;
+  color: var(--mainColor);
+}
+
+#apply-form label {
+  margin: 15px 0 5px 0;
+}
+
+#apply-form input {
+  border: var(--border);
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+#apply-form input::placeholder {
+  font-size: 14px;
+}
+
+.submit-form {
+  display: block;
+  width: auto;
+  background-color: var(--mainColor);
+  color: #fff;
+  border: 0;
+  margin-top: 40px;
+  padding: 10px 15px;
+  font-style: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-form:hover {
+  background-color: var(--extraColor);
 }
