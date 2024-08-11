@@ -64,6 +64,13 @@ $(document).ready(function() {
             }
         })
     });
+
+    $(document).on('click', '.see-more-container button', function(event) {
+        event.stopPropagation();
+
+        page++;
+        search();
+    });
 });
 
 function showEditRecruitmentApplication(recruitment_application_id) {

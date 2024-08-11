@@ -58,7 +58,7 @@ const getProductsPage = async (req, res) => {
         const footerData = await FooterModel.getFooterData(language);
         const mainData = await MainModel.getMainData('products', language);
 
-        const products = await ProductModel.getProducts('', language);
+        const products = await ProductModel.getProducts('', 1, language);
         
         
         return res.status(200).render('client/products', { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: 'products', products: products, err: null });
@@ -197,9 +197,28 @@ const getPicturesPage = async (req, res) => {
     }
 }
 
+const getDocumentsPage = async (req, res) => {
+    
+}
+
+const getFAQsPage = async (req, res) => {
+    try {
+        const language = req.language;
+
+        const headerData = await HeaderModel.getHeaderData(language);
+        const footerData = await FooterModel.getFooterData(language);
+        const mainData = await MainModel.getMainData('FAQs', language);
+        
+        return res.status(200).render('client/FAQs', { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: 'FAQs'});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('serverError');
+    }
+}
+
 
 module.exports = {
     getHomepage, getIntrodutionPage, getPartnersPage, getProductsPage,
     getDetailProductPage, getTechnologyPage, getBlogsPage, getRecruitmentsPage, getBlogPage,
-    getContactPage, getPicturesPage
+    getContactPage, getPicturesPage, getFAQsPage
 }

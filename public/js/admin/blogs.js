@@ -245,6 +245,12 @@ $(document).ready(function() {
         });
     });
     
+    $(document).on('click', '.see-more-container button', function(event) {
+        event.stopPropagation();
+
+        page++;
+        search();
+    });
 });
 
 function showEditBlog(blog_id) {

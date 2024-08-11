@@ -22,3 +22,16 @@
     font-size: 14px;
     color: var(--extraText);
 }
+
+#product_detail {
+    display: none;
+}
+
+.ck-editor__top {
+    display: none
+}
+
+.ck-content {
+    border: 0 !important;
+    padding: 0 !important;
+}

@@ -4,8 +4,6 @@ const clientController = require('../app/controllers/web/clientController');
 const adminController = require('../app/controllers/web/adminController');
 
 const blogCategoryMiddleware = require('../middleware/blog');
-const { write } = require('fs');
-const { webcrypto } = require('crypto');
 
 webRouter.get('/', clientController.getHomepage);
 webRouter.get('/introduction', clientController.getIntrodutionPage);
@@ -28,7 +26,10 @@ webRouter.get('/contact', clientController.getContactPage);
 
 webRouter.get('/pictures', clientController.getPicturesPage);
 
+webRouter.get('/FAQs', clientController.getFAQsPage);
 
+
+//admin
 webRouter.get('/admin/login', adminController.getLoginPage);
 
 webRouter.get('/admin', adminController.getHomepage);

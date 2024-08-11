@@ -92,7 +92,8 @@
             $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
         </script>
     <% } %>
-</main><script>
+</main>
+<script>
     var editor;
 
     const productDetail = `<%- product.detail %>`;
@@ -233,7 +234,7 @@
     });
     removeLoading();
 </script>
-<script src="/js/detailProduct.js"></script>
+<script src="/js/client/detailProduct.js"></script>
 <%- include(`./includes/footer`) %>
 <script>
     const language = '<%- language %>'

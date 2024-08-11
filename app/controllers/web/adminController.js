@@ -194,11 +194,11 @@ const getAdminDisplayPage = async (req, res) => {
                 clientViewContent = await ejs.renderFile(path.join(__dirname, '../../views/client', `blogs.ejs`), { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, blogs: blogs, categories: categories, name: 'social-responsibility' }, { async: true });
                 break;
             case 'products':
-                products = await ProductModel.getProducts('', language);
+                products = await ProductModel.getProducts('', 1, language);
                 clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, products: products }, { async: true });
                 break;
             case 'detail-product':
-                products = await ProductModel.getProducts('', language);
+                products = await ProductModel.getProducts('', 1, language);
                 product = await ProductModel.getProductById(products[0].product_id);
                 clientViewContent = await ejs.renderFile(clientViewPath, { language: language, headerData: headerData, footerData: footerData, mainData: mainData, page: page_name, product: product }, { async: true });
                 break;

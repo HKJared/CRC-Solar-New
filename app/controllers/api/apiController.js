@@ -209,15 +209,16 @@ const toggleAdminStatus = async (req, res) => {
 const getProducts = async (req, res) => {
     try {
         const keyword = req.query.keyword || '';
+        const page = req.query.page || 1;
         const product_category_id = req.query.product_category_id;
         const language = req.language;
 
         var products = [];
 
         if (product_category_id) {
-            products = await ProductModel.getProductsByCategoryId(product_category_id, language);
+            products = await ProductModel.getProductsByCategoryId(product_category_id, page, language);
         } else {
-            products = await ProductModel.getProducts(keyword, language);
+            products = await ProductModel.getProducts(keyword, page, language);
         }
 
         return res.status(200).json({ data: products })
@@ -674,7 +675,7 @@ const createBlog = async (req, res) => {
 const getBlogsByTitle = async (req, res) => {
     try {
         const keyword = req.query.keyword || '';
-        const page = req.query.keyword || 1;
+        const page = req.query.page || 1;
         const language = req.language;
 
         const blogs = await BlogModel.getBlogsByTitle(keyword, page, language);

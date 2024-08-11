@@ -1,4 +1,5 @@
 var keyword = '';
+var page = 1;
 var loading = false;
 var editor;
 
@@ -257,6 +258,13 @@ $(document).ready(function() {
             }
         })
     });
+
+    $(document).on('click', '.see-more-container button', function(event) {
+        event.stopPropagation();
+
+        page++;
+        search();
+    });
 });
 
 function showEditProduct(product_id) {
@@ -353,7 +361,7 @@ function search() {
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
-    fetch(`/api/${ language }/products?keyword=${ keyword }`, {
+    fetch(`/api/${ language }/products?keyword=${ keyword }&page=${ page }`, {
         method: 'GET',
         headers: {
             "authorization": access_token,
@@ -381,16 +389,19 @@ function search() {
 }
 
 function showProducts(data) {
-    $('.product-items').empty();
-    if (!data.length) {
-        const noResultHTML = `<div class="no-result">
-            <h2>Không sản phẩm nào phù hợp</h2>
-            <span>Vui lòng thử tìm kiếm khác</span> 
-        </div>`;
+    if (page == 1) {
+        $('.product-items').empty();        
 
-        $('.product-items').append(noResultHTML);
+        if (!data.length) {
+            const noResultHTML = `<div class="no-result">
+                <h2>Không sản phẩm nào phù hợp</h2>
+                <span>Vui lòng thử tìm kiếm khác</span> 
+            </div>`;
 
-        return
+            $('.product-items').append(noResultHTML);
+
+            return
+        }
     }
  
     for (let i = 0; i < data.length; i++) {

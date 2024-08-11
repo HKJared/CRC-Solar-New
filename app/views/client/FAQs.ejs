@@ -1,0 +1,29 @@
+<%- include(`./includes/header`) %>
+<link rel="stylesheet" href="/css/client/FAQs.css">
+<main class="center">
+    <div class="main center column">
+        <div class="block block1 container column">
+            <div class="top-block">
+                <span>FAQs</span>
+                <h1>Những câu hỏi thường gặp</h1>
+            </div>
+            <div class="faqs-container row">
+                <div class="left">
+                    <div class="nav-faqs">
+                        <ul class="faq-items">
+                        </ul>
+                    </div>
+                </div>
+                <div class="right col">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/client/FAQs.js"></script>
+<%- include(`./includes/footer`) %>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>

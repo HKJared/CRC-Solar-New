@@ -1,9 +1,13 @@
 const pool = require('../../config/connectDB');
 const diacritics = require('diacritics');
 
+const productsPerPage = 20;
+
 class ProductModel {
-    static async getProducts(keyword, language) {
+    static async getProducts(keyword, page, language) {
         keyword = diacritics.remove(keyword);
+
+        const offset = productsPerPage * (page - 1);
         
         const queryString = `
             SELECT 
@@ -26,13 +30,19 @@ class ProductModel {
                 AND p.language = ?
             ORDER BY
                 p.product_id DESC
+            LIMIT
+                ${ productsPerPage }
+            OFFSET
+                ${ offset }
         `;
 
         const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
         return rows;
     }
 
-    static async getProductsByCategoryId(product_category_id, language) {
+    static async getProductsByCategoryId(product_category_id, page, language) {
+        const offset = productsPerPage * (page - 1);
+
         const queryString = `
             SELECT 
                 p.*,
@@ -54,6 +64,10 @@ class ProductModel {
                 AND p.language = ?
             ORDER BY
                 p.product_id DESC
+            LIMIT
+                ${ productsPerPage }
+            OFFSET
+                ${ offset }
         `;
 
         const [rows] = await pool.execute(queryString, [product_category_id, language]);
@@ -179,7 +193,9 @@ class ProductModel {
         return product;
     }
     
-    static async getProductByTechnologyId(technology_id) {
+    static async getProductByTechnologyId(technology_id, page = 1) {
+        const offset = productsPerPage * (page - 1);
+
         const queryString = `
             SELECT 
                 p.*,
@@ -204,6 +220,10 @@ class ProductModel {
                 pt.technology_id = ?
             ORDER BY
                 p.product_id DESC
+            LIMIT
+                ${ productsPerPage }
+            OFFSET
+                ${ offset }
         `;
     
         const [rows] = await pool.execute(queryString, [technology_id]);
