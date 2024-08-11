@@ -137,7 +137,7 @@ CKEDITOR.ClassicEditor
 } );
 
 $(document).ready(function() {
-    document.title = "CRC Solar - Admin - Tạo bài tuyển dụng";
+    document.title = "CRC Solar - Admin - Danh sách đơn tuyển dụng";
 
     search();
 

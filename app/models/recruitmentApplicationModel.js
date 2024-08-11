@@ -10,16 +10,22 @@ class RecruitmentApplicationModel {
 
         const queryString = `
             SELECT 
-                *
+                ra.*,
+                r.position as position,
+                ua.fullname as updated_by_name 
             FROM 
-                recruitment_applications
+                recruitment_applications ra
+            JOIN
+                recruitments r ON ra.recruitment_id = r.recruitment_id
+            LEFT JOIN 
+                admins ua ON ra.updated_by = ua.admin_id
             WHERE
-                (LOWER(fullname) LIKE LOWER(?)
-                OR LOWER(email) LIKE LOWER(?)
-                OR LOWER(phone_number) LIKE LOWER(?))
-                AND language = ?
+                (LOWER(ra.fullname) LIKE LOWER(?)
+                OR LOWER(ra.email) LIKE LOWER(?)
+                OR LOWER(ra.phone_number) LIKE LOWER(?))
+                AND ra.language = ?
             ORDER BY
-                recruitmentApplication_id DESC
+                ra.recruitment_application_id DESC
             LIMIT
                 ${ recruitmentApplicationsPerPage }
             OFFSET
@@ -70,7 +76,7 @@ class RecruitmentApplicationModel {
             UPDATE recruitment_applications 
             SET status = ?, note = ?,
                 updated_by = ?, updated_at = CURRENT_TIMESTAMP()
-            WHERE recruitmentApplication_id = ?
+            WHERE recruitment_application_id = ?
         `;
 
         await pool.execute(queryString, [

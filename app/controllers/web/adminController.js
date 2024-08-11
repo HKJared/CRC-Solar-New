@@ -265,7 +265,7 @@ const getAdminRecruitmentApplicationsPage = async (req, res) => {
     try {
         const language = req.language;
         
-        return res.status(200).render('admin/home', { language, render: 'recruitments', active: "recruitments" })
+        return res.status(200).render('admin/home', { language, render: 'recruitment_applications', active: "recruitment_applications" })
     } catch (error) {
         console.error('ERROR: ', error);
         return res.status(500).render('serverError', { err: 'Server have an error' })
@@ -304,6 +304,6 @@ module.exports = {
     getAdminCreateBlogPage, getAdminBlogsPage, getAdminBlogCategoriesPage,
     getAdminRequestsPage,
     getAdminFAQsPage,
-    getAdminCreateRecruitmentPage, getAdminRecruitmentsPage,
+    getAdminCreateRecruitmentPage, getAdminRecruitmentsPage, getAdminRecruitmentApplicationsPage,
     getAdminPicturesPage, getAdminDocumentsPage
 }

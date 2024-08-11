@@ -1280,6 +1280,13 @@ const createRecruitmentApplication = async (req, res) => {
 
         const recruitment = await RecruitmentModel.getRecruitmentById(recruitment_application.recruitment_id);
 
+        const currentDateTime = new Date();
+        const applicationDeadline = new Date(recruitment.application_deadline);
+
+        if (currentDateTime > applicationDeadline) {
+            return res.status(400).json({ message: 'Đã quá hạn nộp đơn ứng tuyển.' });
+        }
+
         if (!recruitment) {
             return res.status(400).json({ message: 'Không nhận được dữ liệu bài tuyển dụng, vui lòng tải lại trang.' });
         }
@@ -1314,7 +1321,7 @@ const updateRecruitmentApplication = async (req, res) => {
         const newDataRecruitmentApplication = req.body.newDataRecruitmentApplication;
         const admin_id = req.admin_id;
         const log_id = req.log_id;
-
+        
         if (!newDataRecruitmentApplication) {
             await LogModel.updateDetailLog('Không nhận được dữ liệu cập nhật đơn ứng tuyển', log_id);
             return res.status(400).json({ message: 'Không nhận được dữ liệu cập nhật, vui lòng thử lại.' });

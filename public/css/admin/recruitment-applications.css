@@ -1,4 +1,4 @@
-.recruitments-container {
+.recruitment-applications-container {
     display: flex;
     padding: 15px;
 }
@@ -7,7 +7,7 @@
     opacity: 1;
 }
 
-.add-recruitment-container {
+.add-recruitment-application-container {
     display: none;
     position: fixed;
     top: 0;
@@ -17,7 +17,7 @@
     z-index: 9990;
 }
 
-.edit-recruitment, .add-recruitment {
+.edit-recruitment-application, .add-recruitment-application {
     padding: 15px;
     background-color: #fff;
     border: var(--border);
@@ -28,7 +28,7 @@
     box-shadow: 0 0 3px #b6b6b6;
 }
 
-.edit-recruitment .x-btn, .add-recruitment .x-btn {
+.edit-recruitment-application .x-btn, .add-recruitment-application .x-btn {
     position: absolute;
     height: 16px;
     width: 16px;
@@ -36,7 +36,7 @@
     right: 6px;
 }
 
-.edit-recruitment input, .add-recruitment input, .edit-recruitment textarea, .add-recruitment textarea, .edit-recruitment select, .add-recruitment select {
+.edit-recruitment-application input, .add-recruitment-application input, .edit-recruitment-application textarea, .add-recruitment-application textarea, .edit-recruitment-application select, .add-recruitment-application select {
     border: var(--border);
     border-radius: 5px;
     font-size: 16px;
@@ -44,15 +44,15 @@
     resize: vertical;
 }
 
-.edit-recruitment input:focus, .add-recruitment input:focus, .edit-recruitment textarea:focus, .add-recruitment textarea:focus, .edit-recruitment select:focus, .add-recruitment select:focus {
+.edit-recruitment-application input:focus, .add-recruitment-application input:focus, .edit-recruitment-application textarea:focus, .add-recruitment-application textarea:focus, .edit-recruitment-application select:focus, .add-recruitment-application select:focus {
     outline: 1px solid #F7F7F7;
 }
 
-.edit-recruitment label, .add-recruitment label {
+.edit-recruitment-application label, .add-recruitment-application label {
     padding: 16px 0 8px 5px;
 }
 
-.edit-recruitment .cancel, .edit-recruitment .submit-recruitment, .add-recruitment .submit-recruitment {
+.edit-recruitment-application .cancel, .edit-recruitment-application .submit-recruitment-application, .add-recruitment-application .submit-recruitment-application {
     font-size: 16px;
     padding: 5px;
     margin-top: 20px;
@@ -61,33 +61,33 @@
     color: var(--Text);
 }
 
-.edit-recruitment .cancel {
+.edit-recruitment-application .cancel {
     background-color: transparent;
 }
 
-.edit-recruitment .submit-recruitment:hover, .add-recruitment .submit-recruitment:hover {
+.edit-recruitment-application .submit-recruitment-application:hover, .add-recruitment-application .submit-recruitment-application:hover {
     background-color: #c1df5f;
 }
 
-.edit-recruitment .cancel:hover {
+.edit-recruitment-application .cancel:hover {
     background-color: #f8f8f8;
 }
 
 
-.recruitments-container h2 {
+.recruitment-applications-container h2 {
     color: #3364EB;
     width: 1000px;
     padding: 10px 0;
 }
 
-.recruitments-container .add-recruitment {
+.recruitment-applications-container .add-recruitment-application {
     width: 30px;
     height: 30px;
     background-color: #bada55;
     border-radius: 3px;
 }
 
-.recruitment-items {
+.recruitment-application-items {
     margin-top: 36px;
     width: 100%;
     padding: 16px;
@@ -95,7 +95,7 @@
     min-height: 480px;
 }
 
-.recruitment-items > li {
+.recruitment-application-items > li {
     justify-content: space-between;
     align-items: center;
     overflow: hidden;    
@@ -106,22 +106,85 @@
     border-bottom: var(--border);
 }
 
-.position {
-    width: 800px;
+.fullname {
+    width: 350px;
     color: var(--Text);
 }
 
-.department, .application-deadline {
+.note {
+    width: 450px;
+    color: var(--Text);
+}
+
+.note i {
+    margin-left: 10px;
+    color: #b9af18;
+}
+
+#edit-note {
+    width: 100%;
+    height: 100%;
+}
+
+#edit-note textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 5px;
+}
+
+.status {
+    width: 200px;
+    color: var(--Text);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status-content {
+    width: 100px;
+    margin: 2px 15px;
+    border-radius: 5px;
+}
+
+.status-content.yellow {
+    background-color: #fff9a0;
+}
+
+.status-content.green {
+    background-color: #beff98;
+}
+
+.complete {
+    border: 0;
+    padding: 7px 10px;
+    margin-top: auto;
+    margin-bottom: 0;
+    border-radius: 10px;
+    margin: 0 5px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #108023;
+}
+
+.complete:hover {
+    background-color: #1f9733;
+}
+
+.position, .created-at, .cv-link {
     font-size: 12px;
     color: var(--extraText);
 }
 
-.block1 .show-more {
+.cv-link a {
+    font-style: italic;
+}
+
+.show-more {
     display: flex;
     justify-content: end;
 }
 
-.block1 .show-more button {
+.show-more button {
     position: relative;
     border: 0;
     height: 30px;
@@ -129,7 +192,7 @@
     margin-top: 20px;
 }
 
-.block1 .show-more button .background {
+.show-more button .background {
     position: absolute;
     top: 0;
     left: -100%;
@@ -139,7 +202,7 @@
     transition: transform 0.5s ease;
 }
 
-.block1 .show-more a {
+.show-more a {
     position: relative;
     color: #fff;
     padding: 0 20px;
@@ -147,7 +210,7 @@
     z-index: 1;
 }
 
-.block1 .show-more button:hover .background {
+.show-more button:hover .background {
     transform: translateX(50%);
 }
 
@@ -155,40 +218,40 @@
     --border: 1px solid #bebebe;
 }
 
-.edit-recruitment input, .edit-recruitment textarea, .edit-recruitment select {
+.edit-recruitment-application input, .edit-recruitment-application textarea, .edit-recruitment-application select {
     border: var(--border);
     border-radius: 5px;
     font-size: 16px;
     padding: 5px 10px;
 }
 
-.edit-recruitment textarea {
+.edit-recruitment-application textarea {
     resize: vertical;
     min-height: 100px;
 }
 
-.edit-recruitment input:focus, .edit-recruitment textarea:focus, .edit-recruitment select:focus {
+.edit-recruitment-application input:focus, .edit-recruitment-application textarea:focus, .edit-recruitment-application select:focus {
     outline: 1px solid #F7F7F7;
 }
 
-.edit-recruitment input::placeholder {
+.edit-recruitment-application input::placeholder {
     font-size: 12px;
     opacity: 0.6;
 }
 
-.edit-recruitment label {
+.edit-recruitment-application label {
     margin: 15px 0 5px 0;
 }
 
-.edit-recruitment-container .row {
+.edit-recruitment-application-container .row {
     justify-content: space-between
 }
 
-.edit-recruitment-container .row > * {
+.edit-recruitment-application-container .row > * {
     flex: 0 0 47%;
 }
 
-.edit-recruitment-container {
+.edit-recruitment-application-container {
     justify-content: center;
     align-items: center;
     background-color: #F7F7F7;
@@ -196,13 +259,13 @@
     position: relative;
 }
 
-.edit-recruitment-container h2 {
+.edit-recruitment-application-container h2 {
     color: #3364EB;
     width: 1000px;
     padding: 10px 0;
 }
 
-.edit-recruitment {
+.edit-recruitment-application {
     width: 1000px;
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -210,11 +273,11 @@
     padding: 10px 10px 20px 10px;
 }
 
-.edit-recruitment label span {
+.edit-recruitment-application label span {
     color: #ff0000;
 }
 
-.submit-recruitment {
+.submit-recruitment-application {
     display: block;
     width: auto;
     background-color: #3364EB;
@@ -227,7 +290,7 @@
     cursor: pointer;
 }
 
-.submit-recruitment:hover {
+.submit-recruitment-application:hover {
     background-color: #507aee;
 }
 
