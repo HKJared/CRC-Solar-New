@@ -130,6 +130,7 @@ function search() {
     const access_token = localStorage.getItem('access_token');
     loading = true;
     renderLoading();
+    console.log(keyword)
     fetch(`/api/${language}/recruitment-applications?keyword=${ keyword }&page=${page}`, {
         method: 'GET',
         headers: {
@@ -158,7 +159,7 @@ function search() {
 
 function showRecruitmentApplications(recruitment_applications) {
     if (page == 1) {
-        $('.recruitment-items').empty();
+        $('.recruitment-application-items').empty();
     }
 
     for (let i = 0; i < recruitment_applications.length; i++) {

@@ -22,7 +22,9 @@ class RecruitmentApplicationModel {
             WHERE
                 (LOWER(ra.fullname) LIKE LOWER(?)
                 OR LOWER(ra.email) LIKE LOWER(?)
-                OR LOWER(ra.phone_number) LIKE LOWER(?))
+                OR LOWER(ra.phone_number) LIKE LOWER(?)
+                OR LOWER(r.position) LIKE LOWER(?)
+                OR LOWER(r.department) LIKE LOWER(?))
                 AND ra.language = ?
             ORDER BY
                 ra.recruitment_application_id DESC
@@ -33,7 +35,7 @@ class RecruitmentApplicationModel {
             
         `;
 
-        const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, language]);
+        const [rows] = await pool.execute(queryString, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`, `%${keyword}%`, `%${keyword}%`, language]);
         return rows;
     }
 
