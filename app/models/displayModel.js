@@ -20,15 +20,14 @@ class DisplayModel {
     static async getOldImageByElementId(element_id, page) {
         const queryString = `
             SELECT
-                src
+                *
             FROM
                 display_images
             WHERE
                 element_id = ?
-                AND page = ?
         `;
-        const [rows] = await pool.execute(queryString, [element_id, page]);
-        return rows[0].src;
+        const [rows] = await pool.execute(queryString, [element_id]);
+        return rows[0];
     }
 
     static async updateDisplayImage(data, page, admin_id) {

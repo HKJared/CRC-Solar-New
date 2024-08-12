@@ -54,7 +54,8 @@ class HeaderModel {
         const [services] = await pool.execute(`
                                                 SELECT
                                                     blogs.blog_id,
-                                                    blogs.title
+                                                    blogs.title,
+                                                    blogs.main_image
                                                 FROM
                                                     blogs
                                                 JOIN
@@ -67,6 +68,7 @@ class HeaderModel {
                                             `, [language]);
 
         
+
         return {
             product_categories: product_categories,
             products: products,
@@ -121,8 +123,19 @@ class FooterModel {
                 blogs.created_at DESC
         `, [language]);
 
+        const [texts] = await pool.execute(`
+            SELECT
+                display_text_id, element_id, detail
+            FROM
+                display_texts
+            WHERE
+                page = ?
+                AND language = ?
+            `, ['contact', language]);
+
         return {
-            policies: policies
+            policies: policies,
+            texts: texts
         }
     }
 }

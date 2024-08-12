@@ -28,16 +28,22 @@
                     <div class="title-container">
                         <h1><%- product.product_name %></h1>
                     </div>
-                    <p><%- product.category_title %> | 100Ah | 51.2V</p>
+                    <% 
+                        let technologies = '';
+                        for (let i = 0; i < product.technologies.length; i++) {
+                            technologies += (' | ' + product.technologies[i].name);
+                        }
+                    %>
+                    <p><%- product.category_title %> <%- technologies %></p>
                     <div class="row info-product">
-                        <a href="#specification" data-translate="" class="link-element">Thông số sản phẩm</a>
-                        <a href="#detail" data-translate="" class="link-element">Chi tiết sản phẩm</a>
+                        <a href="#specification" data-translate="detailProduct_text1" class="link-element">Thông số sản phẩm</a>
+                        <a href="#detail" data-translate="detailProduct_text2" class="link-element">Chi tiết sản phẩm</a>
                     </div>
                 </div>
             </div>
             <div class="container row">
                 <div class="row center full-width" id="specification">
-                    <h1 class="title-demo">Thông số hóa</h1>
+                    <h1 class="title-demo" data-translate="detailProduct_text3">Thông số hóa</h1>
                 </div>
             </div>
             <div class="row container center" style="margin-top: 20px;">
@@ -74,7 +80,7 @@
             </div>
             <div class="container row" style="margin-top: 160px;">
                 <div class="row center full-width" id="detail">
-                    <h1 class="title-demo">Chi tiết sản phẩm</h1>
+                    <h1 class="title-demo" data-translate="detailProduct_text4">Chi tiết sản phẩm</h1>
                 </div>
             </div>
             <div class="editor-container container">

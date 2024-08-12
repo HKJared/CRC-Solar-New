@@ -40,8 +40,9 @@ class ProductModel {
         return rows;
     }
 
-    static async getProductsByCategoryId(product_category_id, page, language) {
+    static async getProductsByCategoryId(product_category_id, keyword, page, language) {
         const offset = productsPerPage * (page - 1);
+        keyword = diacritics.remove(keyword);
 
         const queryString = `
             SELECT 
@@ -61,6 +62,7 @@ class ProductModel {
             LEFT JOIN product_images pi ON pim.min_image_id = pi.product_image_id
             WHERE
                 p.product_category_id = ?
+                AND LOWER(p.product_name) LIKE LOWER(?)
                 AND p.language = ?
             ORDER BY
                 p.product_id DESC
@@ -70,7 +72,7 @@ class ProductModel {
                 ${ offset }
         `;
 
-        const [rows] = await pool.execute(queryString, [product_category_id, language]);
+        const [rows] = await pool.execute(queryString, [product_category_id, `%${keyword}%`, language]);
         return rows;
     }
 

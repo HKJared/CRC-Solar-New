@@ -3,7 +3,7 @@
     <div class="footer-mid container row">
         <div class="more-info">
             <h3>CRC GROUP</h3>
-            <p style="text-align: justify; text-align-last: left;">CRC SOLAR chuyên cung cấp, thi công và triển khai lập dự án lắp đặt pin mặt trời cho các vị trí: Khu công nghiệp, khu dân cư, nhà máy điện mặt trời. Phù hợp với tất cả mọi nhu cầu về quy mô và kích thước.</p>
+            <p style="text-align: justify; text-align-last: left;" data-translate="footer_about">CRC SOLAR chuyên cung cấp, thi công và triển khai lập dự án lắp đặt pin mặt trời cho các vị trí: Khu công nghiệp, khu dân cư, nhà máy điện mặt trời. Phù hợp với tất cả mọi nhu cầu về quy mô và kích thước.</p>
         </div>
         <div class="hr"></div>
         <div class="more-info">
@@ -21,15 +21,15 @@
             <ul class="contacts-container col">
                 <li class="contact row">
                     <i class="fa-solid fa-envelope"></i>
-                    <span>admin@crcsolar.com.vn</span>
+                    <span id="footer_contact_text1">admin@crcsolar.com.vn</span>
                 </li>
                 <li class="contact row">
                     <i class="fa-solid fa-phone" style="font-size: 14px;"></i>
-                    <span>02186 259 232 <br>0982 484 803</span>
+                    <span><p id="footer_contact_text3">02186 259 232 </p><p id="footer_contact_text4">0982 484 803</p></span>
                 </li>
                 <li class="contact row">
                     <i class="fa-solid fa-location-dot"></i>
-                    <span>Lô 9, đường số 1, Khu công nghiệp Lương Sơn, Hòa Sơn, Lương Sơn, Hòa Bình. <br> <br>104/140 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội.</span>
+                    <span><p id="footer_contact_text5">Lô 9, đường số 1, Khu công nghiệp Lương Sơn, Hòa Sơn, Lương Sơn, Hòa Bình. </p><br><p id="footer_contact_text6">104/140 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội.</p></span>
                 </li>
             </ul>
         </div>
@@ -54,5 +54,10 @@
     </div>
 </footer>
 </body>
+<% for (let i = 0; i < footerData.texts.length; i++) { %>
+    <script>
+        $('#footer_<%- footerData.texts[i].element_id %>').text(`<%- footerData.texts[i].detail %>`);
+    </script>
+<% } %>
 <script src="/js/client/footer.js"></script>
 </html>

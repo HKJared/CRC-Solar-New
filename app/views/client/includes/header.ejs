@@ -23,8 +23,8 @@
             <div class="menu-container col">
                 <div class="header-info row">
                     <div class="search-container row">
-                        <form action="">
-                            <input type="text" data-translate="search_placeholder" placeholder="Tìm kiếm sản phẩm">
+                        <form action="<%- (language == 'vn' ? '' : ('/' + language)) %>/products">
+                            <input type="text" name="keyword" data-translate="search_placeholder" placeholder="Tìm kiếm sản phẩm">
                             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
@@ -155,18 +155,18 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="dropdown-sub-menu center">
-                                <div class="container row flex-box">
-                                    <div class="services-container">
-                                        <ul class="col">
+                                <div class="container col">
+                                    <div class="technologies-container full-width">
+                                        <ul class="row full-width">
                                             <% for (let i = 0; i < headerData.services.length; i ++) { %>
-                                                <li class="full-width">
-                                                    <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/blog?title=<%- headerData.services[i].title %>&blog_id=<%- headerData.services[i].blog_id %>" class="full-width"><span><%- headerData.services[i].title %></span></a>
+                                                <li class="col" data-productid="<%- headerData.technologies[i].technology_id %>">
+                                                    <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/blog?title=<%- headerData.services[i].title %>&blog_id=<%- headerData.services[i].blog_id %>" class="full-width"><img src="<%- headerData.services[i].main_image %>" alt="" srcset="" class="full-width"></a>
+                                                    <div>
+                                                        <span><%- headerData.services[i].title %></span>
+                                                    </div>
                                                 </li>    
                                             <% } %>
                                         </ul>
-                                    </div>
-                                    <div class="services-image">
-                                        <img src="/image/base/dich-vu.jpg" alt="" srcset="" class="full-width full-height">
                                     </div>
                                 </div>
                             </div>

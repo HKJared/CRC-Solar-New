@@ -32,6 +32,7 @@ class DocumentModel {
                 admins ua ON ua.admin_id = d.updated_by
             WHERE
                 LOWER(d.document_name) LIKE LOWER(?)
+                AND d.language = ?
             ORDER BY
                 d.document_id DESC
             LIMIT
@@ -40,7 +41,7 @@ class DocumentModel {
                 ${ offset }
         `;
     
-        const [rows] = await pool.execute(queryString, [`%${keyword}%`]);
+        const [rows] = await pool.execute(queryString, [`%${keyword}%`, language]);
         return rows;
     }
 

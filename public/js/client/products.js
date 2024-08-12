@@ -4,16 +4,20 @@ $(document).ready(function() {
         
         if ($(this).hasClass('active')) return;
 
+        var urlParams = new URLSearchParams(window.location.search);
+        var keyword = urlParams.get('keyword');
+
         var container = $(this).closest('.container');
         const product_category_id = $(this).data('product-category-id');
         var language = $('header').data('language');
 
-        var query = `/api/${ language }/products?keyword=`;
+        var query = `/api/${ language }/products?keyword=${keyword}`;
 
         if (product_category_id) {
-            query = `/api/${ language }/products?product_category_id=${ product_category_id }`
+            query = `/api/${ language }/products?keyword=${keyword}&product_category_id=${ product_category_id }`
         }
 
+        renderLoading();
         fetch(query, {
             method: 'GET',
             headers: {
@@ -24,6 +28,7 @@ $(document).ready(function() {
             return response.json().then(data => {
                 if (!response.ok) {
                     // showNotification(data.message);
+                    removeLoading();
                     throw new Error('Network response was not ok');
                 }
                 return data;
@@ -31,6 +36,7 @@ $(document).ready(function() {
         })
         .then(result => {
             const products = result.data;
+            removeLoading();
 
             var productsHTML = ``
             for (let i = 0; i < products.length; i++) {
@@ -51,6 +57,7 @@ $(document).ready(function() {
             $(this).addClass('active');
         })
         .catch(error => {
+            removeLoading();
             console.error('There was a problem with your fetch operation:', error);
         });
     });

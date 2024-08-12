@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Server Error</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/util.js"></script>
 </head>
 <body class="center" style="width: 100vw; height: 100vh; background-color: #fff;">
     <div class="col" style="width: 50vw; height: 50vh;">
@@ -12,8 +14,12 @@
             <span class="code-status" style="font-size: 130px; color: #aeaeae; line-height: 1;">500</span>
             <span class="detail-status" style="font-size: 80px; margin-left: 40px; color: #e74d61;">Server Error</span>
         </div>
-        <span style="font-size: 28px; color: #636363; line-height: 1.5; margin-top: 20px;">Có vẻ đã có lỗi từ máy chủ.</span>
-        <span style="font-size: 28px; color: #636363; line-height: 1.5; margin-top: 20px;">Hãy thử tải lại trang hoặc liên hệ với chúng tôi nếu sự cố vẫn tiếp diễn.</span>
+        <span style="font-size: 28px; color: #636363; line-height: 1.5; margin-top: 20px;" data-translate="error_text1">Có vẻ đã có lỗi từ máy chủ.</span>
+        <span style="font-size: 28px; color: #636363; line-height: 1.5; margin-top: 20px;" data-translate="error_text2">Hãy thử tải lại trang hoặc liên hệ với chúng tôi nếu sự cố vẫn tiếp diễn.</span>
     </div>
 </body>
+<script>
+    const language = '<%- language %>'
+    setLanguage(language);
+</script>
 </html>

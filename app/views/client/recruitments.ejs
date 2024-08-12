@@ -7,10 +7,24 @@
     </script>
     <div class="main center col">
         <div class="row center block container col title-header-recruitment">
-            <h1 class="">Cơ hội nghề nghiệp</h1>
+            <h1 class="" data-translate="recruitments_text1">Cơ hội nghề nghiệp</h1>
             <label style="text-align: center;">CRC Solar là nơi để nhân viên khám phá giới hạn và bứt phá bản thân. Công ty tìm kiếm những nhân tài có tầm nhìn, biết hoạch định mục tiêu, làm việc đam mê và tạo ra sự khác biệt.</label>
         </div>
-
+        <%
+            function formatDate(datetimeString) {
+                const date = new Date(datetimeString);
+            
+                const day = date.getUTCDate(); // Get the day of the month (1-31)
+                const month = date.getUTCMonth() + 1; // Months are zero-indexed, so add 1
+                const year = date.getUTCFullYear(); // Get the four-digit year
+            
+                // Pad single digit day and month with leading zero if needed
+                const formattedDay = day < 10 ? `0${day}` : day;
+                const formattedMonth = month < 10 ? `0${month}` : month;
+            
+                return `${formattedDay}/${formattedMonth}/${year}`;
+            }
+        %>
         <div class="row block container">
             <div class="col recruitments-container left">
                 <% for (let i = 0; i < recruitments.length; i++) { %>
@@ -24,7 +38,7 @@
                                             <i class="fa fa-usd" aria-hidden="true"></i>
                                         </div>
                                         <div class="row col">
-                                            <p>Mức lương</p>
+                                            <p data-translate="recruitments_text2">Mức lương</p>
                                             <h3><%- recruitments[i].salary_range %></h3>
                                         </div>
                                     </div>
@@ -33,7 +47,7 @@
                                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                                         </div>
                                         <div class="row col">
-                                            <p>Địa điểm</p>
+                                            <p data-translate="recruitments_text3">Địa điểm</p>
                                             <h3><%- recruitments[i].location %></h3>
                                         </div>
                                     </div>
@@ -42,26 +56,26 @@
                                             <i class="fa fa-hourglass" aria-hidden="true"></i>
                                         </div>
                                         <div class="row col">
-                                            <p>Kinh nghiệm</p>
+                                            <p data-translate="recruitments_text4">Kinh nghiệm</p>
                                             <h3><%- recruitments[i].experience_required %> năm</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top: 20px;">
                                     <i class="fa-solid fa-briefcase" aria-hidden="true" style="margin-right: 12px;"></i>
-                                    <p>Phòng ban: <%- recruitments[i].department %></p>
+                                    <p><strong data-translate="recruitments_text5">Phòng ban:</strong> <%- recruitments[i].department %></p>
                                 </div>
                                 <div class="row" style="margin-top: 10px;">
                                     <i class="fa-solid fa-user" aria-hidden="true" style="margin-right: 12px;"></i>
-                                    <p>Số lượng tuyển: <%- recruitments[i].quantity %></p>
+                                    <p><strong data-translate="recruitments_text6">Số lượng tuyển:</strong> <%- recruitments[i].quantity %></p>
                                 </div>
                                 <div class="row" style="margin-top: 10px;">
                                     <i class="fa fa-calendar" aria-hidden="true" style="margin-right: 12px;"></i>
-                                    <p>Hạn nộp hồ sơ: <%- recruitments[i].application_deadline %></p>
+                                    <p><strong data-translate="recruitments_text7">Hạn nộp hồ sơ:</strong> <%- formatDate(recruitments[i].application_deadline) %></p>
                                 </div>
                                 <div class="row" style="margin-top: 20px; gap:20px;">
-                                    <button class="btn-apply" data-recruitmentid="<%- recruitments[i].recruitment_id %>">Ứng tuyển ngay</button>
-                                    <button class="show-detail">Xem chi tiết</button>
+                                    <button class="btn-apply" data-recruitmentid="<%- recruitments[i].recruitment_id %>" data-translate="recruitments_text8">Ứng tuyển ngay</button>
+                                    <button class="show-detail" data-translate="recruitments_text9">Xem chi tiết</button>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +88,8 @@
             </div>
             <div class="right">
                 <div class="col general-info">
-                    <div class="card-item">
+                    <div class="card-item edit-element">
+                        <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="card-item-body">
                             <div class="logo">
                                 <div class="full-width">
@@ -84,32 +99,28 @@
                             <div class="row" style="margin-top: 12px;">
                                 <div class="col-4 row">
                                     <i class="fa fa-users icon-card" aria-hidden="true"></i>
-                                <p>Quy mô</p>
+                                    <p data-translate="recruitments_text10">Quy mô</p>
                                 </div>
                                 <div class="col-8">
-                                    <p>30-100 nhân viên</p>
+                                    <p id="recruitments_text1">30-100 nhân viên</p>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 12px;">
                                 <div class="col-4 row">
                                     <i class="fa fa-map-marker icon-card" aria-hidden="true"></i>
-                                    <p>Địa điểm</p>
+                                    <p data-translate="recruitments_text11">Địa điểm</p>
                                 </div>
                                 <div class="col-8">
-                                    <p>104/140 Khuất Duy Tiến, phường Nhân Chính, Quận Thanh Xuân, Hà Nội.</p>
+                                    <p id="recruitments_text2">104/140 Khuất Duy Tiến, phường Nhân Chính, Quận Thanh Xuân, Hà Nội.</p>
                                 </div>
-                            </div>
-                            <div class="row center">
-                                <a class="see-all">
-                                    Xem chi tiết thông tin
-                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-item" style="margin-top: 20px;">
+                    <div class="card-item edit-element" style="margin-top: 20px;">
+                        <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
                         <div class="card-body">
                             <div class="row col">
-                                <h1 class="title-header-item">Thông tin chung</h1>
+                                <h1 class="title-header-item" data-translate="recruitments_text12">Thông tin chung</h1>
                             </div>
                         </div>
                         <div class="row card-item-content">
@@ -117,8 +128,8 @@
                                 <i class="fa fa-id-card" aria-hidden="true"></i>
                             </div>
                             <div class="row col">
-                                <p>Cấp bậc</p>
-                                <h3>Đại học chính quy</h3>
+                                <p data-translate="recruitments_text13">Cấp bậc</p>
+                                <h3 id="recruitments_text3">Đại học chính quy</h3>
                             </div>
                         </div>
                         <div class="row card-item-content">
@@ -126,8 +137,8 @@
                                 <i class="fa fa-hourglass" aria-hidden="true"></i>
                             </div>
                             <div class="row col">
-                                <p>Kinh nghiệm</p>
-                                <h3>3 năm</h3>
+                                <p data-translate="recruitments_text14">Kinh nghiệm</p>
+                                <h3 id="recruitments_text4">3 năm</h3>
                             </div>
                         </div>
                         <div class="row card-item-content">
@@ -135,8 +146,8 @@
                                 <i class="fa fa-briefcase" aria-hidden="true"></i>
                             </div>
                             <div class="row col">
-                                <p>Hình thức làm việc</p>
-                                <h3>Nhân viên chính thức</h3>
+                                <p data-translate="recruitments_text15">Hình thức làm việc</p>
+                                <h3 id="recruitments_text5">Nhân viên chính thức</h3>
                             </div>
                         </div>
                         <div class="row card-item-content">
@@ -144,8 +155,8 @@
                                 <i class="fa fa-male" aria-hidden="true"></i>
                             </div>
                             <div class="row col">
-                                <p>Giới tính</p>
-                                <h3>Nam/Nữ</h3>
+                                <p data-translate="recruitments_text16">Giới tính</p>
+                                <h3 id="recruitments_text6">Nam/Nữ</h3>
                             </div>
                         </div>
                     </div>   
@@ -156,15 +167,15 @@
             <form action="" id="apply-form" class="col">
                 <h2></h2>
                 <button class="x-btn" type="button"><i class="fa-solid fa-xmark"></i></button>
-                <label for="fullname">Họ và tên</label>
+                <label for="fullname" data-translate="recruitments_text17">Họ và tên</label>
                 <input type="text" name="" id="fullname">
-                <label for="email">Email</label>
+                <label for="email" data-translate="recruitments_text18">Email</label>
                 <input type="text" name="" id="email">
-                <label for="phone_number">Số điện thoại</label>
+                <label for="phone_number" data-translate="recruitments_text19">Số điện thoại</label>
                 <input type="text" name="" id="phone_number">
-                <label for="cv_link">CV</label>
+                <label for="cv_link" data-translate="recruitments_text20">CV</label>
                 <input type="text" name="" id="cv_link" placeholder="Đường dẫn đến CV">
-                <button type="submit" class="submit-form">Nộp đơn ứng tuyển</button>
+                <button type="submit" class="submit-form" data-translate="recruitments_text21">Nộp đơn ứng tuyển</button>
             </form>
         </div>
     </div>

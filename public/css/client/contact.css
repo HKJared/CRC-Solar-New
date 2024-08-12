@@ -32,6 +32,10 @@ main {
     margin-right: 0;
 }
 
+.block1 {
+    padding-top: 20px !important;
+}
+
 .block1 label {
     color: #0E0D1B;
     font-weight: bold;
@@ -51,7 +55,7 @@ main {
     outline: none;
 }
 
-.block1 button {
+.block1 .sent-request {
     margin-top: 65px;
     font-size: 22px;
     padding: 10px 15px;
@@ -61,7 +65,7 @@ main {
     width: fit-content;
 }
 
-.block1 button:hover {
+.block1 .sent-request:hover {
     background-color: #cc3939;
 }
 

@@ -4,43 +4,45 @@
     <div class="container block1 row">
         <div class="left col">
             <div class="top-block">
-                <span>Liên hệ với chúng tôi</span>
+                <span data-translate="contact_text1">Liên hệ với chúng tôi</span>
             </div>
-            <h1>Chúng tôi có thể giúp gì cho bạn?</h1>
-            <span>Hãy cho chúng tôi biết bạn là ai và bạn đang cần trợ giúp điều gì.</span>
+            <h1 data-translate="contact_text2">Chúng tôi có thể giúp gì cho bạn?</h1>
+            <span data-translate="contact_text3">Hãy cho chúng tôi biết bạn là ai và bạn đang cần trợ giúp điều gì.</span>
             <div class="info-container row">
                 <div class="name col">
-                    <label for="name">Tên của bạn</label>
+                    <label for="name" data-translate="contact_text4">Tên của bạn</label>
                     <input type="text" id="name">
                 </div>
                 <div class="email col">
-                    <label for="email">Email</label>
+                    <label for="email" data-translate="contact_text5">Email</label>
                     <input type="text" id="email">
                 </div>
                 <div class="phone col">
-                    <label for="phone_number">Số điện thoại</label>
+                    <label for="phone_number" data-translate="contact_text6">Số điện thoại</label>
                     <input type="text" id="phone_number">
                 </div>
             </div>
             <div class="message col">
-                <label for="message">Câu hỏi của bạn</label>
+                <label for="message" data-translate="contact_text7">Câu hỏi của bạn</label>
                 <textarea name="" id="message"></textarea>
             </div>
-            <button type="button" class="sent-request">Gửi câu hỏi</button>
+            <button type="button" class="sent-request" data-translate="contact_text1"data-translate="contact_text8">Gửi câu hỏi</button>
         </div>
         <div class="right col">
-            <h1>Tổng công ty</h1>
-            <ul class="col">
-                <li><i class="fa-solid fa-location-dot"></i> <p>104/140 Khuất Duy Tiến, phường Nhân Chính, Quận Thanh Xuân, Hà Nội.</p></li>
-                <li><i class="fa-solid fa-phone"></i> <p>02186 259 232</p></li>
-                <li><i class="fa-solid fa-envelope"></i> <p>admin@crcsolar.com.vn</p></li>
+            <h1 data-translate="contact_text8">Tổng công ty</h1>
+            <ul class="col edit-element">
+                <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
+                <li><i class="fa-solid fa-location-dot"></i><p id="contact_text1">104/140 Khuất Duy Tiến, phường Nhân Chính, Quận Thanh Xuân, Hà Nội.</p></li>
+                <li><i class="fa-solid fa-phone"></i> <p id="contact_text2">02186 259 232</p></li>
+                <li><i class="fa-solid fa-envelope"></i> <p id="contact_text3">admin@crcsolar.com.vn</p></li>
             </ul>
             <div class="hr"></div>
-            <h1>Nhà máy</h1>
-            <ul class="col">
-                <li><i class="fa-solid fa-location-dot"></i> <p>Lô 9, đường số 1, Khu công nghiệp Lương Sơn, xã Hòa Sơn, huyện Lương Sơn, tỉnh Hòa Bình.</p></li>
-                <li><i class="fa-solid fa-phone"></i> <p>0982 484 803</p></li>
-                <li><i class="fa-solid fa-envelope"></i> <p>admin@crcsolar.com.vn</p></li>
+            <h1 data-translate="contact_text9">Nhà máy</h1>
+            <ul class="col edit-element">
+                <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
+                <li><i class="fa-solid fa-location-dot"></i> <p id="contact_text4">Lô 9, đường số 1, Khu công nghiệp Lương Sơn, xã Hòa Sơn, huyện Lương Sơn, tỉnh Hòa Bình.</p></li>
+                <li><i class="fa-solid fa-phone"></i> <p id="contact_text5">0982 484 803</p></li>
+                <li><i class="fa-solid fa-envelope"></i> <p id="contact_text6">admin@crcsolar.com.vn</p></li>
             </ul>
         </div>
     </div>
@@ -63,6 +65,16 @@
             </div>
         </div>
     </div>
+    <% for (let i = 0; i < mainData.texts.length; i++) { %>
+        <script>
+            $('#<%- mainData.texts[i].element_id %>').text(`<%- mainData.texts[i].detail %>`);
+        </script>
+    <% } %>
+    <% for (let i = 0; i < mainData.images.length; i++) { %>
+        <script>
+            $('#<%- mainData.images[i].element_id %>').attr( 'id', `<%- mainData.images[i].src %>`);
+        </script>
+    <% } %>
 </main>
 <script src="/js/client/contact.js"></script>
 <%- include(`./includes/footer`) %>

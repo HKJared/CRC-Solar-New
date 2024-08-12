@@ -1,0 +1,29 @@
+.block1 h1 {
+    color: var(--mainColor);
+    margin: 20px 0;
+}
+
+.document-items {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.document-item {
+    padding: 16px;
+    border-bottom: var(--border);
+    font-size: 18px;
+    align-items: center;
+    color: var(--Text);
+    background-color: #fff;
+}
+
+.document-item:hover {
+    background-color: #f0f0f0;
+}
+
+.document-item .src a {
+    padding: 4px 32px;
+    background-color: var(--mainColor);
+    color: #fff;
+    border-radius: 6px;
+}

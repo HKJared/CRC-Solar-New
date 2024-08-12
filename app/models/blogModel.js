@@ -23,6 +23,7 @@ class BlogModel {
                 LOWER(b.title) LIKE LOWER(?)
                 AND b.language = ?
             ORDER BY
+                b.is_outstanding DESC,
                 b.blog_id DESC
             LIMIT
                 ${ blogsPerPage }
@@ -61,6 +62,7 @@ class BlogModel {
                 AND c.name = ?
                 AND b.language = ?
             ORDER BY
+                b.is_outstanding DESC,
                 b.blog_id DESC
             LIMIT
                 ${ blogsPerPage }

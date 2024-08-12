@@ -28,19 +28,28 @@ $(document).ready(function() {
                 subMenu.stop().slideToggle().toggleClass('active');
                 subMenu.css('display', 'flex');
                 chevronIcon.toggleClass('fa-rotate-180');
+
+                        // Thêm lớp blur nếu submenu hiện tại được hiển thị
+                if (subMenu.hasClass('active')) {
+                    $('body > *').not('header').addClass('blur');
+                } else {
+                    $('body > *').not('header').removeClass('blur');
+                }
             }, 400);
         } else {
             subMenu.stop().slideToggle().toggleClass('active');
             subMenu.css('display', 'flex');
             chevronIcon.toggleClass('fa-rotate-180');
+
+                    // Thêm lớp blur nếu submenu hiện tại được hiển thị
+            if (subMenu.hasClass('active')) {
+                $('body > *').not('header').addClass('blur');
+            } else {
+                $('body > *').not('header').removeClass('blur');
+            }
         }
 
-        // Thêm lớp blur nếu submenu hiện tại được hiển thị
-        if (subMenu.hasClass('active')) {
-            $('body > *').not('header').addClass('blur');
-        } else {
-            $('body > *').not('header').removeClass('blur');
-        }
+
     });
 
     // Đóng submenu khi click bên ngoài

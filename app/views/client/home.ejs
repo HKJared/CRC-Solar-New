@@ -5,12 +5,12 @@
         const page = '<%- page %>';
         $('main').attr('data-page', page);
     </script>
-    <div class="slider">
-        <div class="list row edit-element">
-            <button class="edit-button-image"><i class="fa-solid fa-camera"></i></button>
-            <img src="/image/slider/slide1.jpg" alt="" srcset="" id="block1-image1">
-            <img src="/image/slider/slide2.jpg" alt="" srcset="" id="block1-image2">
-            <img src="/image/slider/slide3.jpg" alt="" srcset="" id="block1-image3">
+    <div class="slider edit-element">
+        <button class="edit-button-image"><i class="fa-solid fa-camera"></i></button>
+        <div class="list row" id="slider-list">
+            <img src="" alt="" id="block1-image1">
+            <img src="" alt="" id="block1-image2">
+            <img src="" alt="" id="block1-image3">
         </div>
     </div>
     <!-- <script src="/js/slider.js"></script> -->
@@ -18,7 +18,7 @@
         <div class="block block1 container center col">
             <div class="main-block row edit-element full-width flex-box">
                 <button class="edit-button-text"><i class="fa-solid fa-pen"></i></button>
-                <img src="/image/logo.png" alt="" srcset="">
+                <img src="/image/base/logo.png" alt="" srcset="">
                 <span id="block1-text1"></span>
             </div>
             <div class="info-capacity-container row">
@@ -168,62 +168,37 @@
                 </div>
             </div>
             <div class="newsletters-container row">
-                <a href="" class="newsletter col">
-                    <div class="img">
-                        <img src="/image/news1.jpg" alt="">
-                    </div>
-                    <div class="info-container col">
-                        <div class="info flex-box row">
-                            <p><i class="fa-regular fa-user"></i> admin</p>
-                            <p><i class="fa-regular fa-clock"></i> 11/02/2022</p>
+                <%
+                    function formatDate(datetimeString) {
+                        const date = new Date(datetimeString);
+                    
+                        const day = date.getUTCDate(); // Get the day of the month (1-31)
+                        const month = date.getUTCMonth() + 1; // Months are zero-indexed, so add 1
+                        const year = date.getUTCFullYear(); // Get the four-digit year
+                    
+                        // Pad single digit day and month with leading zero if needed
+                        const formattedDay = day < 10 ? `0${day}` : day;
+                        const formattedMonth = month < 10 ? `0${month}` : month;
+                    
+                        return `${formattedDay}/${formattedMonth}/${year}`;
+                    }
+                %>
+                <% for (let i = 0; i< blogs.length; i++) { %>
+                    <a href="<%- language == 'vn' ? `` : '/' + language %>/blog?title=<%- blogs[i].title %>&blog_id=<%- blogs[i].blog_id %>" class="newsletter col" title="<%- blogs[i].title %>">
+                        <div class="img">
+                            <img src="<%- blogs[i].main_image %>" alt="">
                         </div>
-                        <div class="title">
-                            <h3>Triển lãm & Hội nghị phát điện quang điện Quốc tế (Snec Pv) 2024</h3>
+                        <div class="info-container col">
+                            <div class="info flex-box row">
+                                <p><i class="fa-regular fa-user"></i> <%- blogs[i].admin_name %></p>
+                                <p><i class="fa-regular fa-clock"></i> <%- formatDate(blogs[i].created_at) %></p>
+                            </div>
+                            <div class="title">
+                                <h3><%- blogs[i].title %></h3>
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <a href="" class="newsletter col">
-                    <div class="img">
-                        <img src="/image/news2.jpg" alt="">
-                    </div>
-                    <div class="info-container colums">
-                        <div class="info flex-box row">
-                            <p><i class="fa-regular fa-user"></i> admin</p>
-                            <p><i class="fa-regular fa-clock"></i> 11/02/2022</p>
-                        </div>
-                        <div class="title">
-                            <h3>Điện năng lượng mặt trời phát triển những thành phố thông minh</h3>
-                        </div>
-                    </div>
-                </a>
-                <a href="" class="newsletter col">
-                    <div class="img">
-                        <img src="/image/news3.jpg" alt="">
-                    </div>
-                    <div class="info-container colums">
-                        <div class="info flex-box row">
-                            <p><i class="fa-regular fa-user"></i> admin</p>
-                            <p><i class="fa-regular fa-clock"></i> 11/02/2022</p>
-                        </div>
-                        <div class="title">
-                            <h3>Triển khai mô hình điện mặt trời áp mái hướng tới giảm phát thải</h3>
-                        </div>
-                    </div>
-                </a>
-                <a href="" class="newsletter col">
-                    <div class="img">
-                        <img src="/image/news4.jpg" alt="">
-                    </div>
-                    <div class="info-container colums">
-                        <div class="info flex-box row">
-                            <p><i class="fa-regular fa-user"></i> admin</p>
-                            <p><i class="fa-regular fa-clock"></i> 11/02/2022</p>
-                        </div>
-                        <div class="title">
-                            <h3>Xu hướng "Xanh hóa" năng lượng trong sản xuất</h3>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                <% } %>
             </div>
             <div class="button-see-more full-width">
                 <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/news" data-translate="home_text9" class="center">Xem thêm</a>

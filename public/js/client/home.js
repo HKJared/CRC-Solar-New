@@ -1,6 +1,21 @@
 $(document).ready(function() {
-    
+    const $sliderList = $('.slider .list');
+    const $images = $sliderList.find('img');
+    const totalSlides = $images.length;
+    let currentIndex = 0;
+
+    function showNextSlide() {
+        currentIndex++;
+        if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        }
+        $sliderList.animate({ scrollLeft: currentIndex * $sliderList.width() }, 500);
+    }
+
+    // Tự động cuộn mỗi 3 giây
+    setInterval(showNextSlide, 3000);
 });
+
 
 $(document).ready(function() {
     $('.technologies-container li').on('click', function() {

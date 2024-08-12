@@ -26,6 +26,8 @@ webRouter.get('/contact', clientController.getContactPage);
 
 webRouter.get('/pictures', clientController.getPicturesPage);
 
+webRouter.get('/documents', clientController.getDocumentsPage);
+
 webRouter.get('/FAQs', clientController.getFAQsPage);
 
 

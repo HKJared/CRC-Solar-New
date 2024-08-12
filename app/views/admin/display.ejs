@@ -100,13 +100,12 @@
                         <ul class="sub-menu">
                             <li id="displayhome"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/home">Trang chủ</a></li>
                             <li id="displayintroduction"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/introduction">Giới thiệu</a></li>
-                            <li id="displaypartners"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/partners">Đối tác</a></li>
-                            <li id="displaysocialResponsibility"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/social-responsibility">Trách nhiệm xã hội</a></li>
                             <li id="displayproducts"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/products">Danh sách sản phẩm</a></li>
-                            <li id="displaydetailProduct"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/detail-product">Chi tiết sản phẩm</a></li>
+                            <li id="displaydetailProduct"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/detailProduct">Chi tiết sản phẩm</a></li>
                             <li id="displaytechnology"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/technology">Công nghệ</a></li>
                             <li id="displayblogs"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/blogs">Danh sách bài viết</a></li>
                             <li id="displayrecruitments"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/recruitments">Tuyển dụng</a></li>
+                            <li id="displaycontact"><a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/admin/display/contact">Liên hệ</a></li>
                         </ul>
                     </li>
                     <li>
@@ -179,7 +178,7 @@
             $("#" + active).addClass("active");
         });
 
-        $(document).on('click', '.body main a', function(e) {
+        $(document).on('click', '.body main a, .body main button', function(e) {
             e.preventDefault();
             showNotification('Phần tử chỉ mang tính hiển thị');
         });

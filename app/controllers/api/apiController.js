@@ -216,7 +216,7 @@ const getProducts = async (req, res) => {
         var products = [];
 
         if (product_category_id) {
-            products = await ProductModel.getProductsByCategoryId(product_category_id, page, language);
+            products = await ProductModel.getProductsByCategoryId(product_category_id, keyword, page, language);
         } else {
             products = await ProductModel.getProducts(keyword, page, language);
         }
@@ -583,10 +583,9 @@ const updateDisplayImage = async (req, res) => {
         try {
             const language = req.language;
             const page = req.query.page
-            const elementIds = req.body.element_ids.split(',');
+            const element_ids = req.body.element_ids.split(',');
             const files = req.files;
             const log_id = req.log_id;
-
             await LogModel.updateDetailLog(`Chỉnh sửa hình ảnh hiển thị trang ${page}`, log_id);
 
             const admin_id = req.admin_id || 1;
@@ -597,8 +596,8 @@ const updateDisplayImage = async (req, res) => {
 
             let oldImagePaths = [];
 
-            for (let i = 0; i < elementIds.length; i++) {
-                const element_id = elementIds[i];
+            for (let i = 0; i < element_ids.length; i++) {
+                const element_id = element_ids[i];
                 const file = files[i];
 
                 if (file) {
@@ -606,13 +605,12 @@ const updateDisplayImage = async (req, res) => {
                     const oldImagePath = await DisplayModel.getOldImageByElementId(element_id, page);
                     
                     if (oldImagePath) {
-                        oldImagePaths.push(path.join(__dirname, '../../../public', oldImagePath));
+                        oldImagePaths.push(path.join(__dirname, '../../../public', oldImagePath.src));
                     }
 
                     await DisplayModel.updateDisplayImage({ src: image_src, element_id: element_id }, page, admin_id);
                 }
             }
-
             // Xóa ảnh cũ
             oldImagePaths.forEach(oldPath => {
                 fs.unlink(oldPath, (err) => {
@@ -1096,7 +1094,7 @@ const getDocuments = async (req, res) => {
         const language = req.language;
         const keyword = req.query.keyword || '';
         const page = req.query.page || 1;
-
+        
         const documents = await DocumentModel.getDocuments(keyword, page, language);
 
         return res.status(200).json({ data: documents });

@@ -283,11 +283,12 @@ header {
     top: 90px;
     left: 0;
     background-color: #fff;
-    box-shadow: 0px 500px 20px 480px rgba(0, 0, 0, 0.3);
+    border-bottom: var(--border);
 }
 
 .dropdown-sub-menu.active {
     display: flex;
+    padding: 24px 0;
 }
 
 .categories-container {
@@ -372,6 +373,8 @@ header {
     margin: 2px 5px 2px 5px;
     position: relative;
     overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-sub-menu .technologies-container ul li a:hover > img , .dropdown-sub-menu .abouts-container ul li a:hover > img, .dropdown-sub-menu .news-container ul li a:hover > img {

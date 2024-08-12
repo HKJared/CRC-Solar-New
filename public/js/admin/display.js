@@ -53,9 +53,9 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.edit-button-text', function() {
-        const container = $(this).closest('div');
+        const container = $(this).closest('.edit-element');
 
-        const textElements  = container.find("[id*='block'][id*='text']");
+        const textElements  = container.find("[id*='text']");
 
         let textsContainerHTML = ``;
 
@@ -105,7 +105,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.edit-button-image', function() {
         const container = $(this).closest('div');
-        const imageElements = container.find("[id*='block'][id*='image']");
+        const imageElements = container.find("[id*='image']");
         let imagesContainerHTML = ``;
         const maxContainerHeight = 330;
         const numElements = imageElements.length;
@@ -122,7 +122,7 @@ $(document).ready(function() {
                     <img src="${ $(this).attr('src') }" alt="">
                 </div>
                 <div class="new-image center">
-                    <input type="file" id="${ $(this).attr('id') }">
+                    <input type="file" data-id="${ $(this).attr('id') }" accept=".png, .jpg, .jpeg">
                 </div>
             </div>
             `
@@ -178,10 +178,10 @@ $(document).ready(function() {
                 
                 $('.images-container input').each(function() {
                     const file = this.files[0];
-                    const elementId = $(this).attr('id');
-                    
+                    const elementId = $(this).attr('data-id');
+                    const src = $(this).closest('.image').find('img').attr('src');
                     if (file) {
-                        data.push({ element_id: elementId, file: file });
+                        data.push({ element_id: elementId, src: src, file: file });
                     }
                 });
                 updateDisplayImage(data);
@@ -272,7 +272,7 @@ function updateDisplayImage(data) {
         removeLoading();
         showNotification(result.message);
         data.forEach(item => {
-            $(`img#${item.element_id}`).attr('src', URL.createObjectURL(item.file)); 
+            $(`#${item.element_id}`).attr('src', item.src); 
         });
 
         $('.edit-image-container').css('display', 'none');
