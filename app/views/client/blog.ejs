@@ -223,6 +223,12 @@
 <script src="/js/client/blog.js"></script>
 <%- include(`./includes/footer`) %>
 <script>
+    
+    $(document).ready(function() {
+        const blogTitle = '<%- blog.title %>';
+        document.title = blogTitle;
+    })
+
     const language = '<%- language %>'
     setLanguage(language);
 </script>
