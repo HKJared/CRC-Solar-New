@@ -48,8 +48,7 @@ main .products-container ul {
 main .products-container ul li {
     flex: 0 0 calc((100% - 40px) / 5);
     padding: 20px 10px 28px 10px;
-    border: var(--border);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px #bebebe;
     box-sizing: border-box; 
     border-radius: 10px;
 }
