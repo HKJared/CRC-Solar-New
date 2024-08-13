@@ -45,7 +45,7 @@
     </div>
     <div class="footer-bottom container center">
         <span>Copyright <i class="fa-regular fa-copyright"></i> CRC Solar 2024.</span>
-        <span>Design by NHK</span>
+        <span style="margin-left: 12px;">Design by NHK</span>
         <div class="policy">
             <% for (let i = 0; i < footerData.policies.length; i ++) { %>
                 <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/blog?title=<%- footerData.policies[i].title %>&blog_id=<%- footerData.policies[i].blog_id %>" class="full-width"><span><%- footerData.policies[i].title %></span></a>   
