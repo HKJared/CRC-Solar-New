@@ -10,21 +10,6 @@
             <h1 class="" data-translate="recruitments_text1">Cơ hội nghề nghiệp</h1>
             <label style="text-align: center;">CRC Solar là nơi để nhân viên khám phá giới hạn và bứt phá bản thân. Công ty tìm kiếm những nhân tài có tầm nhìn, biết hoạch định mục tiêu, làm việc đam mê và tạo ra sự khác biệt.</label>
         </div>
-        <%
-            function formatDate(datetimeString) {
-                const date = new Date(datetimeString);
-            
-                const day = date.getUTCDate(); // Get the day of the month (1-31)
-                const month = date.getUTCMonth() + 1; // Months are zero-indexed, so add 1
-                const year = date.getUTCFullYear(); // Get the four-digit year
-            
-                // Pad single digit day and month with leading zero if needed
-                const formattedDay = day < 10 ? `0${day}` : day;
-                const formattedMonth = month < 10 ? `0${month}` : month;
-            
-                return `${formattedDay}/${formattedMonth}/${year}`;
-            }
-        %>
         <div class="row block container">
             <div class="col recruitments-container left">
                 <% for (let i = 0; i < recruitments.length; i++) { %>

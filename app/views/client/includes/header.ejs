@@ -137,7 +137,7 @@
                                     <div class="technologies-container full-width">
                                         <ul class="row full-width">
                                             <% for (let i = 0; i < headerData.technologies.length; i ++) { %>
-                                                <li class="col" data-productid="<%- headerData.technologies[i].technology_id %>">
+                                                <li class="col" data-productid="<%- headerData.technologies[i]?.technology_id %>">
                                                     <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/technology/<%- headerData.technologies[i].technology_name %>" class="full-width"><img src="<%- headerData.technologies[i].image %>" alt="" srcset="" class="full-width"></a>
                                                     <div>
                                                         <span><%- headerData.technologies[i].technology_name %></span>
@@ -159,7 +159,7 @@
                                     <div class="technologies-container full-width">
                                         <ul class="row full-width">
                                             <% for (let i = 0; i < headerData.services.length; i ++) { %>
-                                                <li class="col" data-productid="<%- headerData.technologies[i].technology_id %>">
+                                                <li class="col" data-productid="<%- headerData.technologies[i]?.technology_id %>">
                                                     <a href="<%- (language == 'vn' ? '' : ('/' + language)) %>/blog?title=<%- headerData.services[i].title %>&blog_id=<%- headerData.services[i].blog_id %>" class="full-width"><img src="<%- headerData.services[i].main_image %>" alt="" srcset="" class="full-width"></a>
                                                     <div>
                                                         <span><%- headerData.services[i].title %></span>

@@ -71,6 +71,8 @@ const login = async (req, res) => {
             return res.status(400).json({ message: 'Tài khoản đã bị vô hiệu hóa.' })
         }
 
+        console.log(account)
+
         if(passwordLogin != account.password) {
             await LogModel.updateDetailLog('Mật khẩu không chính xác.', log_id);
             return res.status(400).json({ message: 'Mật khẩu không chính xác.' })

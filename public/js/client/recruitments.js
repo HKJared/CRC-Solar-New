@@ -53,7 +53,7 @@ $(document).ready(function () {
         }
 
         createRecruitmentApplication(recruitment_application);
-    })
+    });
 });
 
 function createRecruitmentApplication(recruitment_application) {
